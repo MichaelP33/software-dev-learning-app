@@ -1,0 +1,712 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Study Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23d110fc-9f3a-80a9-b947-f4ee12c02ed5" class="page sans"><header><h1 class="page-title">Study Questions</h1><p class="page-description"></p></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><div data-testid="/icons/font_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/font_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/font_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Question</th><th><span class="icon property-icon"><div data-testid="/icons/description_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/description_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/description_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Answer</th><th><span class="icon property-icon"><div data-testid="/icons/arrow-northeast_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-northeast_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-northeast_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Relation</th><th><span class="icon property-icon"><div data-testid="/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Question Type</th><th><span class="icon property-icon"><div data-testid="/icons/calendar_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Last Reviewed</th><th><span class="icon property-icon"><div data-testid="/icons/hashtag_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/hashtag_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/hashtag_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Confidence Rating</th><th><span class="icon property-icon"><div data-testid="/icons/search_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/search_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/search_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Question Count</th></tr></thead><tbody><tr id="23d110fc-9f3a-80fa-917c-f43c7d3140bf"><td class="cell-title"><a href="https://www.notion.so/23d110fc9f3a80fa917cf43c7d3140bf?pvs=21">Untitled</a></td><td class="cell-dwbm"></td><td class="cell-zk]D"></td><td class="cell-\ktg"></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-80cc-a1e9-d8644838a6d7"><td class="cell-title"><a href="https://www.notion.so/Which-of-the-following-are-the-four-foundational-principles-of-OOP-A-Classes-Objects-Methods-Fu-23d110fc9f3a80cca1e9d8644838a6d7?pvs=21">Which of the following are the four foundational principles of OOP?
+A) Classes, Objects, Methods, Functions
+B) Encapsulation, Inheritance, Polymorphism, Abstraction
+C) Variables, Loops, Conditionals, Arrays
+D) Input, Process, Output, Storage</a></td><td class="cell-dwbm">B) Encapsulation, Inheritance, Polymorphism, Abstraction. These four principles define object-oriented programming: Encapsulation bundles data and methods while hiding internal complexity (like using a car without knowing engine details), Inheritance creates new classes based on existing ones (SalesCustomer inheriting basic Customer properties), Polymorphism allows different objects to respond to the same message differently (Dogs and Cats both &quot;makeSound()&quot; but produce different results), and Abstraction focuses on essential features while hiding complexity (Payment interface defining common operations without specifying implementation details). These principles help developers organize code in ways that mirror real-world thinking and make complex systems more manageable and maintainable.</td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-8076-ae4a-cf2b535116f7"><td class="cell-title"><a href="https://www.notion.so/Explain-the-difference-between-functions-methods-and-classes-in-OOP-23d110fc9f3a8076ae4acf2b535116f7?pvs=21">Explain the difference between functions, methods, and classes in OOP</a></td><td class="cell-dwbm">In <strong>Object-Oriented Programming</strong>, <strong>classes</strong> are the blueprints that define objects - they&#x27;re the foundation of OOP. <strong>Methods</strong> are functions that belong to objects created from classes, like <code>customer.updateEmail(newEmail)</code> - they can access the object&#x27;s data and represent what the object can <em>do</em>. <strong>Functions</strong> exist independently outside of any object, like <code>calculateTax(amount, rate)</code>.<br/><br/><br/><strong>Important context</strong>: Even experienced developers often use &quot;function&quot; and &quot;method&quot; interchangeably in casual conversation, but understanding the distinction reveals architectural thinking. When you hear &quot;method,&quot; you know you&#x27;re dealing with object-oriented design where data and behavior are bundled together. When you hear &quot;function,&quot; it suggests a more procedural or functional approach. This distinction is crucial in OOP because methods enable objects to have behavior (not just data), which is core to object-oriented design.</td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-80a3-b1b8-ff16c4372a24"><td class="cell-title"><a href="https://www.notion.so/True-or-False-You-should-always-create-objects-instead-of-simple-functions-to-follow-OOP-principle-23d110fc9f3a80a3b1b8ff16c4372a24?pvs=21">True or False: &quot;You should always create objects instead of simple functions to follow OOP principles.&quot; Explain your reasoning.</a></td><td class="cell-dwbm">False. While OOP is powerful, you shouldn&#x27;t force everything into objects just to follow OOP principles. Simple functions are appropriate for stateless operations like calculations (calculateTax, formatCurrency) or utility functions (validateEmail). Objects should be created when you have entities with both state (data) and behavior (methods) that naturally belong together, like Customer objects with properties (name, email) and methods (updateProfile, purchaseHistory). Over-engineering with unnecessary objects creates complexity without benefits. The decision should be based on whether you&#x27;re modeling something with meaningful state and related behaviors, not just following OOP for its own sake.</td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-yellow">True/False</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-80f1-a52e-fe4105751102"><td class="cell-title"><a href="https://www.notion.so/What-decision-frameworks-do-OOP-teams-use-to-choose-between-objects-and-functions-23d110fc9f3a80f1a52efe4105751102?pvs=21">What decision frameworks do OOP teams use to choose between objects and functions?</a></td><td class="cell-dwbm"><strong>Mature OOP teams use specific tests</strong> to make consistent architectural decisions. The most common frameworks are:<br/><br/><br/><strong>The &quot;Noun vs Verb&quot; Test</strong>: Nouns in your business domain become objects (Customer, Order, Invoice), while verbs become functions (calculate, format, validate). If you&#x27;re describing a &quot;thing&quot; that exists in your business, it&#x27;s likely an object.<br/><br/><br/><strong>The &quot;State Test&quot;</strong>: If it needs to remember information between operations, create an object (ShoppingCart that tracks items). If it&#x27;s stateless and just transforms inputs to outputs, use a function (calculateTax).<br/><br/><br/><strong>The &quot;Growth Test&quot;</strong>: If the logic will likely become more complex over time, start with an object structure (PaymentProcessor that might need different implementations). If it will stay simple, keep it as a function (formatCurrency).<br/><br/>These tests help OOP teams avoid endless code review debates by providing consistent criteria. The key insight is that objects should represent meaningful business concepts that have both data and behavior, while functions handle pure operations without state.<br/></td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-8023-b30c-f208c1002f11"><td class="cell-title"><a href="https://www.notion.so/Explain-how-encapsulation-inheritance-and-polymorphism-work-together-to-create-maintainable-enterp-23d110fc9f3a8023b30cf208c1002f11?pvs=21">Explain how encapsulation, inheritance, and polymorphism work together to create maintainable enterprise software. Provide an example showing their interaction.</a></td><td class="cell-dwbm">These three principles create a reinforcing system for maintainable code architecture. <br/><br/><br/><strong>Example: Enterprise payment processing system.</strong><br/><br/><br/><strong>Encapsulation</strong> hides the complex implementation details of payment processing behind simple interfaces - external code only calls <code>processPayment()</code> without knowing the internal validation, security, and transaction logic.<br/><br/><br/><strong>Inheritance</strong> allows specialized payment types to share common functionality - <code>CreditCardPayment</code>, <code>PayPalPayment</code>, and <code>BankTransferPayment</code> all inherit basic payment properties (amount, currency, timestamp) and methods (validate, log) from a base <code>Payment</code> class.<br/><br/><br/><strong>Polymorphism</strong> enables the system to treat all payment types uniformly - the same <code>processPayment()</code> call works for any payment type, but each executes its own specific implementation (credit card authorization vs PayPal API vs bank routing).<br/><br/>Together, they enable adding new payment methods without changing existing code, testing each payment type independently, and maintaining consistent interfaces while allowing specialized behavior - essential for enterprise systems that must evolve without breaking existing functionality.<br/></td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-800d-94cc-c2ed7b1836b0"><td class="cell-title"><a href="https://www.notion.so/What-is-the-key-defining-characteristic-of-a-class-and-an-object-in-code-23d110fc9f3a800d94ccc2ed7b1836b0?pvs=21">What is the key defining characteristic of a class and an object in code?</a></td><td class="cell-dwbm"><strong>A class is a code template that can bundle data and behavior together</strong>. The key word is &quot;can&quot; - while classic OOP design encourages both data and methods in objects, some objects in practice might be data-heavy (like a Customer with properties and a few methods) or behavior-heavy (like a PaymentProcessor that mostly contains methods).<br/><br/><br/><strong>The defining characteristic isn&#x27;t that every object must have equal amounts of data and behavior</strong>, but rather that OOP gives you the ability to bundle them together in a single construct. This is different from procedural programming where data structures and functions exist completely separately.<br/><br/><br/><strong>In practice, you&#x27;ll see variations</strong>: Data Transfer Objects (DTOs) that are mostly data with minimal behavior, utility classes that are mostly static methods, and rich domain objects that have substantial data and behavior. But they&#x27;re all &quot;objects&quot; because they use the class construct that enables this bundling.<br/><br/><br/><strong>An object is a specific instance created from a class at runtime</strong> - like <code>customer1 = new Customer(&quot;John&quot;, &quot;john@email.com&quot;)</code>. Each object gets its own actual values and can execute whatever methods its class defines.</td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-803f-bdbc-fb9954cab2b4"><td class="cell-title"><a href="https://www.notion.so/How-does-OOP-fit-within-mixed-paradigm-enterprise-development-23d110fc9f3a803fbdbcfb9954cab2b4?pvs=21">How does OOP fit within mixed paradigm enterprise development?</a></td><td class="cell-dwbm">In enterprise systems, <strong>OOP serves as the primary paradigm for modeling business domains</strong>, while other paradigms handle different concerns. OOP excels for business logic objects (Customer, Order, Payment) because these represent real business concepts with data and behavior. However, successful teams combine OOP with functional programming for data processing, procedural scripts for automation, and declarative config for rules.<br/><br/>For example, an e-commerce system uses OOP for core business objects, functional programming for recommendation algorithms, and SQL for data queries. Understanding where OOP adds value (complex stateful business logic) versus where simpler approaches work better is crucial for effective object-oriented design in real enterprise systems.<br/></td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23d110fc-9f3a-8059-a94e-deee60c959a6"><td class="cell-title"><a href="https://www.notion.so/List-three-warning-signs-that-indicate-OOP-over-engineering-in-a-codebase-23d110fc9f3a8059a94edeee60c959a6?pvs=21">List three warning signs that indicate OOP over-engineering in a codebase.</a></td><td class="cell-dwbm">1) <strong>Single-method classes</strong> - Classes that only contain one method often indicate the functionality should be a simple function instead. 2) <strong>Deep inheritance hierarchies</strong> - More than 3-4 levels of inheritance usually creates unnecessary complexity and fragile dependencies. 3) <strong>Classes with no state</strong> - Objects that contain only methods but no meaningful data properties suggest the behavior could be implemented as standalone functions. These patterns indicate developers are forcing OOP concepts where simpler approaches would be more appropriate and maintainable.</td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-green">Short Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8079-9634-ccd9efd1b7e1"><td class="cell-title"><a href="https://www.notion.so/What-happens-during-the-compilation-process-A-Code-is-executed-line-by-line-B-Source-code-is-tran-23e110fc9f3a80799634ccd9efd1b7e1?pvs=21">What happens during the compilation process?
+A) Code is executed line by line
+B) Source code is translated into machine code before execution
+C) Code is interpreted at runtime
+D) Variables are declared and initialized</a></td><td class="cell-dwbm">B) Source code is translated into machine code before execution. During compilation, a compiler program reads the human-readable source code and converts it into machine code (binary instructions that the processor can execute directly). This translation happens once, before the program runs, creating an executable file that can run independently without needing the original source code or a separate interpreter. This is different from interpreted languages where code is translated and executed line by line at runtime.</td><td class="cell-zk]D"><a href="https://www.notion.so/Compiled-Languages-23c110fc9f3a8092a167eb5f7d09c574?pvs=21">Compiled Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-801d-947f-fb6566cd79cf"><td class="cell-title"><a href="https://www.notion.so/What-are-the-main-business-benefits-we-d-see-from-moving-to-compiled-languages-23e110fc9f3a801d947ffb6566cd79cf?pvs=21">What are the main business benefits we&#x27;d see from moving to compiled languages?</a></td><td class="cell-dwbm">The main business benefits are: 1) <strong>Performance gains</strong> - applications run faster with less CPU usage, 2) <strong>Resource efficiency</strong> - significantly lower memory usage (often 4-10x less RAM), 3) <strong>Operational cost reduction</strong> - fewer servers needed for the same workload, 4) <strong>Deployment simplicity</strong> - self-contained executables eliminate runtime dependency issues, and 5) <strong>Early error detection</strong> - many bugs caught during compilation rather than in production. For companies at scale, the operational savings often exceed the development investment within 6-12 months.<br/><br/><br/><strong>Business Context</strong>: This positions compiled languages as a strategic cost optimization rather than just a technical choice, connecting to CFO-level concerns.</td><td class="cell-zk]D"><a href="https://www.notion.so/Compiled-Languages-23c110fc9f3a8092a167eb5f7d09c574?pvs=21">Compiled Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-805e-9282-e0b05b95d802"><td class="cell-title"><a href="https://www.notion.so/Name-the-three-primary-business-benefits-of-compiled-languages-and-briefly-explain-each-23e110fc9f3a805e9282e0b05b95d802?pvs=21">Name the three primary business benefits of compiled languages and briefly explain each.</a></td><td class="cell-dwbm">1) <strong>Performance</strong> - Compiled code runs faster because it&#x27;s already translated to machine code, eliminating runtime translation overhead. Critical for performance-sensitive applications like trading systems or games. <br/><br/>2) <br/><strong>Security</strong> - Source code isn&#x27;t distributed with the application, protecting intellectual property and making reverse engineering more difficult. Important for commercial software products. <br/><br/>3) <br/><strong>Independence</strong> - Compiled applications run without requiring interpreters or runtime environments to be installed on target systems, simplifying deployment and reducing dependency management in enterprise environments.</td><td class="cell-zk]D"><a href="https://www.notion.so/Compiled-Languages-23c110fc9f3a8092a167eb5f7d09c574?pvs=21">Compiled Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-green">Short Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8087-8de0-e5f584a1f8a5"><td class="cell-title"><a href="https://www.notion.so/True-or-False-Compiled-languages-are-always-better-than-interpreted-languages-for-enterprise-appli-23e110fc9f3a80878de0e5f584a1f8a5?pvs=21">True or False: &quot;Compiled languages are always better than interpreted languages for enterprise applications.&quot; Explain when this is true and when it&#x27;s not.</a></td><td class="cell-dwbm">False. While compiled languages offer advantages, the &quot;better&quot; choice depends on specific enterprise needs. <strong>Compiled languages excel when</strong>: performance is critical (high-frequency trading, real-time systems), security is paramount (protecting proprietary algorithms), or deployment complexity must be minimized (embedded systems, client distributions). <strong>Interpreted languages excel when</strong>: rapid development and deployment cycles are needed (web applications, data analysis), cross-platform compatibility is required without multiple builds, or when runtime flexibility is valuable (configuration changes, dynamic behavior). Modern enterprises typically use both strategically - compiled languages for performance-critical core systems and interpreted languages for rapid development, scripting, and integration tasks.</td><td class="cell-zk]D"><a href="https://www.notion.so/Compiled-Languages-23c110fc9f3a8092a167eb5f7d09c574?pvs=21">Compiled Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-yellow">True/False</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-80c6-9861-cf638d20ecd9"><td class="cell-title"><a href="https://www.notion.so/In-interpreted-languages-source-code-is-executed-_______-by-an-_______-rather-than-being-translated-23e110fc9f3a80c69861cf638d20ecd9?pvs=21">In interpreted languages, source code is executed _______ by an _______ rather than being translated to machine code beforehand.</a></td><td class="cell-dwbm">line-by-line; interpreter. In interpreted languages, source code is executed line-by-line by an interpreter rather than being translated to machine code beforehand. The interpreter reads each line of source code, translates it to machine instructions, and executes it immediately before moving to the next line. This allows for immediate execution and interactive development but requires the interpreter to be present on the target system and creates runtime translation overhead.</td><td class="cell-zk]D"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-gray">Fill-in-the-Blank</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-806f-ab84-d00391dda78d"><td class="cell-title"><a href="https://www.notion.so/What-are-the-four-key-characteristics-of-interpreted-languages-23e110fc9f3a806fab84d00391dda78d?pvs=21">What are the four key characteristics of interpreted languages?</a></td><td class="cell-dwbm">The four key characteristics are: 1) <strong>Development velocity advantage</strong> - immediate execution without compilation delays enables rapid iteration; 2) <strong>Runtime flexibility</strong> - code can be modified, generated, or executed dynamically during program execution; 3) <strong>Platform independence</strong> - source code runs on any system with the appropriate interpreter installed; 4) <strong>Performance trade-off</strong> - runtime interpretation overhead makes execution slower than compiled languages.</td><td class="cell-zk]D"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8040-b792-e6fd8dedc539"><td class="cell-title"><a href="https://www.notion.so/Explain-what-runtime-dependency-complexity-means-in-interpreted-languages-and-provide-one-example-23e110fc9f3a8040b792e6fd8dedc539?pvs=21">Explain what &quot;runtime dependency complexity&quot; means in interpreted languages and provide one example.</a></td><td class="cell-dwbm">Runtime dependency complexity refers to the challenges of ensuring all required interpreters, libraries, and specific versions are available on target systems when deploying interpreted applications. Unlike compiled programs that are self-contained, interpreted applications depend on external runtime environments. <strong>Example</strong>: A Python web application requires not just the Python interpreter, but specific versions of libraries like Flask, database connectors, and other dependencies. If the target server has Python 3.8 but the app was developed with Python 3.10-specific features, or if required libraries are missing, the application won&#x27;t run. This complexity requires careful environment management and dependency documentation.</td><td class="cell-zk]D"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-green">Short Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-806e-8342-d0e4e0b5d29c"><td class="cell-title"><a href="https://www.notion.so/Which-application-type-is-BEST-suited-for-interpreted-languages-A-High-frequency-trading-systems-B-23e110fc9f3a806e8342d0e4e0b5d29c?pvs=21">Which application type is BEST suited for interpreted languages?
+A) High-frequency trading systems
+B) Rapid prototyping and scripting
+C) Operating system kernels
+D) Device drivers</a></td><td class="cell-dwbm">B) Rapid prototyping and scripting. Interpreted languages excel at rapid prototyping and scripting because they allow immediate code execution without compilation steps, support interactive development and testing, and enable quick iterations and modifications. This makes them ideal for automation scripts, data analysis, web development, and experimental development. High-frequency trading systems (A) need compiled language performance, while operating system kernels (C) and device drivers (D) require the efficiency and direct hardware access that compiled languages provide.</td><td class="cell-zk]D"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8016-9303-ce509b962e40"><td class="cell-title"><a href="https://www.notion.so/What-are-the-most-common-interpreted-languages-used-in-enterprise-settings-and-what-is-each-primaril-23e110fc9f3a80169303ce509b962e40?pvs=21">What are the most common interpreted languages used in enterprise settings and what is each primarily used for?</a></td><td class="cell-dwbm">The main enterprise interpreted languages are: <br/><br/><strong>JavaScript/Node.js</strong> - Web development, APIs, and full-stack applications; dominates frontend and increasingly used for backend services. <br/><br/><br/><strong>Python</strong> - Data science, machine learning, automation scripts, and web applications; popular for AI/ML workloads and business logic.<br/><br/><br/><strong>Ruby</strong> - Web applications and rapid prototyping; known for developer productivity and clean syntax, especially with Rails framework. <br/><br/><br/><strong>PHP</strong> - Web development and content management systems; powers a large percentage of websites and e-commerce platforms. <br/><br/><br/><strong>PowerShell</strong> - Windows system administration and automation; Microsoft&#x27;s scripting language for infrastructure management.</td><td class="cell-zk]D"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-80f4-88b8-e193a7bb6bb4"><td class="cell-title"><a href="https://www.notion.so/What-are-the-most-common-compiled-languages-used-in-enterprise-settings-and-what-is-each-primarily-u-23e110fc9f3a80f488b8e193a7bb6bb4?pvs=21">What are the most common compiled languages used in enterprise settings and what is each primarily used for?</a></td><td class="cell-dwbm">The main enterprise compiled languages are: <br/><br/><br/><strong>Java</strong> - Enterprise applications, web services, and Android development; dominates large-scale business systems with strong ecosystem and platform independence. <br/><br/><br/><strong>C#</strong> - Windows applications, web development, and enterprise software; Microsoft&#x27;s flagship language for .NET ecosystem and cloud services. <br/><br/><br/><strong>C++</strong> - System programming, high-performance applications, and embedded systems; used where maximum performance and hardware control are critical. <br/><br/><br/><strong>Go</strong> - Microservices, cloud infrastructure, and DevOps tools; Google&#x27;s language designed for concurrent, scalable backend systems. <br/><br/><br/><strong>Rust</strong> - System programming and performance-critical applications; emerging language focused on memory safety without performance overhead.</td><td class="cell-zk]D"><a href="https://www.notion.so/Compiled-Languages-23c110fc9f3a8092a167eb5f7d09c574?pvs=21">Compiled Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-804f-948e-e82e689dc482"><td class="cell-title"><a href="https://www.notion.so/In-2-3-sentences-explain-what-hybrid-languages-are-and-name-their-two-stage-process-23e110fc9f3a804f948ee82e689dc482?pvs=21">In 2-3 sentences, explain what hybrid languages are and name their two-stage process.</a></td><td class="cell-dwbm">Hybrid languages combine aspects of both compiled and interpreted languages through a two-stage execution process. The two stages are: 1) <strong>Compilation stage</strong> - source code is compiled into bytecode (an intermediate representation), and 2) <strong>Interpretation/Execution stage</strong> - the bytecode is executed by a virtual machine or runtime environment. This approach provides some benefits of compilation (early error detection, optimization) while maintaining some benefits of interpretation (platform independence, runtime flexibility).</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-green">Short Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8041-9a68-cb889811a02f"><td class="cell-title"><a href="https://www.notion.so/What-are-hybrid-languages-and-what-two-stage-process-do-they-use-23e110fc9f3a80419a68cb889811a02f?pvs=21">What are hybrid languages and what two-stage process do they use?</a></td><td class="cell-dwbm">Hybrid languages are programming languages that combine compilation and interpretation approaches. They use a two-stage process: first, source code is compiled into platform-independent bytecode (like Java&#x27;s .class files or C#&#x27;s .NET assemblies), then this bytecode is executed by a virtual machine that handles the final translation to machine code.</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8002-b4f5-eaa14a1146b5"><td class="cell-title"><a href="https://www.notion.so/Hybrid-languages-compile-source-code-into-_______-which-is-then-executed-by-a-_______-_______-prov-23e110fc9f3a8002b4f5eaa14a1146b5?pvs=21">Hybrid languages compile source code into _______, which is then executed by a _______ _______, providing benefits of both compiled and interpreted approaches.</a></td><td class="cell-dwbm">bytecode; virtual machine. Hybrid languages compile source code into bytecode, which is then executed by a virtual machine, providing benefits of both compiled and interpreted approaches. Bytecode is a platform-independent intermediate representation that&#x27;s more efficient to execute than source code but not tied to specific hardware like machine code. The virtual machine handles the final translation to machine instructions and provides a consistent runtime environment across different platforms.</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-gray">Fill-in-the-Blank</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-80a8-9839-f9ef046882ac"><td class="cell-title"><a href="https://www.notion.so/True-or-False-Hybrid-languages-eliminate-all-disadvantages-of-both-compiled-and-interpreted-langua-23e110fc9f3a80a89839f9ef046882ac?pvs=21"> True or False: &quot;Hybrid languages eliminate all disadvantages of both compiled and interpreted languages.&quot; Explain the trade-offs that remain.</a></td><td class="cell-dwbm">False. While hybrid languages mitigate some disadvantages, they introduce their own trade-offs and don&#x27;t eliminate all problems. <strong>Remaining disadvantages</strong>: 1) <strong>Performance overhead</strong> - bytecode execution is faster than interpretation but still slower than native compiled code due to virtual machine overhead, 2) <strong>Runtime dependency</strong> - applications still require the virtual machine/runtime to be installed on target systems, similar to interpreted languages, 3) <strong>Memory usage</strong> - virtual machines consume additional memory beyond the application itself, and 4) <strong>Startup time</strong> - JVM or .NET runtime initialization can create noticeable startup delays. Hybrid languages optimize for the middle ground - better performance than pure interpretation while maintaining more flexibility than pure compilation, but they don&#x27;t achieve the absolute best of either approach.</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-yellow">True/False</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8083-930a-d420e0b45a31"><td class="cell-title"><a href="https://www.notion.so/What-role-does-the-virtual-machine-play-in-hybrid-languages-and-what-services-does-it-provide-beyon-23e110fc9f3a8083930ad420e0b45a31?pvs=21">What role does the virtual machine play in hybrid languages, and what services does it provide beyond code execution?</a></td><td class="cell-dwbm">The virtual machine acts as a sophisticated runtime platform that provides: memory management through garbage collection, security sandboxing and access control, cross-platform abstraction hiding OS differences, just-in-time optimization and performance monitoring, comprehensive debugging and profiling capabilities, and dynamic class loading and reflection services. Modern VMs like the JVM also support multiple programming languages and provide shared library ecosystems.</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-80b8-a6d6-e0342412df78"><td class="cell-title"><a href="https://www.notion.so/What-are-the-most-common-hybrid-languages-in-enterprise-environments-and-what-are-their-primary-use--23e110fc9f3a80b8a6d6e0342412df78?pvs=21">What are the most common hybrid languages in enterprise environments and what are their primary use cases?</a></td><td class="cell-dwbm"><strong>Java</strong> is the dominant hybrid language, used for large-scale enterprise applications, web services, Android development, and big data processing (Hadoop, Spark). <strong>C#</strong> is the second major player, primarily for Windows-based enterprise applications, web development with ASP.NET, and desktop applications. <strong>Kotlin</strong> is growing rapidly for Android development and server-side applications as a modern JVM language. <strong>Scala</strong> is used for big data processing and functional programming in enterprises. <strong>F#</strong> serves functional programming needs in .NET environments. Java and C# account for the vast majority of enterprise hybrid language usage.</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-80a5-9139-d3c8703d60ec"><td class="cell-title"><a href="https://www.notion.so/How-does-procedural-programming-organize-code-A-Into-classes-and-objects-B-Into-mathematical-func-23e110fc9f3a80a59139d3c8703d60ec?pvs=21">How does procedural programming organize code?
+A) Into classes and objects
+B) Into mathematical functions
+C) Into sequential procedures and functions
+D) Into distributed components</a></td><td class="cell-dwbm">C) Into sequential procedures and functions. Procedural programming organizes code into sequential procedures (also called functions or subroutines) that execute step-by-step instructions to accomplish tasks. The program flow follows a clear sequence where one procedure calls another, data is passed between procedures, and each procedure performs a specific set of operations. This creates a top-down approach where complex problems are broken down into smaller procedures that can be executed in order to achieve the desired outcome.</td><td class="cell-zk]D"><a href="https://www.notion.so/Procedural-Programming-23e110fc9f3a80f48f5ee2d394372204?pvs=21">Procedural Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-800d-8e97-f939dda56df6"><td class="cell-title"><a href="https://www.notion.so/Explain-the-core-building-blocks-of-procedural-programming-and-how-they-work-together-23e110fc9f3a800d8e97f939dda56df6?pvs=21">Explain the core building blocks of procedural programming and how they work together.</a></td><td class="cell-dwbm">1) <strong>Functions/Procedures</strong> - reusable blocks of code that perform specific tasks and can accept parameters and return values, 2) <strong>Sequential execution</strong> - code executes in a predetermined order, with control flow managed through function calls and control structures, 3) <strong>Shared data</strong> - variables and data structures that are passed between functions or accessed globally to maintain program state. These work together by breaking complex problems into smaller functions that execute in sequence, passing data between functions as needed, and using control structures (loops, conditionals) to manage the program flow and decision-making process.</td><td class="cell-zk]D"><a href="https://www.notion.so/Procedural-Programming-23e110fc9f3a80f48f5ee2d394372204?pvs=21">Procedural Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-green">Short Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-804e-b265-ec96457a78ee"><td class="cell-title"><a href="https://www.notion.so/Why-does-procedural-programming-continue-to-exist-and-thrive-in-modern-enterprise-development-despit-23e110fc9f3a804eb265ec96457a78ee?pvs=21">Why does procedural programming continue to exist and thrive in modern enterprise development despite the popularity of object-oriented programming?</a></td><td class="cell-dwbm">Procedural programming thrives because it naturally fits many types of problems and offers specific advantages: <br/><br/><br/><strong>Performance</strong> - minimal overhead makes it ideal for high-performance computing; <br/><br/><br/><strong>Clarity</strong> - sequential execution mirrors how humans think about solving problems step-by-step; <strong>Simplicity</strong> - easier to understand and debug with explicit data flow; <br/><br/><br/><strong>Mathematical alignment</strong> - perfect for calculations, data transformations, and scientific computing; <br/><br/><br/><strong>Utility functions</strong> - ideal for stateless operations like formatting, validation, and conversion. Modern enterprise teams use procedural programming strategically alongside OOP, choosing the paradigm that best fits each specific problem rather than adhering to paradigm purity.</td><td class="cell-zk]D"><a href="https://www.notion.so/Procedural-Programming-23e110fc9f3a80f48f5ee2d394372204?pvs=21">Procedural Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8077-a279-ecdd1fd763c9"><td class="cell-title"><a href="https://www.notion.so/What-is-the-decision-framework-modern-enterprise-developers-use-to-choose-between-creating-a-functio-23e110fc9f3a8077a279ecdd1fd763c9?pvs=21">What is the decision framework modern enterprise developers use to choose between creating a function versus creating an object?</a></td><td class="cell-dwbm"><strong>Use a Function When</strong>: Transforming data from one format to another, performing calculations or business logic, handling stateless operations, building data processing pipelines, or needing maximum performance. <br/><br/><br/><strong>Create an Object When</strong>: Maintaining state across multiple operations, handling complex data with associated behaviors, or modeling real-world business concepts with multiple interrelated attributes. <br/><br/><br/><strong>Key Tests</strong>: &quot;Transformation Test&quot; (pure data transformation = function), &quot;State Test&quot; (no persistent state = function), &quot;Performance Test&quot; (maximum speed = function), &quot;Complexity Test&quot; (simple, focused operation = function). The decision happens multiple times daily for every enterprise developer and is about matching the paradigm to the problem.</td><td class="cell-zk]D"><a href="https://www.notion.so/Procedural-Programming-23e110fc9f3a80f48f5ee2d394372204?pvs=21">Procedural Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-80ff-aba1-e7261058224a"><td class="cell-title"><a href="https://www.notion.so/How-does-procedural-programming-relate-to-and-interact-with-other-programming-paradigms-commonly-use-23e110fc9f3a80ffaba1e7261058224a?pvs=21">How does procedural programming relate to and interact with other programming paradigms commonly used in enterprise development?</a></td><td class="cell-dwbm"><strong>With Functional Programming</strong>: Shares emphasis on functions but procedural allows side effects while functional emphasizes purity and immutability. Often used together in data processing pipelines. <br/><br/><br/><strong>With Object-Oriented</strong>: Complementary approaches - procedural for utilities and calculations, OOP for business domain modeling. Objects often contain procedural methods. <br/><br/><br/><strong>With Declarative Programming</strong>: Procedural describes &quot;how&quot; to do something, declarative describes &quot;what&quot; you want. SQL queries (declarative) often feed into procedural processing functions. <br/><br/><br/><strong>Daily Reality</strong>: Enterprise developers switch between paradigms within the same codebase, day, or even file. A typical developer might create User objects (OOP), write validateEmail() functions (procedural), use array.map() (functional), and write SQL queries (declarative) all in the same feature. This mixed-paradigm approach is strategic problem-solving, not poor architecture.</td><td class="cell-zk]D"><a href="https://www.notion.so/Procedural-Programming-23e110fc9f3a80f48f5ee2d394372204?pvs=21">Procedural Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23e110fc-9f3a-8059-a08a-c0510af8b8cd"><td class="cell-title"><a href="https://www.notion.so/What-are-the-three-core-principles-of-functional-programming-A-Encapsulation-inheritance-and-pol-23e110fc9f3a8059a08ac0510af8b8cd?pvs=21">What are the three core principles of functional programming?
+A) Encapsulation, inheritance, and polymorphism
+B) Immutability, pure functions, and function composition
+C) Classes, objects, and methods
+D) Variables, loops, and conditionals</a></td><td class="cell-dwbm"> B) Immutability, pure functions, and function composition. These three principles define functional programming: immutability means data never changes after creation, pure functions always return the same output for the same input with no side effects, and function composition involves chaining functions together to build complex operations from simpler ones.</td><td class="cell-zk]D"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-808c-898d-d4487389e748"><td class="cell-title"><a href="https://www.notion.so/In-2-3-sentences-explain-what-a-pure-function-is-and-give-one-key-benefit-23f110fc9f3a808c898dd4487389e748?pvs=21"> In 2-3 sentences, explain what a pure function is and give one key benefit.</a></td><td class="cell-dwbm">A pure function is like a mathematical equation that always returns the same result for the same input and has no side effects (doesn&#x27;t modify global state or variables outside itself). For example, a function that multiplies a number by 2 will always return the same result for the same input. The key benefit is that pure functions are highly testable and predictable, making code more reliable and easier to debug.</td><td class="cell-zk]D"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-green">Short Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-8025-8c6e-dcd2c5636a3e"><td class="cell-title"><a href="https://www.notion.so/Functional-programming-treats-computation-as-_______-evaluation-while-procedural-programming-follow-23f110fc9f3a80258c6edcd2c5636a3e?pvs=21">Functional programming treats computation as _______ evaluation, while procedural programming follows _______ instructions that modify data in place.</a></td><td class="cell-dwbm">mathematical function; sequential. Functional programming treats computation as mathematical function evaluation, emphasizing transformations and immutability, while procedural programming follows sequential instructions that modify data in place through step-by-step operations.</td><td class="cell-zk]D"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-gray">Fill-in-the-Blank</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-801e-b800-fea89a2299b3"><td class="cell-title"><a href="https://www.notion.so/True-or-False-Developers-consciously-choose-between-functional-and-procedural-programming-when-wri-23f110fc9f3a801eb800fea89a2299b3?pvs=21">True or False: &quot;Developers consciously choose between functional and procedural programming when writing code.&quot; Explain your reasoning.</a></td><td class="cell-dwbm">False. According to the article, developers don&#x27;t consciously choose &quot;functional vs. procedural&quot; - they intuitively reach for whatever feels most natural for the specific transformation or problem they&#x27;re solving. They&#x27;re thinking &quot;what&#x27;s the clearest way to solve this specific problem?&quot; rather than deliberately selecting a programming paradigm. Developers fluidly move between both approaches based on what makes the problem easiest to think about, often within the same piece of code.</td><td class="cell-zk]D"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-yellow">True/False</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-8018-84ab-c1074a6f457d"><td class="cell-title"><a href="https://www.notion.so/When-would-functional-programming-patterns-feel-most-natural-to-a-developer-A-Processing-a-single--23f110fc9f3a801884abc1074a6f457d?pvs=21">When would functional programming patterns feel most natural to a developer?
+A) Processing a single payment transaction step by step
+B) Transforming a collection of customer orders through multiple operations
+C) Updating a single database record
+D) Implementing a simple if-then-else logic</a></td><td class="cell-dwbm">B) Transforming a collection of customer orders through multiple operations. Functional patterns feel natural when developers are working with collections of data that need multiple transformations (like filtering, mapping, grouping), as these operations can be chained together in clear pipelines. Single entity processing (like option A) typically feels more natural with procedural approaches.</td><td class="cell-zk]D"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-8018-94c8-d1a2b0c4b355"><td class="cell-title"><a href="https://www.notion.so/Explain-why-functional-programming-emerged-and-became-important-particularly-in-the-context-of-conc-23f110fc9f3a801894c8d1a2b0c4b355?pvs=21">Explain why functional programming emerged and became important, particularly in the context of concurrent and distributed systems. Include the specific problems it solves.</a></td><td class="cell-dwbm">Functional programming emerged from mathematical lambda calculus but gained prominence with concurrent and distributed systems because it solves critical problems with traditional mutable state. When multiple processes or threads modify shared data simultaneously, traditional approaches create race conditions, deadlocks, and unpredictable behavior. Functional programming eliminates these issues through immutability - since data never changes after creation, multiple processes can safely access and transform data concurrently without interfering with each other. This makes concurrent execution safe and predictable, which is essential for modern distributed systems, cloud applications, and high-performance computing where multiple operations need to run simultaneously without causing data corruption or system failures.</td><td class="cell-zk]D"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-8011-8386-ceb0829af33d"><td class="cell-title"><a href="https://www.notion.so/A-_______-is-the-blueprint-or-template-that-defines-the-structure-and-behavior-while-an-_______-is--23f110fc9f3a80118386ceb0829af33d?pvs=21">A _______ is the blueprint or template that defines the structure and behavior, while an _______ is a specific instance created from that blueprint with actual data.</a></td><td class="cell-dwbm">class; object. A class is the blueprint or template that defines the structure and behavior, while an object is a specific instance created from that blueprint with actual data. Think of it like a house blueprint (class) versus an actual house built from that blueprint (object). The class defines what properties and methods all objects of that type will have, but each object contains its own specific data values.</td><td class="cell-zk]D"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-gray">Fill-in-the-Blank</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-80fe-a365-c101a51d137c"><td class="cell-title"><a href="https://www.notion.so/True-or-False-Interpreted-languages-are-too-slow-for-any-enterprise-production-use-Explain-with--23f110fc9f3a80fea365c101a51d137c?pvs=21">True or False: &quot;Interpreted languages are too slow for any enterprise production use.&quot; Explain with specific examples.</a></td><td class="cell-dwbm">False. While interpreted languages have performance overhead, many run successfully in enterprise production environments where their benefits outweigh the performance costs. <strong>Examples</strong>: Netflix uses Python extensively for data analysis and recommendation systems, Instagram&#x27;s backend was built primarily in Python/Django, and many financial institutions use R for statistical analysis and risk modeling. The key is strategic application - interpreted languages excel in scenarios where development speed, flexibility, and ease of maintenance are more valuable than raw execution speed. They&#x27;re inappropriate for latency-critical applications like high-frequency trading, but perfectly suitable for web applications, data processing, automation, and business logic where the performance difference is negligible compared to network, database, or I/O operations.</td><td class="cell-zk]D"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-yellow">True/False</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-803c-9675-e4dff10850d8"><td class="cell-title"><a href="https://www.notion.so/What-is-the-primary-advantage-of-bytecode-in-hybrid-languages-A-It-executes-faster-than-machine-co-23f110fc9f3a803c9675e4dff10850d8?pvs=21">What is the primary advantage of bytecode in hybrid languages?
+A) It executes faster than machine code
+B) It provides platform independence while being more efficient than source code
+C) It eliminates the need for error checking
+D) It automatically optimizes memory usage</a></td><td class="cell-dwbm">B) It provides platform independence while being more efficient than source code. Bytecode serves as a &quot;write once, run anywhere&quot; intermediate representation that can execute on any system with the appropriate virtual machine, while being much more efficient to execute than interpreting source code line-by-line. The virtual machine can execute bytecode faster than an interpreter can parse and execute source code, but the bytecode remains platform-independent unlike native machine code which is tied to specific processor architectures.</td><td class="cell-zk]D"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-8021-ad15-f20af9d133ae"><td class="cell-title"><a href="https://www.notion.so/What-is-the-fundamental-difference-between-declarative-and-imperative-programming-A-Declarative-us-23f110fc9f3a8021ad15f20af9d133ae?pvs=21">What is the fundamental difference between declarative and imperative programming?
+A) Declarative uses functions, imperative uses objects
+B) Declarative describes what you want, imperative describes how to achieve it
+C) Declarative is faster, imperative is more readable
+D) Declarative uses databases, imperative uses files</a></td><td class="cell-dwbm">B) Declarative describes what you want, imperative describes how to achieve it. Declarative programming focuses on specifying the desired outcome or result, while imperative programming provides step-by-step instructions for how to achieve that result. This is like the difference between telling a GPS &quot;take me to 123 Main Street&quot; (declarative) versus giving turn-by-turn directions (imperative).</td><td class="cell-zk]D"><a href="https://www.notion.so/Declarative-Programming-23e110fc9f3a805e9f21e491f8788e0a?pvs=21">Declarative Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-803f-a775-c5820d001d4f"><td class="cell-title"><a href="https://www.notion.so/In-declarative-programming-you-focus-on-describing-the-_______-while-the-execution-engine-handles-t-23f110fc9f3a803fa775c5820d001d4f?pvs=21">In declarative programming, you focus on describing the _______ while the execution engine handles the _______.</a></td><td class="cell-dwbm">problem domain; &quot;how&quot; (or implementation details). Declarative programming allows developers to focus on describing the problem domain and desired outcomes, while the underlying system or execution engine determines the optimal way to implement and execute those specifications.</td><td class="cell-zk]D"><a href="https://www.notion.so/Declarative-Programming-23e110fc9f3a805e9f21e491f8788e0a?pvs=21">Declarative Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-blue">Multiple Choice</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-808c-96e3-f64ee563d45d"><td class="cell-title"><a href="https://www.notion.so/True-or-False-Functional-programming-is-truly-declarative-because-it-focuses-on-data-transformatio-23f110fc9f3a808c96e3f64ee563d45d?pvs=21">True or False: &quot;Functional programming is truly declarative because it focuses on data transformations rather than step-by-step instructions.&quot; Explain your reasoning.</a></td><td class="cell-dwbm">False. While functional programming feels more declarative than traditional imperative programming, it is still fundamentally imperative because you&#x27;re telling the computer exactly what steps to take, just more abstractly. For example, <code>users.filter().map().sort()</code> still specifies a sequence of operations (Step 1: filter, Step 2: transform, Step 3: sort). True declarative programming, like SQL, doesn&#x27;t specify the sequence—you describe what you want (SELECT name FROM users WHERE age &gt;= 18 ORDER BY name) and let the system determine the optimal execution path.</td><td class="cell-zk]D"><a href="https://www.notion.so/Declarative-Programming-23e110fc9f3a805e9f21e491f8788e0a?pvs=21">Declarative Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-yellow">True/False</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-8068-8664-cf4efb6c9f27"><td class="cell-title"><a href="https://www.notion.so/Describe-how-enterprise-systems-typically-blend-declarative-and-imperative-approaches-within-a-singl-23f110fc9f3a80688664cf4efb6c9f27?pvs=21">Describe how enterprise systems typically blend declarative and imperative approaches within a single application. Provide a specific example showing where each paradigm is used and explain why that choice makes sense.</a></td><td class="cell-dwbm">Enterprise systems seamlessly integrate both paradigms, switching between them based on the specific requirements of each component. For example, in an e-commerce system: <strong>Declarative components</strong> include SQL queries for data access (&quot;SELECT * FROM customers WHERE status = &#x27;active&#x27;&quot;) because databases can optimize retrieval better than manual implementation, CSS for styling because browsers handle rendering optimization, and React JSX for UI structure because the framework manages DOM updates efficiently. <strong>Imperative components</strong> include complex business logic like risk calculation algorithms where precise control over each step is required, error handling and retry logic for API integrations where custom conditions must be managed, and performance-critical processing where specific optimizations are needed. This hybrid approach maximizes the benefits of both paradigms: declarative for predictable, optimizable operations and imperative for custom business logic requiring precise control.</td><td class="cell-zk]D"><a href="https://www.notion.so/Declarative-Programming-23e110fc9f3a805e9f21e491f8788e0a?pvs=21">Declarative Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr><tr id="23f110fc-9f3a-80f4-a15c-d11aea424c50"><td class="cell-title"><a href="https://www.notion.so/Analyze-why-SQL-databases-React-rendering-and-Kubernetes-orchestration-are-all-successful-examples-23f110fc9f3a80f4a15cd11aea424c50?pvs=21">Analyze why SQL databases, React rendering, and Kubernetes orchestration are all successful examples of declarative programming. What common characteristics make declarative approaches work well in these domains?</a></td><td class="cell-dwbm">These systems succeed with declarative approaches because they share three critical characteristics: <strong>specialized optimization engines</strong>, <strong>complex underlying operations</strong>, and <strong>multiple valid implementation paths</strong>. SQL succeeds because database engines can optimize query execution better than developers manually implementing joins and indexes—there are many ways to retrieve the same data, and the optimizer chooses the best approach. React rendering succeeds because the framework can optimize DOM updates, handle browser differences, and manage component lifecycles more efficiently than manual DOM manipulation—developers describe what the UI should look like, and React determines the minimal updates needed. Kubernetes succeeds because container orchestration involves complex scheduling, networking, and health management that changes based on cluster state—users declare desired state (3 replicas), and Kubernetes handles the complex implementation details. The common thread is that each domain has an optimized engine that can execute specifications better than manual implementation, while also handling the complexity of multiple valid approaches to achieve the same goal.</td><td class="cell-zk]D"><a href="https://www.notion.so/Declarative-Programming-23e110fc9f3a805e9f21e491f8788e0a?pvs=21">Declarative Programming</a></td><td class="cell-\ktg"><span class="selected-value select-value-color-brown">Long Answer</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-RlTl"></td></tr></tbody></table><br/><br/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

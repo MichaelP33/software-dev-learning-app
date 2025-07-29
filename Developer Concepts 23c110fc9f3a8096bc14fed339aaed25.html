@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Developer Concepts</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23c110fc-9f3a-8096-bc14-fed339aaed25" class="page sans"><header><h1 class="page-title">Developer Concepts</h1><p class="page-description"></p></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><div data-testid="/icons/font_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/font_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/font_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Name</th><th><span class="icon property-icon"><div data-testid="/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Category</th><th><span class="icon property-icon"><div data-testid="/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Topic</th><th><span class="icon property-icon"><div data-testid="/icons/burst_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/burst_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/burst_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Learning Status</th><th><span class="icon property-icon"><div data-testid="/icons/burst_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/burst_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/burst_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Priority Status</th><th><span class="icon property-icon"><div data-testid="/icons/calendar_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Last Reviewed</th><th><span class="icon property-icon"><div data-testid="/icons/hashtag_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/hashtag_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/hashtag_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Confidence Rating</th><th><span class="icon property-icon"><div data-testid="/icons/list_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/list_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/list_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Customer Relevance</th><th><span class="icon property-icon"><div data-testid="/icons/description_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/description_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/description_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Value Prop</th><th><span class="icon property-icon"><div data-testid="/icons/search_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/search_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/search_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Question Count</th><th><span class="icon property-icon"><div data-testid="/icons/arrow-northeast_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-northeast_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-northeast_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Study Questions</th></tr></thead><tbody><tr id="23c110fc-9f3a-8092-a167-eb5f7d09c574"><td class="cell-title"><a href="https://www.notion.so/Compiled-Languages-23c110fc9f3a8092a167eb5f7d09c574?pvs=21">Compiled Languages</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"><time>@July 27, 2025</time></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/What-happens-during-the-compilation-process-A-Code-is-executed-line-by-line-B-Source-code-is-tran-23e110fc9f3a80799634ccd9efd1b7e1?pvs=21">What happens during the compilation process?
+A) Code is executed line by line
+B) Source code is translated into machine code before execution
+C) Code is interpreted at runtime
+D) Variables are declared and initialized</a>, <a href="https://www.notion.so/What-are-the-main-business-benefits-we-d-see-from-moving-to-compiled-languages-23e110fc9f3a801d947ffb6566cd79cf?pvs=21">What are the main business benefits we&#x27;d see from moving to compiled languages?</a>, <a href="https://www.notion.so/Name-the-three-primary-business-benefits-of-compiled-languages-and-briefly-explain-each-23e110fc9f3a805e9282e0b05b95d802?pvs=21">Name the three primary business benefits of compiled languages and briefly explain each.</a>, <a href="https://www.notion.so/True-or-False-Compiled-languages-are-always-better-than-interpreted-languages-for-enterprise-appli-23e110fc9f3a80878de0e5f584a1f8a5?pvs=21">True or False: &quot;Compiled languages are always better than interpreted languages for enterprise applications.&quot; Explain when this is true and when it&#x27;s not.</a>, <a href="https://www.notion.so/What-are-the-most-common-compiled-languages-used-in-enterprise-settings-and-what-is-each-primarily-u-23e110fc9f3a80f488b8e193a7bb6bb4?pvs=21">What are the most common compiled languages used in enterprise settings and what is each primarily used for?</a></td></tr><tr id="23d110fc-9f3a-80fa-8eb6-cd6cf0014d0e"><td class="cell-title"><a href="https://www.notion.so/Interpreted-Languages-23d110fc9f3a80fa8eb6cd6cf0014d0e?pvs=21">Interpreted Languages</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/In-interpreted-languages-source-code-is-executed-_______-by-an-_______-rather-than-being-translated-23e110fc9f3a80c69861cf638d20ecd9?pvs=21">In interpreted languages, source code is executed _______ by an _______ rather than being translated to machine code beforehand.</a>, <a href="https://www.notion.so/What-are-the-four-key-characteristics-of-interpreted-languages-23e110fc9f3a806fab84d00391dda78d?pvs=21">What are the four key characteristics of interpreted languages?</a>, <a href="https://www.notion.so/Explain-what-runtime-dependency-complexity-means-in-interpreted-languages-and-provide-one-example-23e110fc9f3a8040b792e6fd8dedc539?pvs=21">Explain what &quot;runtime dependency complexity&quot; means in interpreted languages and provide one example.</a>, <a href="https://www.notion.so/Which-application-type-is-BEST-suited-for-interpreted-languages-A-High-frequency-trading-systems-B-23e110fc9f3a806e8342d0e4e0b5d29c?pvs=21">Which application type is BEST suited for interpreted languages?
+A) High-frequency trading systems
+B) Rapid prototyping and scripting
+C) Operating system kernels
+D) Device drivers</a>, <a href="https://www.notion.so/What-are-the-most-common-interpreted-languages-used-in-enterprise-settings-and-what-is-each-primaril-23e110fc9f3a80169303ce509b962e40?pvs=21">What are the most common interpreted languages used in enterprise settings and what is each primarily used for?</a>, <a href="https://www.notion.so/True-or-False-Interpreted-languages-are-too-slow-for-any-enterprise-production-use-Explain-with--23f110fc9f3a80fea365c101a51d137c?pvs=21">True or False: &quot;Interpreted languages are too slow for any enterprise production use.&quot; Explain with specific examples.</a></td></tr><tr id="23e110fc-9f3a-80dc-ab4d-fca66b94c02e"><td class="cell-title"><a href="https://www.notion.so/Hybrid-Languages-23e110fc9f3a80dcab4dfca66b94c02e?pvs=21">Hybrid Languages</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/In-2-3-sentences-explain-what-hybrid-languages-are-and-name-their-two-stage-process-23e110fc9f3a804f948ee82e689dc482?pvs=21">In 2-3 sentences, explain what hybrid languages are and name their two-stage process.</a>, <a href="https://www.notion.so/What-are-hybrid-languages-and-what-two-stage-process-do-they-use-23e110fc9f3a80419a68cb889811a02f?pvs=21">What are hybrid languages and what two-stage process do they use?</a>, <a href="https://www.notion.so/Hybrid-languages-compile-source-code-into-_______-which-is-then-executed-by-a-_______-_______-prov-23e110fc9f3a8002b4f5eaa14a1146b5?pvs=21">Hybrid languages compile source code into _______, which is then executed by a _______ _______, providing benefits of both compiled and interpreted approaches.</a>, <a href="https://www.notion.so/True-or-False-Hybrid-languages-eliminate-all-disadvantages-of-both-compiled-and-interpreted-langua-23e110fc9f3a80a89839f9ef046882ac?pvs=21"> True or False: &quot;Hybrid languages eliminate all disadvantages of both compiled and interpreted languages.&quot; Explain the trade-offs that remain.</a>, <a href="https://www.notion.so/What-role-does-the-virtual-machine-play-in-hybrid-languages-and-what-services-does-it-provide-beyon-23e110fc9f3a8083930ad420e0b45a31?pvs=21">What role does the virtual machine play in hybrid languages, and what services does it provide beyond code execution?</a>, <a href="https://www.notion.so/What-are-the-most-common-hybrid-languages-in-enterprise-environments-and-what-are-their-primary-use--23e110fc9f3a80b8a6d6e0342412df78?pvs=21">What are the most common hybrid languages in enterprise environments and what are their primary use cases?</a>, <a href="https://www.notion.so/What-is-the-primary-advantage-of-bytecode-in-hybrid-languages-A-It-executes-faster-than-machine-co-23f110fc9f3a803c9675e4dff10850d8?pvs=21">What is the primary advantage of bytecode in hybrid languages?
+A) It executes faster than machine code
+B) It provides platform independence while being more efficient than source code
+C) It eliminates the need for error checking
+D) It automatically optimizes memory usage</a></td></tr><tr id="23d110fc-9f3a-8052-9e9e-cf2875a69ad0"><td class="cell-title"><a href="https://www.notion.so/Object-Oriented-Programming-23d110fc9f3a80529e9ecf2875a69ad0?pvs=21">Object Oriented Programming</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/Which-of-the-following-are-the-four-foundational-principles-of-OOP-A-Classes-Objects-Methods-Fu-23d110fc9f3a80cca1e9d8644838a6d7?pvs=21">Which of the following are the four foundational principles of OOP?
+A) Classes, Objects, Methods, Functions
+B) Encapsulation, Inheritance, Polymorphism, Abstraction
+C) Variables, Loops, Conditionals, Arrays
+D) Input, Process, Output, Storage</a>, <a href="https://www.notion.so/Explain-the-difference-between-functions-methods-and-classes-in-OOP-23d110fc9f3a8076ae4acf2b535116f7?pvs=21">Explain the difference between functions, methods, and classes in OOP</a>, <a href="https://www.notion.so/True-or-False-You-should-always-create-objects-instead-of-simple-functions-to-follow-OOP-principle-23d110fc9f3a80a3b1b8ff16c4372a24?pvs=21">True or False: &quot;You should always create objects instead of simple functions to follow OOP principles.&quot; Explain your reasoning.</a>, <a href="https://www.notion.so/What-decision-frameworks-do-OOP-teams-use-to-choose-between-objects-and-functions-23d110fc9f3a80f1a52efe4105751102?pvs=21">What decision frameworks do OOP teams use to choose between objects and functions?</a>, <a href="https://www.notion.so/Explain-how-encapsulation-inheritance-and-polymorphism-work-together-to-create-maintainable-enterp-23d110fc9f3a8023b30cf208c1002f11?pvs=21">Explain how encapsulation, inheritance, and polymorphism work together to create maintainable enterprise software. Provide an example showing their interaction.</a>, <a href="https://www.notion.so/What-is-the-key-defining-characteristic-of-a-class-and-an-object-in-code-23d110fc9f3a800d94ccc2ed7b1836b0?pvs=21">What is the key defining characteristic of a class and an object in code?</a>, <a href="https://www.notion.so/How-does-OOP-fit-within-mixed-paradigm-enterprise-development-23d110fc9f3a803fbdbcfb9954cab2b4?pvs=21">How does OOP fit within mixed paradigm enterprise development?</a>, <a href="https://www.notion.so/List-three-warning-signs-that-indicate-OOP-over-engineering-in-a-codebase-23d110fc9f3a8059a94edeee60c959a6?pvs=21">List three warning signs that indicate OOP over-engineering in a codebase.</a>, <a href="https://www.notion.so/A-_______-is-the-blueprint-or-template-that-defines-the-structure-and-behavior-while-an-_______-is--23f110fc9f3a80118386ceb0829af33d?pvs=21">A _______ is the blueprint or template that defines the structure and behavior, while an _______ is a specific instance created from that blueprint with actual data.</a></td></tr><tr id="23e110fc-9f3a-80f4-8f5e-e2d394372204"><td class="cell-title"><a href="https://www.notion.so/Procedural-Programming-23e110fc9f3a80f48f5ee2d394372204?pvs=21">Procedural Programming</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/How-does-procedural-programming-organize-code-A-Into-classes-and-objects-B-Into-mathematical-func-23e110fc9f3a80a59139d3c8703d60ec?pvs=21">How does procedural programming organize code?
+A) Into classes and objects
+B) Into mathematical functions
+C) Into sequential procedures and functions
+D) Into distributed components</a>, <a href="https://www.notion.so/Explain-the-core-building-blocks-of-procedural-programming-and-how-they-work-together-23e110fc9f3a800d8e97f939dda56df6?pvs=21">Explain the core building blocks of procedural programming and how they work together.</a>, <a href="https://www.notion.so/Why-does-procedural-programming-continue-to-exist-and-thrive-in-modern-enterprise-development-despit-23e110fc9f3a804eb265ec96457a78ee?pvs=21">Why does procedural programming continue to exist and thrive in modern enterprise development despite the popularity of object-oriented programming?</a>, <a href="https://www.notion.so/What-is-the-decision-framework-modern-enterprise-developers-use-to-choose-between-creating-a-functio-23e110fc9f3a8077a279ecdd1fd763c9?pvs=21">What is the decision framework modern enterprise developers use to choose between creating a function versus creating an object?</a>, <a href="https://www.notion.so/How-does-procedural-programming-relate-to-and-interact-with-other-programming-paradigms-commonly-use-23e110fc9f3a80ffaba1e7261058224a?pvs=21">How does procedural programming relate to and interact with other programming paradigms commonly used in enterprise development?</a></td></tr><tr id="23e110fc-9f3a-8086-a492-e30f65f53ab3"><td class="cell-title"><a href="https://www.notion.so/Functional-Programming-23e110fc9f3a8086a492e30f65f53ab3?pvs=21">Functional Programming</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/What-are-the-three-core-principles-of-functional-programming-A-Encapsulation-inheritance-and-pol-23e110fc9f3a8059a08ac0510af8b8cd?pvs=21">What are the three core principles of functional programming?
+A) Encapsulation, inheritance, and polymorphism
+B) Immutability, pure functions, and function composition
+C) Classes, objects, and methods
+D) Variables, loops, and conditionals</a>, <a href="https://www.notion.so/In-2-3-sentences-explain-what-a-pure-function-is-and-give-one-key-benefit-23f110fc9f3a808c898dd4487389e748?pvs=21"> In 2-3 sentences, explain what a pure function is and give one key benefit.</a>, <a href="https://www.notion.so/Functional-programming-treats-computation-as-_______-evaluation-while-procedural-programming-follow-23f110fc9f3a80258c6edcd2c5636a3e?pvs=21">Functional programming treats computation as _______ evaluation, while procedural programming follows _______ instructions that modify data in place.</a>, <a href="https://www.notion.so/True-or-False-Developers-consciously-choose-between-functional-and-procedural-programming-when-wri-23f110fc9f3a801eb800fea89a2299b3?pvs=21">True or False: &quot;Developers consciously choose between functional and procedural programming when writing code.&quot; Explain your reasoning.</a>, <a href="https://www.notion.so/When-would-functional-programming-patterns-feel-most-natural-to-a-developer-A-Processing-a-single--23f110fc9f3a801884abc1074a6f457d?pvs=21">When would functional programming patterns feel most natural to a developer?
+A) Processing a single payment transaction step by step
+B) Transforming a collection of customer orders through multiple operations
+C) Updating a single database record
+D) Implementing a simple if-then-else logic</a>, <a href="https://www.notion.so/Explain-why-functional-programming-emerged-and-became-important-particularly-in-the-context-of-conc-23f110fc9f3a801894c8d1a2b0c4b355?pvs=21">Explain why functional programming emerged and became important, particularly in the context of concurrent and distributed systems. Include the specific problems it solves.</a></td></tr><tr id="23e110fc-9f3a-805e-9f21-e491f8788e0a"><td class="cell-title"><a href="https://www.notion.so/Declarative-Programming-23e110fc9f3a805e9f21e491f8788e0a?pvs=21">Declarative Programming</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-blue">Programming Languages &amp; Paradigms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"><a href="https://www.notion.so/What-is-the-fundamental-difference-between-declarative-and-imperative-programming-A-Declarative-us-23f110fc9f3a8021ad15f20af9d133ae?pvs=21">What is the fundamental difference between declarative and imperative programming?
+A) Declarative uses functions, imperative uses objects
+B) Declarative describes what you want, imperative describes how to achieve it
+C) Declarative is faster, imperative is more readable
+D) Declarative uses databases, imperative uses files</a>, <a href="https://www.notion.so/In-declarative-programming-you-focus-on-describing-the-_______-while-the-execution-engine-handles-t-23f110fc9f3a803fa775c5820d001d4f?pvs=21">In declarative programming, you focus on describing the _______ while the execution engine handles the _______.</a>, <a href="https://www.notion.so/True-or-False-Functional-programming-is-truly-declarative-because-it-focuses-on-data-transformatio-23f110fc9f3a808c96e3f64ee563d45d?pvs=21">True or False: &quot;Functional programming is truly declarative because it focuses on data transformations rather than step-by-step instructions.&quot; Explain your reasoning.</a>, <a href="https://www.notion.so/Describe-how-enterprise-systems-typically-blend-declarative-and-imperative-approaches-within-a-singl-23f110fc9f3a80688664cf4efb6c9f27?pvs=21">Describe how enterprise systems typically blend declarative and imperative approaches within a single application. Provide a specific example showing where each paradigm is used and explain why that choice makes sense.</a>, <a href="https://www.notion.so/Analyze-why-SQL-databases-React-rendering-and-Kubernetes-orchestration-are-all-successful-examples-23f110fc9f3a80f4a15cd11aea424c50?pvs=21">Analyze why SQL databases, React rendering, and Kubernetes orchestration are all successful examples of declarative programming. What common characteristics make declarative approaches work well in these domains?</a></td></tr><tr id="23f110fc-9f3a-8022-a969-d834386e32ac"><td class="cell-title"><a href="https://www.notion.so/Variables-Data-Types-Memory-Concepts-23f110fc9f3a8022a969d834386e32ac?pvs=21">Variables, Data Types, Memory Concepts</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-pink">Core Programming Constructs</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80d3-8960-f4850faa908c"><td class="cell-title"><a href="https://www.notion.so/Control-flow-conditionals-loops-branching-23f110fc9f3a80d38960f4850faa908c?pvs=21">
+Control flow (conditionals, loops, branching)</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-pink">Core Programming Constructs</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8062-adc1-c3223d49a4c0"><td class="cell-title"><a href="https://www.notion.so/Functions-methods-and-scope-23f110fc9f3a8062adc1c3223d49a4c0?pvs=21">Functions/methods and scope</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-pink">Core Programming Constructs</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80e2-8605-d3dd13470620"><td class="cell-title"><a href="https://www.notion.so/Error-handling-and-exceptions-23f110fc9f3a80e28605d3dd13470620?pvs=21">Error handling and exceptions</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-pink">Core Programming Constructs</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-809f-b350-e085bf89435a"><td class="cell-title"><a href="https://www.notion.so/Basic-structures-arrays-lists-stacks-queues-23f110fc9f3a809fb350e085bf89435a?pvs=21">Basic structures: arrays, lists, stacks, queues</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Data Structures &amp; Algorithms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8037-a58c-e03f6ccfc5a1"><td class="cell-title"><a href="https://www.notion.so/Complex-structures-trees-graphs-hash-tables-23f110fc9f3a8037a58ce03f6ccfc5a1?pvs=21">Complex structures: trees, graphs, hash tables</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Data Structures &amp; Algorithms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8041-82ee-e8726616b551"><td class="cell-title"><a href="https://www.notion.so/Algorithm-design-approaches-and-complexity-23f110fc9f3a804182eee8726616b551?pvs=21">Algorithm design approaches and complexity</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Data Structures &amp; Algorithms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-802b-b5ca-e6bcbf4080b4"><td class="cell-title"><a href="https://www.notion.so/Common-patterns-searching-sorting-recursion-23f110fc9f3a802bb5cae6bcbf4080b4?pvs=21">Common patterns: searching, sorting, recursion</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Data Structures &amp; Algorithms</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80ce-9cb0-f27ad2516e3f"><td class="cell-title"><a href="https://www.notion.so/Functions-classes-and-modules-23f110fc9f3a80ce9cb0f27ad2516e3f?pvs=21">Functions, classes, and modules</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-yellow">Code Organizatiion &amp; Modularity</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8082-8ce2-c92223434a04"><td class="cell-title"><a href="https://www.notion.so/Separation-of-concerns-and-single-responsibility-23f110fc9f3a80828ce2c92223434a04?pvs=21">Separation of concerns and single responsibility</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-yellow">Code Organizatiion &amp; Modularity</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80a8-b0eb-c6259d31abe9"><td class="cell-title"><a href="https://www.notion.so/Code-reusability-and-abstraction-23f110fc9f3a80a8b0ebc6259d31abe9?pvs=21">Code reusability and abstraction</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-yellow">Code Organizatiion &amp; Modularity</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8025-a7ee-caca3a0957a4"><td class="cell-title"><a href="https://www.notion.so/Documentation-and-naming-conventions-23f110fc9f3a8025a7eecaca3a0957a4?pvs=21">Documentation and naming conventions</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-brown">Programming Fundamentals</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-yellow">Code Organizatiion &amp; Modularity</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-803a-a203-de79f1ce2cfd"><td class="cell-title"><a href="https://www.notion.so/SOLID-principles-23f110fc9f3a803aa203de79f1ce2cfd?pvs=21">
+SOLID principles</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-purple">System Design Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8041-87a7-c08ae0f57f65"><td class="cell-title"><a href="https://www.notion.so/Design-patterns-Observer-Factory-Singleton-MVC-23f110fc9f3a804187a7c08ae0f57f65?pvs=21">Design patterns: Observer, Factory, Singleton, MVC</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-purple">System Design Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8077-bd4d-e5b474b4a0a1"><td class="cell-title"><a href="https://www.notion.so/Domain-driven-design-concepts-23f110fc9f3a8077bd4de5b474b4a0a1?pvs=21">Domain-driven design concepts</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-purple">System Design Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80d2-aa3a-e46a17b32ee8"><td class="cell-title"><a href="https://www.notion.so/Clean-architecture-principles-23f110fc9f3a80d2aa3ae46a17b32ee8?pvs=21">Clean architecture principles</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-purple">System Design Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8039-8f37-ccc4859ed0b8"><td class="cell-title"><a href="https://www.notion.so/Monolithic-Architecture-23f110fc9f3a80398f37ccc4859ed0b8?pvs=21">Monolithic Architecture</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-red">Application Architecture Styles</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80d1-9a1f-c445941c0d21"><td class="cell-title"><a href="https://www.notion.so/Microservices-Architecture-23f110fc9f3a80d19a1fc445941c0d21?pvs=21">Microservices Architecture</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-red">Application Architecture Styles</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8020-b070-c526adddc40c"><td class="cell-title"><a href="https://www.notion.so/Client-Server-Patterns-23f110fc9f3a8020b070c526adddc40c?pvs=21">Client-Server Patterns</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-red">Application Architecture Styles</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80b4-9667-e18c977b4686"><td class="cell-title"><a href="https://www.notion.so/RESTful-APIs-23f110fc9f3a80b49667e18c977b4686?pvs=21">
+RESTful APIs</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-gray">API Design &amp; Integration</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8053-b973-d6155e81c937"><td class="cell-title"><a href="https://www.notion.so/GraphQL-23f110fc9f3a8053b973d6155e81c937?pvs=21">
+GraphQL</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-gray">API Design &amp; Integration</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-805a-8d0a-eba761f2e82b"><td class="cell-title"><a href="https://www.notion.so/Event-Driven-Architecture-23f110fc9f3a805a8d0aeba761f2e82b?pvs=21">
+Event-Driven Architecture</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-gray">API Design &amp; Integration</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-808a-b774-f20caf8d041c"><td class="cell-title"><a href="https://www.notion.so/RPC-vs-REST-23f110fc9f3a808ab774f20caf8d041c?pvs=21">
+RPC vs REST</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-gray">API Design &amp; Integration</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8001-a8b7-f0a42177d7bd"><td class="cell-title"><a href="https://www.notion.so/SQL-vs-NoSQL-trade-offs-23f110fc9f3a8001a8b7f0a42177d7bd?pvs=21">SQL vs NoSQL trade-offs</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-orange">Database Architecture Decisions</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8099-a974-c9f5d83c7d77"><td class="cell-title"><a href="https://www.notion.so/ACID-properties-vs-eventual-consistency-23f110fc9f3a8099a974c9f5d83c7d77?pvs=21">ACID properties vs eventual consistency</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-orange">Database Architecture Decisions</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-8008-89e4-f9c55e3798bd"><td class="cell-title"><a href="https://www.notion.so/Read-replicas-and-write-scaling-23f110fc9f3a800889e4f9c55e3798bd?pvs=21">Read replicas and write scaling</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-orange">Database Architecture Decisions</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80ff-8836-ec65c680f956"><td class="cell-title"><a href="https://www.notion.so/Database-sharding-and-partitioning-23f110fc9f3a80ff8836ec65c680f956?pvs=21">Database sharding and partitioning</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-orange">Database Architecture Decisions</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-801b-b871-d7127e1f91b5"><td class="cell-title"><a href="https://www.notion.so/Horizontal-vs-vertical-scaling-23f110fc9f3a801bb871d7127e1f91b5?pvs=21">Horizontal vs vertical scaling</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Scalability Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80c7-ade4-e552041a2cfa"><td class="cell-title"><a href="https://www.notion.so/Load-balancing-strategies-23f110fc9f3a80c7ade4e552041a2cfa?pvs=21">Load balancing strategies</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Scalability Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-809d-bfcf-ca5c50eecf9b"><td class="cell-title"><a href="https://www.notion.so/Caching-layers-Redis-CDNs-23f110fc9f3a809dbfcfca5c50eecf9b?pvs=21">Caching layers (Redis, CDNs)</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Scalability Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr><tr id="23f110fc-9f3a-80cc-aadb-f224530ed320"><td class="cell-title"><a href="https://www.notion.so/Database-connection-pooling-23f110fc9f3a80ccaadbf224530ed320?pvs=21">Database connection pooling</a></td><td class="cell-dwbm"><span class="selected-value select-value-color-yellow">Software Architecture &amp; Design</span></td><td class="cell-zk]D"><span class="selected-value select-value-color-brown">Scalability Patterns</span></td><td class="cell-SB&gt;X"><span class="status-value"><div class="status-dot"></div>Not started</span></td><td class="cell-H]nu"><span class="status-value"><div class="status-dot"></div>Low</span></td><td class="cell-`oGA"></td><td class="cell-y`}Z"></td><td class="cell-C{AE"></td><td class="cell-Bbft"></td><td class="cell-RlTl"></td><td class="cell-PNB:"></td></tr></tbody></table><br/><br/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

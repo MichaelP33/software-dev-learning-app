@@ -1,0 +1,96 @@
+graph TD
+    A[Software Development Concepts] --> B[Programming Fundamentals]
+    A --> C[Software Architecture & Design]
+    A --> D[Development Process & Methodologies]
+    A --> E[Tools & Development Environment]
+    A --> F[Data Management & APIs]
+    A --> G[Testing & Quality Assurance]
+    A --> H[Deployment & Operations]
+    
+    %% Programming Fundamentals (COMPLETED)
+    B --> B1[Programming Languages & Paradigms]
+    B --> B2[Core Programming Constructs]
+    B --> B3[Data Structures & Algorithms]
+    B --> B4[Code Organization & Modularity]
+    
+    B1 --> B1a[Compiled Languages: Go, Rust, C++]
+    B1 --> B1b[Interpreted Languages: Python, JavaScript, Ruby]
+    B1 --> B1c[Hybrid Languages: Java, C#, Scala]
+    B1 --> B1d[Paradigms: OOP, Functional, Procedural]
+    
+    %% Software Architecture & Design
+    C --> C1[System Design Patterns]
+    C --> C2[Application Architecture Styles]
+    C --> C3[API Design & Integration]
+    C --> C4[Database Architecture]
+    C --> C5[Scalability Patterns]
+    
+    C2 --> C2a[Monoliths vs Microservices]
+    C2 --> C2b[Client-Server Patterns]
+    C3 --> C3a[RESTful APIs]
+    C3 --> C3b[GraphQL]
+    C3 --> C3c[Event-Driven Architecture]
+    
+    %% Development Process & Methodologies
+    D --> D1[SDLC Models]
+    D --> D2[Team Collaboration]
+    D --> D3[Project Planning]
+    D --> D4[Release Management]
+    
+    D1 --> D1a[Waterfall]
+    D1 --> D1b[Agile/Scrum]
+    D1 --> D1c[DevOps Philosophy]
+    D2 --> D2a[Code Reviews]
+    D2 --> D2b[Pair Programming]
+    
+    %% Tools & Development Environment
+    E --> E1[Version Control Systems]
+    E --> E2[IDEs & Development Tools]
+    E --> E3[Build Systems]
+    E --> E4[Local vs Cloud Development]
+    
+    E1 --> E1a[Git Workflows]
+    E1 --> E1b[Branching Strategies]
+    E3 --> E3a[Package Management]
+    E3 --> E3b[Build Automation]
+    
+    %% Data Management & APIs
+    F --> F1[Database Fundamentals]
+    F --> F2[Data Modeling]
+    F --> F3[API Design Principles]
+    F --> F4[Data Integration]
+    
+    F1 --> F1a[Relational Databases]
+    F1 --> F1b[NoSQL: Document, Graph]
+    F2 --> F2a[Normalization]
+    F2 --> F2b[Indexing & Optimization]
+    
+    %% Testing & Quality Assurance
+    G --> G1[Testing Pyramid]
+    G --> G2[Quality Metrics]
+    G --> G3[Debugging Methodologies]
+    G --> G4[Code Review Practices]
+    
+    G1 --> G1a[Unit Testing]
+    G1 --> G1b[Integration Testing]
+    G1 --> G1c[End-to-End Testing]
+    
+    %% Deployment & Operations
+    H --> H1[Infrastructure Concepts]
+    H --> H2[CI/CD Pipelines]
+    H --> H3[Monitoring & Observability]
+    H --> H4[Incident Response]
+    
+    H1 --> H1a[Containers & Docker]
+    H1 --> H1b[Orchestration/Kubernetes]
+    H2 --> H2a[Automated Testing]
+    H2 --> H2b[Deployment Strategies]
+    
+    %% Styling
+    classDef completed fill:#90EE90
+    classDef next fill:#FFE4B5
+    classDef future fill:#E6E6FA
+    
+    class B,B1,B1a,B1b,B1c,B1d completed
+    class C,C1,C2,C2a,C2b,C3,C3a,C3b,C3c,C4,C5 next
+    class D,E,F,G,H future
