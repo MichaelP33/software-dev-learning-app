@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, BookOpen, Clock, Target, Star } from 'lucide-react'
+import { ArrowLeft, BookOpen, Target } from 'lucide-react'
 import { getArticleById, getAllCategories, getStatusColor, getPriorityColor } from '@/lib/data'
 
 interface ArticlePageProps {

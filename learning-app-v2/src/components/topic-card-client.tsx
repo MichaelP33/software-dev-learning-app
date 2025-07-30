@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CursorInspiredCard } from '@/components/cursor-inspired-card'
 import { Topic, Progress } from '@/types'
-import { getStatusIcon, getStatusColor } from '@/lib/data'
+import { getStatusIcon } from '@/lib/data'
 
 interface TopicCardClientProps {
   topic: Topic
@@ -23,7 +23,6 @@ export function TopicCardClient({
 }: TopicCardClientProps) {
   return (
     <CursorInspiredCard 
-      hoverGradient={gradient}
       className="cursor-pointer"
     >
       <Link
@@ -62,7 +61,7 @@ export function TopicCardClient({
           {(() => {
             // Filter out "not started" articles
             const meaningfulArticles = topic.articles.filter(article => 
-              article.learningStatus !== 'not started'
+              article.learningStatus !== 'Not started'
             );
             
             if (meaningfulArticles.length === 0) {

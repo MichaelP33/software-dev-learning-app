@@ -6,13 +6,11 @@ import { ReactNode, useState } from 'react'
 interface CursorInspiredCardProps {
   children: ReactNode
   className?: string
-  hoverGradient?: string
 }
 
 export function CursorInspiredCard({ 
   children, 
-  className = "",
-  hoverGradient
+  className = ""
 }: CursorInspiredCardProps) {
   const [isHovered, setIsHovered] = useState(false)
 

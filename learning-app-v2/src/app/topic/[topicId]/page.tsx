@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, BookOpen, CheckCircle, Clock, Target, PlayCircle, Star, TrendingUp } from 'lucide-react'
-import { getTopicById, getAllCategories, calculateTopicProgress, getCompletionPercentage, getStatusIcon, getStatusColor } from '@/lib/data'
+import { ArrowLeft, BookOpen, CheckCircle, Target, PlayCircle, Star } from 'lucide-react'
+import { getTopicById, getAllCategories, calculateTopicProgress, getCompletionPercentage } from '@/lib/data'
 
 interface TopicPageProps {
   params: Promise<{

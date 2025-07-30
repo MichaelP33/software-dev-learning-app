@@ -23,7 +23,6 @@ export function CategoryCardClient({
 }: CategoryCardClientProps) {
   return (
     <CursorInspiredCard 
-      hoverGradient={gradient}
       className="cursor-pointer"
     >
       <Link
