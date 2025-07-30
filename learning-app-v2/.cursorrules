@@ -1,0 +1,66 @@
+# Cursor Rules for Learning App V2
+
+## 🎯 **Focus Directory**
+- **ONLY work with files in the `learning-app-v2/` directory**
+- **IGNORE** all other directories: `learning-app/`, `learning-app-OLD-BROKEN/`, `planning docs/`
+- **Default to** `learning-app-v2/` for all file operations
+
+## 📁 **Project Structure**
+```
+learning-app-v2/           # 👈 WORK HERE ONLY
+├── src/
+│   ├── app/               # Next.js 15 App Router
+│   │   ├── page.tsx       # Home page
+│   │   ├── layout.tsx     # Root layout
+│   │   ├── globals.css    # Global styles
+│   │   ├── category/[categoryId]/page.tsx
+│   │   ├── topic/[topicId]/page.tsx
+│   │   └── article/[articleId]/page.tsx
+│   ├── components/        # React components
+│   ├── lib/              # Utilities and data functions
+│   └── types/            # TypeScript interfaces
+├── data/
+│   └── learning-content.json  # Content data
+└── package.json          # Dependencies
+```
+
+## 🚀 **Tech Stack**
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Framer Motion** for animations
+- **Lucide React** for icons
+
+## ⚡ **Development Commands**
+- `cd learning-app-v2 && npm run dev` (runs on http://localhost:3001)
+- Always run commands from `learning-app-v2/` directory
+
+## 🎨 **Current Features**
+- ✅ Dark mode toggle with theme persistence
+- ✅ Responsive design with glass morphism
+- ✅ Framer Motion animations and transitions
+- ✅ Progress tracking with animated bars
+- 🔄 Working on: Cursor-inspired gradient hover effects
+
+## 🚫 **What to Avoid**
+- **DON'T** reference files from `learning-app/` or `learning-app-OLD-BROKEN/`
+- **DON'T** create new versions - only work with `learning-app-v2/`
+- **DON'T** modify files outside `learning-app-v2/`
+
+## 🐛 **Current Issues**
+- SSR hydration issues with client/server components
+- Need to properly separate client and server logic
+- Focus on `learning-app-v2/` exclusively
+
+## 📝 **File Naming Convention**
+- Use kebab-case for file names
+- Client components: `component-name.tsx`
+- Server components: No special suffix needed
+- Add 'use client' directive when needed for interactivity
+
+## 🎯 **Goals**
+- Beautiful, modern UI inspired by Cursor's design
+- Smooth animations and micro-interactions
+- Full dark mode support
+- Mobile-responsive design
+- Type-safe TypeScript implementation
