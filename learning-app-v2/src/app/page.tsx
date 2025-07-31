@@ -8,19 +8,7 @@ import { FloatingCard } from '@/components/animated-card'
 import { CategoryCardClient } from '@/components/category-card-client'
 import { motion } from 'framer-motion'
 
-// Gradient presets for category cards
-const gradientPresets = [
-  'from-purple-500 to-pink-500', // Purple to Pink
-  'from-blue-500 to-cyan-500',   // Blue to Cyan  
-  'from-orange-500 to-red-500',  // Orange to Red
-  'from-green-500 to-teal-500',  // Green to Teal
-  'from-indigo-500 to-purple-500', // Indigo to Purple
-  'from-pink-500 to-rose-500',   // Pink to Rose
-]
-
-function getCardGradient(index: number): string {
-  return gradientPresets[index % gradientPresets.length]
-}
+// Note: Gradients are now handled by the gradient system library
 
 export default function HomePage() {
   const categories = getAllCategories()
@@ -181,7 +169,6 @@ export default function HomePage() {
           {categories.map((category, index) => {
             const progress = calculateCategoryProgress(category)
             const completionPercentage = getCompletionPercentage(progress)
-            const gradient = getCardGradient(index)
             
             return (
               <CategoryCardClient
@@ -190,7 +177,6 @@ export default function HomePage() {
                 index={index}
                 progress={progress}
                 completionPercentage={completionPercentage}
-                gradient={gradient}
               />
             )
           })}

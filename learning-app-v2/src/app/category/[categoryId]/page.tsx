@@ -4,19 +4,7 @@ import { ArrowLeft, BookOpen } from 'lucide-react'
 import { getCategoryById, calculateTopicProgress, getCompletionPercentage } from '@/lib/data'
 import { TopicCardClient } from '@/components/topic-card-client'
 
-// Gradient presets for server-side use
-const gradientPresets = [
-  'from-purple-500 to-pink-500', // Purple to Pink
-  'from-blue-500 to-cyan-500',   // Blue to Cyan  
-  'from-orange-500 to-red-500',  // Orange to Red
-  'from-green-500 to-teal-500',  // Green to Teal
-  'from-indigo-500 to-purple-500', // Indigo to Purple
-  'from-pink-500 to-rose-500',   // Pink to Rose
-]
-
-function getCardGradient(index: number): string {
-  return gradientPresets[index % gradientPresets.length]
-}
+// Note: Gradients are now handled by the gradient system library
 
 interface CategoryPageProps {
   params: Promise<{
@@ -130,7 +118,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               {category.topics.map((topic, index) => {
                 const topicProgress = calculateTopicProgress(topic)
                 const topicCompletedPercentage = getCompletionPercentage(topicProgress)
-                const gradient = getCardGradient(index)
 
                 return (
                   <TopicCardClient
@@ -139,7 +126,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     index={index}
                     topicProgress={topicProgress}
                     topicCompletedPercentage={topicCompletedPercentage}
-                    gradient={gradient}
+                    categoryId={category.id}
                   />
                 )
               })}

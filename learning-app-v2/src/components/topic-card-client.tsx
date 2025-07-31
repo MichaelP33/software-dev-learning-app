@@ -5,13 +5,14 @@ import { motion } from 'framer-motion'
 import { CursorInspiredCard } from '@/components/cursor-inspired-card'
 import { Topic, Progress } from '@/types'
 import { getStatusIcon } from '@/lib/data'
+import { getCategoryPrimaryGradient, getCategoryAccentGradient } from '@/lib/gradients'
 
 interface TopicCardClientProps {
   topic: Topic
   index: number
   topicProgress: Progress
   topicCompletedPercentage: number
-  gradient: string
+  categoryId: string
 }
 
 export function TopicCardClient({ 
@@ -19,11 +20,15 @@ export function TopicCardClient({
   index, 
   topicProgress, 
   topicCompletedPercentage, 
-  gradient 
+  categoryId 
 }: TopicCardClientProps) {
+  // Get category-specific gradients
+  const progressGradient = getCategoryPrimaryGradient(categoryId)
+  const arrowGradient = getCategoryAccentGradient(categoryId)
   return (
     <CursorInspiredCard 
       className="cursor-pointer"
+      categoryId={categoryId}
     >
       <Link
         href={`/topic/${topic.id}`}
@@ -48,7 +53,7 @@ export function TopicCardClient({
         <div className="mb-4">
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
             <motion.div 
-              className={`h-full bg-gradient-to-r ${gradient} transition-all duration-500 ease-out`}
+              className={`h-full bg-gradient-to-r ${progressGradient} transition-all duration-500 ease-out`}
               initial={{ width: 0 }}
               animate={{ width: `${topicCompletedPercentage}%` }}
               transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
@@ -96,7 +101,7 @@ export function TopicCardClient({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg`}>
+          <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${arrowGradient} flex items-center justify-center shadow-lg`}>
             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

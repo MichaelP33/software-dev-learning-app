@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, BookOpen, Target, HelpCircle, Brain } from 'lucide-react'
 import { getArticleById, getAllCategories, getStatusColor, getPriorityColor } from '@/lib/data'
+import { getCategoryPrimaryGradient, getCategoryBackground } from '@/lib/gradients'
 
 interface ArticlePageProps {
   params: Promise<{
@@ -43,8 +44,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/80 via-pink-50/70 via-orange-50/60 via-green-50/70 to-cyan-50/80 dark:from-purple-900/20 dark:via-pink-900/15 dark:via-orange-900/10 dark:via-green-900/15 dark:to-cyan-900/20" />
+      {/* Category-specific Background gradients */}
+      <div className={`absolute inset-0 bg-gradient-to-r ${category ? getCategoryBackground(category.id) : 'from-slate-50/80 via-white/40 to-slate-50/80 dark:from-gray-900/20 dark:via-gray-800/10 dark:to-gray-900/20'}`} />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.25),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(0,0,0,0))]" />
       
       <div className="relative z-10">
@@ -114,7 +115,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                     <div 
-                      className={`h-3 rounded-full transition-all duration-700 ease-out shadow-sm ${category?.color ? `bg-gradient-to-r ${category.color}` : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`}
+                      className={`h-3 rounded-full transition-all duration-700 ease-out shadow-sm ${category ? `bg-gradient-to-r ${getCategoryPrimaryGradient(category.id)}` : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`}
                       style={{ width: `${proficiencyLevel}%` }}
                     />
                   </div>

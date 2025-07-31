@@ -5,25 +5,28 @@ import { motion } from 'framer-motion'
 import { CursorInspiredCard } from '@/components/cursor-inspired-card'
 import { AnimatedProgressBar } from '@/components/animated-card'
 import { Category, Progress } from '@/types'
+import { getCategoryPrimaryGradient, getCategoryAccentGradient } from '@/lib/gradients'
 
 interface CategoryCardClientProps {
   category: Category
   index: number
   progress: Progress
   completionPercentage: number
-  gradient: string
 }
 
 export function CategoryCardClient({ 
   category, 
   index, 
   progress, 
-  completionPercentage, 
-  gradient 
+  completionPercentage
 }: CategoryCardClientProps) {
+  // Get category-specific gradients
+  const progressGradient = getCategoryPrimaryGradient(category.id)
+  const arrowGradient = getCategoryAccentGradient(category.id)
   return (
     <CursorInspiredCard 
       className="cursor-pointer"
+      categoryId={category.id}
     >
       <Link
         href={`/category/${category.id}`}
@@ -89,7 +92,7 @@ export function CategoryCardClient({
           </div>
           <AnimatedProgressBar 
             percentage={completionPercentage}
-            gradient={gradient}
+            gradient={progressGradient}
             delay={index + 12}
           />
         </div>
@@ -116,7 +119,7 @@ export function CategoryCardClient({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg`}>
+          <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${arrowGradient} flex items-center justify-center shadow-lg`}>
             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
