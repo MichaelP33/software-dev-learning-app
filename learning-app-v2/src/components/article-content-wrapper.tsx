@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, HelpCircle, Brain, TrendingUp, ChevronLeft, ChevronRight, X, Menu, Home, ArrowUp } from 'lucide-react'
+import { ArrowLeft, HelpCircle, Brain, TrendingUp, ChevronLeft, ChevronRight, X, ArrowUp } from 'lucide-react'
 import { getCategoryPrimaryGradient, getCategoryBackground } from '@/lib/gradients'
 import { Article, Topic, Category } from '@/types'
 import { getQuizByArticleId } from '@/lib/data'

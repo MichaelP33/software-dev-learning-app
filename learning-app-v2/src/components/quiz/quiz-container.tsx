@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useReducer, useEffect } from 'react'
+import { useReducer, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Quiz, QuizQuestion, QuizAnswer, QuizState } from '@/types'
+import { Quiz, QuizAnswer, QuizState } from '@/types'
 import { calculateSelfAssessmentScore, validateMultipleChoiceAnswer, calculateQuizScore, getQuizPerformanceLevel } from '@/lib/data'
 import MultipleChoiceQuestion from './multiple-choice-question'
 import ShortAnswerQuestion from './short-answer-question'

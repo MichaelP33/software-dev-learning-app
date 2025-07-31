@@ -92,7 +92,7 @@ export default function QuizResults({
             Quiz Complete!
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
-            Here's how you performed
+            Here&apos;s how you performed
           </p>
         </div>
         
