@@ -20,6 +20,7 @@ export interface Category {
   name: string
   description: string
   icon: string
+  iconType?: 'laptop' | 'building' | 'zap' | 'wrench' | 'rocket' | 'emoji'
   color: string
   topics: Topic[]
 }

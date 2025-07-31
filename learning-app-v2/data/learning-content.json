@@ -5,6 +5,7 @@
       "name": "Programming Fundamentals",
       "description": "Core concepts and principles that form the foundation of software development",
       "icon": "💻",
+      "iconType": "laptop",
       "color": "from-blue-500 to-cyan-500",
       "topics": [
         {
@@ -198,6 +199,7 @@
       "name": "Software Architecture & Design",
       "description": "High-level design patterns and architectural approaches for building robust systems",
       "icon": "🏗️",
+      "iconType": "building",
       "color": "from-purple-500 to-pink-500",
       "topics": [
         {
@@ -399,6 +401,7 @@
       "name": "Development Process & Methodologies",
       "description": "Methodologies and processes for organizing software development work",
       "icon": "⚡",
+      "iconType": "zap",
       "color": "from-green-500 to-emerald-500",
       "topics": [
         {
@@ -568,6 +571,7 @@
       "name": "Tools & Development Environment",
       "description": "Essential tools and environments for modern software development",
       "icon": "🔧",
+      "iconType": "wrench",
       "color": "from-orange-500 to-red-500",
       "topics": [
         {
@@ -737,6 +741,7 @@
       "name": "Data Management & APIs",
       "description": "Data storage, modeling, and API design principles",
       "icon": "🗄️",
+      "iconType": "emoji",
       "color": "from-indigo-500 to-purple-500",
       "topics": [
         {
@@ -906,6 +911,7 @@
       "name": "Testing & Quality Assurance",
       "description": "Strategies and practices for ensuring software quality",
       "icon": "🧪",
+      "iconType": "emoji",
       "color": "from-teal-500 to-cyan-500",
       "topics": [
         {
@@ -1075,6 +1081,7 @@
       "name": "Deployment & Operations (DevOps)",
       "description": "Infrastructure, deployment, and operational practices for software systems",
       "icon": "🚀",
+      "iconType": "rocket",
       "color": "from-rose-500 to-pink-500",
       "topics": [
         {

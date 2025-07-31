@@ -29,13 +29,30 @@ export function CategoryCardClient({
         href={`/category/${category.id}`}
         className="block p-8"
       >
-        {/* Category Header */}
-        <div className="flex items-start justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center text-3xl shadow-lg`}>
-              {category.icon}
-            </div>
-            <div>
+        {/* Category Header - Responsive Layout */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-4">
+            {/* Icon - Centered on mobile, left-aligned on larger screens */}
+            <motion.div 
+              className="flex justify-center sm:justify-start"
+              whileHover={{ 
+                scale: 1.05,
+                rotate: 2,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center text-2xl sm:text-3xl shadow-lg transition-all duration-300`} 
+                   style={{ 
+                     fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif',
+                     fontVariantEmoji: 'normal',
+                     lineHeight: 1
+                   }}>
+                {category.icon}
+              </div>
+            </motion.div>
+            {/* Title and Description - Centered on mobile, left-aligned on larger */}
+            <div className="text-center sm:text-left">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
                 {category.name}
               </h3>
