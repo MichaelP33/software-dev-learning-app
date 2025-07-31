@@ -1,11 +1,11 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Target, HelpCircle, Brain, Clock, TrendingUp, Shield, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ArrowLeft, HelpCircle, Brain, TrendingUp, ChevronLeft, ChevronRight, X, Menu, Home, ArrowUp } from 'lucide-react'
 import { getCategoryPrimaryGradient, getCategoryBackground } from '@/lib/gradients'
 import { Article, Topic, Category } from '@/types'
 import { ArticleTableOfContents } from '@/components/article-table-of-contents'
-import { ArticleBrowserWrapper } from '@/components/article-browser-wrapper'
 import { ComparisonTable } from '@/components/comparison-table'
 import { MetricsCard } from '@/components/metrics-card'
 
@@ -32,6 +32,11 @@ export function ArticleContentWrapper({
   const proficiencyLevel = Math.round((questionsAnswered / totalQuestions) * 100)
   const knowledgeLevel = proficiencyLevel < 30 ? 'Beginner' : 
                         proficiencyLevel < 70 ? 'Intermediate' : 'Advanced'
+
+  // Calculate article position in topic
+  const currentArticleIndex = topic?.articles.findIndex(a => a.id === article.id) ?? -1
+  const totalArticles = topic?.articles.length ?? 0
+  const articlePosition = currentArticleIndex + 1
 
   // Generate table of contents sections
   const languageArticles = ['compiled-languages', 'interpreted-languages', 'hybrid-languages', 'object-oriented-programming', 'procedural-programming', 'functional-programming']
@@ -134,34 +139,9 @@ export function ArticleContentWrapper({
                   <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
                     {article.name}
                   </h1>
-                  <p className="text-lg text-slate-600 dark:text-gray-300 italic leading-relaxed mb-4">
+                  <p className="text-lg text-slate-600 dark:text-gray-300 italic leading-relaxed mb-8">
                     {article.description}
                   </p>
-                  
-                  {/* Reading Metadata */}
-                  <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-gray-400">
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{getEstimatedReadTime(article.id)} min read</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Target className="w-4 h-4" />
-                      <span>{topic?.name || 'Knowledge Article'}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className={`inline-block w-2 h-2 rounded-full ${getStatusIndicatorColor(article.learningStatus)}`}></span>
-                      <span>{article.learningStatus}</span>
-                    </div>
-                    
-                    {/* Browse Articles Button */}
-                    {topic && (
-                      <ArticleBrowserWrapper 
-                        topicId={topic.id} 
-                        topicName={topic.name} 
-                        currentArticleId={article.id}
-                      />
-                    )}
-                  </div>
                 </div>
 
                 {/* Article Content with Enhanced Typography */}
@@ -186,13 +166,26 @@ export function ArticleContentWrapper({
               </div>
             </div>
 
-            {/* Enhanced Navigation */}
-            <ArticleNavigation 
-              topicLink={topicLink}
-              topicName={topic?.name}
-              categoryName={category?.name}
+            {/* Enhanced Navigation - Desktop only */}
+            <div className="hidden lg:block">
+              <ArticleNavigation 
+                topicLink={topicLink}
+                topicName={topic?.name}
+                categoryName={category?.name}
+                previousArticle={previousArticle}
+                nextArticle={nextArticle}
+              />
+            </div>
+
+            {/* Mobile Bottom Navigation */}
+            <MobileBottomNavigation
+              article={article}
+              topic={topic}
               previousArticle={previousArticle}
               nextArticle={nextArticle}
+              topicLink={topicLink}
+              articlePosition={articlePosition}
+              totalArticles={totalArticles}
             />
           </div>
         </main>
@@ -200,10 +193,10 @@ export function ArticleContentWrapper({
         {/* Table of Contents */}
         <ArticleTableOfContents sections={tocSections} />
 
-        {/* Floating Close Button */}
+        {/* Floating Close Button - Desktop only */}
         <Link 
           href={topicLink}
-          className="fixed top-6 right-6 z-50 p-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg border border-slate-200/50 dark:border-gray-700/50 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 hover:shadow-xl lg:hidden"
+          className="fixed top-6 right-6 z-50 p-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg border border-slate-200/50 dark:border-gray-700/50 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 hover:shadow-xl hidden lg:block"
           aria-label="Close article"
         >
           <X className="w-5 h-5" />
@@ -219,8 +212,7 @@ function CompiledLanguagesContent() {
     <article className="space-y-10">
       {/* Key Concepts Section */}
       <section id="key-concepts">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6 text-blue-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Key Concepts
         </h2>
         
@@ -493,8 +485,7 @@ function CompiledLanguagesContent() {
 
       {/* Cursor Implementation Section */}
       <section id="cursor-implementation">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-purple-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Cursor Implementation Considerations
         </h2>
         
@@ -546,8 +537,7 @@ function InterpretedLanguagesContent() {
     <article className="space-y-10">
       {/* Key Concepts Section */}
       <section id="key-concepts">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6 text-blue-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Key Concepts
         </h2>
         
@@ -716,8 +706,7 @@ function InterpretedLanguagesContent() {
 
       {/* Cursor Implementation Section */}
       <section id="cursor-implementation">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-purple-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Cursor Implementation Considerations
         </h2>
         
@@ -754,8 +743,7 @@ function HybridLanguagesContent() {
     <article className="space-y-10">
       {/* Key Concepts Section */}
       <section id="key-concepts">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6 text-blue-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Key Concepts
         </h2>
         
@@ -915,8 +903,7 @@ function HybridLanguagesContent() {
 
       {/* Cursor Implementation Section */}
       <section id="cursor-implementation">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-purple-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Cursor Implementation Considerations
         </h2>
         
@@ -946,8 +933,7 @@ function ObjectOrientedProgrammingContent() {
     <article className="space-y-10">
       {/* Key Concepts Section */}
       <section id="key-concepts">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6 text-blue-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Key Concepts
         </h2>
         
@@ -1099,8 +1085,7 @@ function ObjectOrientedProgrammingContent() {
 
       {/* Cursor Implementation Section */}
       <section id="cursor-implementation">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-purple-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Cursor Implementation Considerations
         </h2>
         
@@ -1137,8 +1122,7 @@ function ProceduralProgrammingContent() {
     <article className="space-y-10">
       {/* Key Concepts Section */}
       <section id="key-concepts">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6 text-blue-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Key Concepts
         </h2>
         
@@ -1273,8 +1257,7 @@ function ProceduralProgrammingContent() {
 
       {/* Cursor Implementation Section */}
       <section id="cursor-implementation">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-purple-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Cursor Implementation Considerations
         </h2>
         
@@ -1304,8 +1287,7 @@ function FunctionalProgrammingContent() {
     <article className="space-y-10">
       {/* Key Concepts Section */}
       <section id="key-concepts">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Target className="w-6 h-6 text-blue-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Key Concepts
         </h2>
         
@@ -1489,8 +1471,7 @@ function FunctionalProgrammingContent() {
 
       {/* Cursor Implementation Section */}
       <section id="cursor-implementation">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-          <Shield className="w-6 h-6 text-purple-500" />
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
           Cursor Implementation Considerations
         </h2>
         
@@ -1563,6 +1544,117 @@ function DefaultArticleContent({ article }: { article: Article }) {
   )
 }
 
+// Mobile Bottom Navigation Component
+interface MobileBottomNavigationProps {
+  article: Article
+  topic: Topic | null
+  previousArticle: Article | null
+  nextArticle: Article | null
+  topicLink: string
+  articlePosition: number
+  totalArticles: number
+}
+
+function MobileBottomNavigation({
+  article,
+  topic,
+  previousArticle,
+  nextArticle,
+  topicLink,
+  articlePosition,
+  totalArticles
+}: MobileBottomNavigationProps) {
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = (scrollTop / docHeight) * 100
+      setScrollProgress(Math.min(progress, 100))
+    }
+
+    window.addEventListener('scroll', updateScrollProgress)
+    return () => window.removeEventListener('scroll', updateScrollProgress)
+  }, [])
+
+  return (
+    <>
+      {/* Reading Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 lg:hidden">
+        <div className="h-1 bg-slate-200 dark:bg-gray-700">
+          <div 
+            className="h-full bg-blue-500 transition-all duration-150 ease-out"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Bottom Navigation Bar */}
+      <div className="lg:hidden mt-8">
+        <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-t border-slate-200 dark:border-gray-700 px-4 py-3">
+          {/* Progress Indicator */}
+          <div className="text-center mb-3">
+            <div className="text-xs text-slate-500 dark:text-gray-400 font-medium">
+              Article {articlePosition} of {totalArticles}
+            </div>
+            <div className="text-xs text-slate-600 dark:text-gray-300 truncate mt-1">
+              {topic?.name}
+            </div>
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="flex items-center gap-2">
+            {/* Previous Article */}
+            {previousArticle ? (
+              <Link
+                href={`/article/${previousArticle.id}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-slate-50 dark:bg-gray-800 rounded-xl hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4 text-slate-600 dark:text-gray-400" />
+                <span className="text-sm font-medium text-slate-700 dark:text-gray-300">Previous</span>
+              </Link>
+            ) : (
+              <div className="flex-1 opacity-50">
+                <div className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-50 dark:bg-gray-800 rounded-xl">
+                  <ChevronLeft className="w-4 h-4 text-slate-400 dark:text-gray-600" />
+                  <span className="text-sm text-slate-400 dark:text-gray-600">Previous</span>
+                </div>
+              </div>
+            )}
+
+            {/* Back to Topic - Centered */}
+            <Link
+              href={topicLink}
+              className="flex items-center justify-center w-14 py-3 bg-slate-100 dark:bg-gray-700 rounded-xl hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors"
+            >
+              <ArrowUp className="w-4 h-4 text-slate-600 dark:text-gray-400" />
+            </Link>
+
+            {/* Next Article */}
+            {nextArticle ? (
+              <Link
+                href={`/article/${nextArticle.id}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-slate-50 dark:bg-gray-800 rounded-xl hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors"
+              >
+                <span className="text-sm font-medium text-slate-700 dark:text-gray-300">Next</span>
+                <ChevronRight className="w-4 h-4 text-slate-600 dark:text-gray-400" />
+              </Link>
+            ) : (
+              <div className="flex-1 opacity-50">
+                <div className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-50 dark:bg-gray-800 rounded-xl">
+                  <span className="text-sm text-slate-400 dark:text-gray-600">Next</span>
+                  <ChevronRight className="w-4 h-4 text-slate-400 dark:text-gray-600" />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
 // Enhanced navigation component
 interface ArticleNavigationProps {
   topicLink: string
@@ -1605,6 +1697,16 @@ function ArticleNavigation({
             <div className="flex-1 max-w-sm"></div>
           )}
 
+          {/* Back to Topic - Desktop Center */}
+          <Link
+            href={topicLink}
+            className="group flex items-center justify-center p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-gray-700/50 hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
+          >
+            <div className="p-2 bg-slate-100 dark:bg-gray-700 rounded-lg group-hover:bg-slate-200 dark:group-hover:bg-gray-600 transition-colors">
+              <ArrowUp className="w-4 h-4 text-slate-600 dark:text-gray-400" />
+            </div>
+          </Link>
+
           {nextArticle ? (
             <Link 
               href={`/article/${nextArticle.id}`}
@@ -1627,47 +1729,6 @@ function ArticleNavigation({
           )}
         </div>
       )}
-
-      {/* Back to Topic Navigation */}
-      <div className="flex justify-between items-center">
-        <Link 
-          href={topicLink}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-gray-700/50 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to {topicName || 'Topics'}
-        </Link>
-        
-        <div className="text-sm text-slate-500 dark:text-gray-400">
-          {categoryName && `Category: ${categoryName}`}
-        </div>
-      </div>
     </div>
   )
-}
-
-// Helper functions
-function getEstimatedReadTime(articleId: string): number {
-  // Estimated reading times based on content complexity
-  const readTimes: Record<string, number> = {
-    'compiled-languages': 12, // Rich content with examples
-    // Add more specific times as content is developed
-  }
-  
-  return readTimes[articleId] || 8 // Default 8 minutes
-}
-
-function getStatusIndicatorColor(status: string): string {
-  switch (status) {
-    case 'Completed':
-      return 'bg-green-500'
-    case 'In progress':
-      return 'bg-blue-500'
-    case 'Reviewing':
-      return 'bg-yellow-500'
-    case 'Not started':
-      return 'bg-gray-400'
-    default:
-      return 'bg-gray-400'
-  }
 }

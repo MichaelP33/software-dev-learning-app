@@ -134,36 +134,70 @@ export function ArticleTableOfContents({ sections, className = "" }: ArticleTabl
     )
   }
 
-  // Desktop floating sidebar
+  // Desktop collapsible edge tab
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.2 }}
-      className={`fixed top-1/2 right-6 transform -translate-y-1/2 z-40 ${className}`}
+      className={`fixed top-1/2 right-0 transform -translate-y-1/2 z-40 ${className}`}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
     >
-      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg border border-slate-200/50 dark:border-gray-700/50 p-4 max-w-xs">
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm flex items-center gap-2">
-          <ChevronRight className="w-4 h-4" />
-          Contents
-        </h3>
-        
-        <nav className="space-y-1 max-h-80 overflow-y-auto">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className={`block w-full text-left px-3 py-2 text-sm rounded-lg transition-all duration-200 ${
-                activeSection === section.id
-                  ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 font-medium'
-                  : 'text-slate-600 dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700/50 hover:text-slate-900 dark:hover:text-white'
-              } ${section.level > 1 ? 'ml-4' : ''}`}
-            >
-              <span className="truncate">{section.title}</span>
-            </button>
-          ))}
-        </nav>
-      </div>
+      {/* Edge Tab */}
+      <motion.div
+        className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-slate-200/50 dark:border-gray-700/50 shadow-lg cursor-pointer hover:shadow-xl"
+        style={{
+          borderTopLeftRadius: '0.75rem',
+          borderBottomLeftRadius: '0.75rem',
+          borderRight: 'none'
+        }}
+        whileHover={{ x: -4, backgroundColor: 'rgba(255,255,255,0.95)' }}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <div className="flex items-center justify-center py-3 px-2">
+          <motion.div
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronRight className="w-5 h-5 text-slate-600 dark:text-gray-400" />
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Expandable Panel */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, x: 20, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-0 right-16 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl shadow-xl border border-slate-200/50 dark:border-gray-700/50 p-4 w-72"
+          >
+            <h3 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm flex items-center gap-2">
+              <ChevronRight className="w-4 h-4" />
+              Table of Contents
+            </h3>
+            
+            <nav className="space-y-1 max-h-80 overflow-y-auto">
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`block w-full text-left px-3 py-2 text-sm rounded-lg transition-all duration-200 ${
+                    activeSection === section.id
+                      ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 font-medium'
+                      : 'text-slate-600 dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700/50 hover:text-slate-900 dark:hover:text-white'
+                  } ${section.level > 1 ? 'ml-4' : ''}`}
+                >
+                  <span className="truncate">{section.title}</span>
+                </button>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }

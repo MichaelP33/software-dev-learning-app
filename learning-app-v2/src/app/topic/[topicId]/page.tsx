@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, BookOpen, CheckCircle, PlayCircle, Star } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { getTopicById, getAllCategories, calculateTopicProgress, getCompletionPercentage } from '@/lib/data'
 import { getCategoryPrimaryGradient, getCategoryBackground } from '@/lib/gradients'
 
@@ -30,18 +30,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
   // Calculate category link
   const categoryLink = category ? `/category/${category.id}` : '/'
 
-  function getStatusInfo(learningStatus: string) {
-    switch (learningStatus) {
-      case 'Completed': 
-        return { icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-100' }
-      case 'In progress': 
-        return { icon: PlayCircle, color: 'text-blue-600', bg: 'bg-blue-100' }
-      case 'Reviewing': 
-        return { icon: Star, color: 'text-yellow-600', bg: 'bg-yellow-100' }
-      default: 
-        return { icon: BookOpen, color: 'text-slate-500', bg: 'bg-slate-100' }
-    }
-  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
@@ -128,9 +117,6 @@ export default async function TopicPage({ params }: TopicPageProps) {
             
             <div className="space-y-4">
               {topic.articles.map((article, index) => {
-                const statusInfo = getStatusInfo(article.learningStatus)
-                const StatusIcon = statusInfo.icon
-
                 return (
                   <Link
                     key={article.id}
@@ -139,15 +125,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
                   >
                     <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-gray-700/50 shadow-sm transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-200/60 dark:group-hover:border-purple-400/60 group-hover:bg-white dark:group-hover:bg-gray-800">
                       <div className="flex items-start gap-4">
-                        {/* Article Number & Status */}
+                        {/* Article Number */}
                         <div className="flex-shrink-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-slate-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-sm font-semibold text-slate-600 dark:text-gray-300">
-                              {index + 1}
-                            </div>
-                            <div className={`p-2 rounded-lg ${statusInfo.bg} transition-all duration-300 group-hover:scale-110`}>
-                              <StatusIcon className={`w-4 h-4 ${statusInfo.color}`} />
-                            </div>
+                          <div className="w-8 h-8 bg-slate-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-sm font-semibold text-slate-600 dark:text-gray-300">
+                            {index + 1}
                           </div>
                         </div>
 
