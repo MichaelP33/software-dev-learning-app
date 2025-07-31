@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, BookOpen, CheckCircle, Target, PlayCircle, Star } from 'lucide-react'
+import { ArrowLeft, BookOpen, CheckCircle, PlayCircle, Star } from 'lucide-react'
 import { getTopicById, getAllCategories, calculateTopicProgress, getCompletionPercentage } from '@/lib/data'
 
 interface TopicPageProps {
@@ -45,8 +45,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
       {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/40 via-pink-50/30 via-orange-50/20 via-green-50/30 to-cyan-50/40" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.08),rgba(255,255,255,0))]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/80 via-pink-50/70 via-orange-50/60 via-green-50/70 to-cyan-50/80" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.25),rgba(255,255,255,0))]" />
       
       <div className="relative z-10">
         {/* Header */}
@@ -65,8 +65,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
             {/* Topic Header */}
             <div className="text-center mb-8">
-              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 text-3xl shadow-lg ${category?.color ? `bg-gradient-to-br ${category.color}` : 'bg-gradient-to-br from-blue-500 to-cyan-500'}`}>
-                📚
+              {/* Subtle Divider with Shadow */}
+              <div className="flex justify-center mb-16">
+                <div className="h-px w-32 bg-slate-700/30 shadow-sm" />
               </div>
               
               <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 leading-tight">
@@ -101,12 +102,12 @@ export default async function TopicPage({ params }: TopicPageProps) {
                 {/* Progress Bar */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-semibold text-slate-900">Topic Progress</span>
+                    <span className="text-sm font-semibold text-slate-900">Proficiency</span>
                     <span className="text-sm text-slate-600">{completionPercentage}%</span>
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                     <div 
-                      className={`h-3 rounded-full transition-all duration-700 ease-out shadow-sm ${category?.color ? `bg-gradient-to-r ${category.color}` : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`}
+                      className={`h-3 rounded-full transition-all duration-700 ease-out shadow-sm ${category?.color ? `bg-gradient-to-r ${category.color.replace('to-', 'to-').replace('from-', 'from-')}` : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`}
                       style={{ width: `${completionPercentage}%` }}
                     />
                   </div>
@@ -162,39 +163,26 @@ export default async function TopicPage({ params }: TopicPageProps) {
                             </div>
                           </div>
 
-                          {/* Article Meta */}
-                          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mb-4">
-                            <div className="flex items-center gap-1">
-                              <Target className="w-4 h-4" />
-                              {article.priorityStatus} Priority
+                          {/* Proficiency Bar */}
+                          <div className="mb-3">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-sm font-medium text-slate-700">Proficiency</span>
+                              <span className="text-sm text-slate-600">
+                                {article.learningStatus === 'Completed' ? '100%' :
+                                 article.learningStatus === 'In progress' ? '75%' :
+                                 article.learningStatus === 'Reviewing' ? '50%' : '25%'}
+                              </span>
                             </div>
-                            <div className="flex items-center gap-1">
-                              <span className="w-4 h-4 flex items-center justify-center text-xs">📚</span>
-                              {article.learningStatus}
+                            <div className="w-full bg-slate-100 rounded-full h-2 transition-all duration-300 group-hover:bg-slate-50">
+                              <div 
+                                className={`h-2 rounded-full transition-all duration-500 shadow-sm group-hover:shadow-md ${category?.color ? `bg-gradient-to-r ${category.color}` : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`}
+                                style={{ 
+                                  width: article.learningStatus === 'Completed' ? '100%' :
+                                         article.learningStatus === 'In progress' ? '75%' :
+                                         article.learningStatus === 'Reviewing' ? '50%' : '25%'
+                                }}
+                              />
                             </div>
-                          </div>
-
-                          {/* Topics */}
-                          {article.topics && article.topics.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {article.topics.map((topicName, i) => (
-                                <span key={i} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-                                  {topicName}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Status Bar */}
-                          <div className="w-full bg-slate-100 rounded-full h-2 transition-all duration-300 group-hover:bg-slate-50">
-                            <div 
-                              className={`h-2 rounded-full transition-all duration-500 shadow-sm group-hover:shadow-md ${
-                                article.learningStatus === 'Completed' ? 'bg-gradient-to-r from-green-500 to-green-600 w-full' :
-                                article.learningStatus === 'In progress' ? 'bg-gradient-to-r from-blue-500 to-blue-600 w-3/4' :
-                                article.learningStatus === 'Reviewing' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 w-1/2' :
-                                'bg-gradient-to-r from-slate-400 to-slate-500 w-1/4'
-                              }`}
-                            />
                           </div>
                         </div>
                       </div>
