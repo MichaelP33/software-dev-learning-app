@@ -184,8 +184,6 @@ export function ArticleContentWrapper({
             <div className="hidden lg:block">
               <ArticleNavigation 
                 topicLink={topicLink}
-                topicName={topic?.name}
-                categoryName={category?.name}
                 previousArticle={previousArticle}
                 nextArticle={nextArticle}
               />
@@ -193,7 +191,6 @@ export function ArticleContentWrapper({
 
             {/* Mobile Bottom Navigation */}
             <MobileBottomNavigation
-              article={article}
               topic={topic}
               previousArticle={previousArticle}
               nextArticle={nextArticle}
@@ -1570,14 +1567,14 @@ interface MobileBottomNavigationProps {
 }
 
 function MobileBottomNavigation({
-  article,
+  // article: _article, // Unused parameter
   topic,
   previousArticle,
   nextArticle,
   topicLink,
   articlePosition,
   totalArticles
-}: MobileBottomNavigationProps) {
+}: Omit<MobileBottomNavigationProps, 'article'>) {
   const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
@@ -1680,11 +1677,11 @@ interface ArticleNavigationProps {
 
 function ArticleNavigation({ 
   topicLink, 
-  topicName, 
-  categoryName, 
+  // topicName: _topicName, // Unused parameter  
+  // categoryName: _categoryName, // Unused parameter
   previousArticle, 
   nextArticle 
-}: ArticleNavigationProps) {
+}: Omit<ArticleNavigationProps, 'topicName' | 'categoryName'>) {
   return (
     <div className="mt-12 space-y-6">
       {/* Previous/Next Article Navigation */}

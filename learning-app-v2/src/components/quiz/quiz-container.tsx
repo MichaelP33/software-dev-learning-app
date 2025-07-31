@@ -45,7 +45,7 @@ function createQuizReducer(quiz: Quiz) {
       const quizAnswer: QuizAnswer = {
         questionId,
         type: question.type,
-        answer,
+        answer: answer as string | number,
         isCorrect,
         selfAssessment,
         pointsEarned

@@ -3,9 +3,9 @@ import { getQuizByArticleId, getArticleById } from '@/lib/data'
 import QuizContainer from '@/components/quiz/quiz-container'
 
 interface QuizPageProps {
-  params: {
+  params: Promise<{
     articleId: string
-  }
+  }>
 }
 
 export default async function QuizPage({ params }: QuizPageProps) {
