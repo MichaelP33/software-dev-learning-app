@@ -107,3 +107,71 @@ export function getPriorityColor(priority: string): string {
       return 'bg-gray-100 text-gray-800 border-gray-200'
   }
 }
+
+// Navigation helpers
+export function getArticleNavigation(articleId: string): {
+  currentTopic: Topic | null
+  currentCategory: Category | null
+  previousArticle: Article | null
+  nextArticle: Article | null
+} {
+  let currentTopic: Topic | null = null
+  let currentCategory: Category | null = null
+  let previousArticle: Article | null = null
+  let nextArticle: Article | null = null
+
+  // Find the topic and category containing this article
+  for (const category of data.categories) {
+    for (const topic of category.topics) {
+      const articleIndex = topic.articles.findIndex(article => article.id === articleId)
+      if (articleIndex !== -1) {
+        currentTopic = topic
+        currentCategory = category
+        
+        // Get previous article
+        if (articleIndex > 0) {
+          previousArticle = topic.articles[articleIndex - 1]
+        }
+        
+        // Get next article
+        if (articleIndex < topic.articles.length - 1) {
+          nextArticle = topic.articles[articleIndex + 1]
+        }
+        
+        return {
+          currentTopic,
+          currentCategory,
+          previousArticle,
+          nextArticle
+        }
+      }
+    }
+  }
+
+  return {
+    currentTopic,
+    currentCategory,
+    previousArticle,
+    nextArticle
+  }
+}
+
+export function getTopicArticles(topicId: string): Article[] {
+  const topic = getTopicById(topicId)
+  return topic ? topic.articles : []
+}
+
+export function getStatusIndicatorColor(status: string): string {
+  switch (status) {
+    case 'Completed':
+      return 'bg-green-500'
+    case 'In progress':
+      return 'bg-blue-500'
+    case 'Reviewing':
+      return 'bg-yellow-500'
+    case 'Not started':
+      return 'bg-gray-400'
+    default:
+      return 'bg-gray-400'
+  }
+}

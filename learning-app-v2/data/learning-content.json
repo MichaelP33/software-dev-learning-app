@@ -39,36 +39,28 @@
               "topics": ["Virtual Machines", "Bytecode", "Platform Independence"]
             },
             {
-              "id": "procedural",
-              "name": "Procedural",
+              "id": "procedural-programming",
+              "name": "Procedural Programming",
               "learningStatus": "Not started",
               "priorityStatus": "Low",
-              "description": "Programming paradigm that uses procedures and functions",
-              "topics": ["Functions", "Modularity", "Sequential Logic"]
+              "description": "Programming paradigm that uses step-by-step functions to organize code",
+              "topics": ["Functions", "Modularity", "Sequential Logic", "Performance"]
             },
             {
-              "id": "object-oriented",
-              "name": "Object-Oriented",
+              "id": "object-oriented-programming",
+              "name": "Object-Oriented Programming",
               "learningStatus": "Not started",
               "priorityStatus": "Low",
-              "description": "Programming paradigm based on objects and classes",
+              "description": "Programming paradigm based on objects that combine data and behavior",
               "topics": ["Encapsulation", "Inheritance", "Polymorphism", "Abstraction"]
             },
             {
-              "id": "functional",
-              "name": "Functional",
+              "id": "functional-programming",
+              "name": "Functional Programming",
               "learningStatus": "Not started",
               "priorityStatus": "Low",
-              "description": "Programming paradigm treating computation as function evaluation",
-              "topics": ["Pure Functions", "Immutability", "Function Composition"]
-            },
-            {
-              "id": "declarative",
-              "name": "Declarative",
-              "learningStatus": "Not started",
-              "priorityStatus": "Low",
-              "description": "Programming paradigm that describes what you want, not how to achieve it",
-              "topics": ["SQL", "React", "Configuration"]
+              "description": "Programming paradigm treating computation as mathematical transformations",
+              "topics": ["Pure Functions", "Immutability", "Function Composition", "Concurrency"]
             }
           ]
         },
