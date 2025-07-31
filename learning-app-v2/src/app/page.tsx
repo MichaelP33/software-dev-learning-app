@@ -2,7 +2,7 @@
 
 import { BookOpen, TrendingUp, Target } from 'lucide-react'
 import { getAllCategories, calculateCategoryProgress, getCompletionPercentage } from '@/lib/data'
-import { ThemeToggle } from '@/components/theme-toggle'
+
 import { PageTransition } from '@/components/page-transition'
 import { FloatingCard } from '@/components/animated-card'
 import { CategoryCardClient } from '@/components/category-card-client'
@@ -43,10 +43,10 @@ export default function HomePage() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Header - Cursor-style gradient background */}
-      <header 
-        className="relative overflow-hidden rounded-2xl mx-4 sm:mx-6 lg:mx-8 mt-4"
-        style={{
+      {/* Header - Theme-aware Cursor-style gradient background */}
+      <header className="relative overflow-hidden rounded-2xl mx-4 sm:mx-6 lg:mx-8 mt-4 header-gradient">
+        {/* Light mode gradient overlay */}
+        <div className="absolute inset-0 dark:hidden" style={{
           background: `
             radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.45) 0%, transparent 60%),
             radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.4) 0%, transparent 55%),
@@ -69,13 +69,34 @@ export default function HomePage() {
             )
           `,
           filter: 'blur(0.5px) contrast(1.1)'
-        }}
-      >
+        }} />
+        
+        {/* Dark mode gradient overlay */}
+        <div className="absolute inset-0 hidden dark:block" style={{
+          background: `
+            radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
+            radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 55%),
+            radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.09) 0%, transparent 58%),
+            radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.07) 0%, transparent 55%),
+            radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.35) 0%, transparent 45%),
+            radial-gradient(circle at 20% 85%, rgba(236, 72, 153, 0.38) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.35) 0%, transparent 50%),
+            radial-gradient(circle at 30% 60%, rgba(255, 255, 255, 0.06) 0%, transparent 45%),
+            radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+            linear-gradient(135deg, 
+              #1e1b4b 0%,     /* dark purple start */
+              #581c87 25%,    /* dark magenta */
+              #7c2d12 50%,    /* dark orange */
+              #713f12 65%,    /* dark yellow */
+              #14532d 80%,    /* dark green */
+              #0c4a6e 100%    /* dark blue end */
+            )
+          `,
+          filter: 'blur(0.5px) contrast(1.2)'
+        }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
-          {/* Theme Toggle */}
-          <div className="absolute top-6 right-4 sm:right-6 lg:right-8 z-20">
-            <ThemeToggle />
-          </div>
           
           <div className="text-center">
             {/* Enhanced H1 with white text on gradient background */}
@@ -232,6 +253,9 @@ export default function HomePage() {
           </FloatingCard>
         </div>
       </main>
+      
+
+
     </div>
     </PageTransition>
   )

@@ -43,10 +43,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
       {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/80 via-pink-50/70 via-orange-50/60 via-green-50/70 to-cyan-50/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.25),rgba(255,255,255,0))]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-50/80 via-pink-50/70 via-orange-50/60 via-green-50/70 to-cyan-50/80 dark:from-purple-900/20 dark:via-pink-900/15 dark:via-orange-900/10 dark:via-green-900/15 dark:to-cyan-900/20" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.25),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(0,0,0,0))]" />
       
       <div className="relative z-10">
         {/* Header */}
@@ -56,7 +56,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             <div className="flex items-center gap-4 mb-8">
               <Link 
                 href={categoryLink}
-                className="inline-flex items-center text-slate-600 hover:text-slate-900 transition-colors"
+                className="inline-flex items-center text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to {category?.name || 'Categories'}
@@ -70,40 +70,40 @@ export default async function TopicPage({ params }: TopicPageProps) {
                 <div className="h-px w-32 bg-slate-700/30 shadow-sm" />
               </div>
               
-              <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+              <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
                 {topic.name}
               </h1>
               
-              <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-slate-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
                 {topic.description}
               </p>
 
               {/* Topic Stats */}
-              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg max-w-2xl mx-auto">
+              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-gray-700/50 shadow-lg max-w-2xl mx-auto">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-slate-900">{topicProgress.total}</div>
-                    <div className="text-sm text-slate-600">Articles</div>
+                    <div className="text-2xl font-bold text-slate-900 dark:text-white">{topicProgress.total}</div>
+                    <div className="text-sm text-slate-600 dark:text-gray-400">Articles</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-600">{topicProgress.completed}</div>
-                    <div className="text-sm text-slate-600">Completed</div>
+                    <div className="text-sm text-slate-600 dark:text-gray-400">Completed</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">{topicProgress.inProgress}</div>
-                    <div className="text-sm text-slate-600">In Progress</div>
+                    <div className="text-sm text-slate-600 dark:text-gray-400">In Progress</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-600">{topicProgress.notStarted}</div>
-                    <div className="text-sm text-slate-600">Not Started</div>
+                    <div className="text-sm text-slate-600 dark:text-gray-400">Not Started</div>
                   </div>
                 </div>
 
                 {/* Progress Bar */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-semibold text-slate-900">Proficiency</span>
-                    <span className="text-sm text-slate-600">{completionPercentage}%</span>
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white">Proficiency</span>
+                    <span className="text-sm text-slate-600 dark:text-gray-400">{completionPercentage}%</span>
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                     <div 
@@ -112,7 +112,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
                     />
                   </div>
                   <div className="text-right">
-                    <span className="text-lg font-bold text-slate-900">{completionPercentage}%</span>
+                    <span className="text-lg font-bold text-slate-900 dark:text-white">{completionPercentage}%</span>
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         {/* Articles List */}
         <main className="px-6 pb-12 sm:px-8 lg:px-12">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Articles</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Articles</h2>
             
             <div className="space-y-4">
               {topic.articles.map((article, index) => {
@@ -136,12 +136,12 @@ export default async function TopicPage({ params }: TopicPageProps) {
                     href={`/article/${article.id}`}
                     className="group block transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
                   >
-                    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-sm transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-200/60 group-hover:bg-white">
+                    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-gray-700/50 shadow-sm transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-200/60 dark:group-hover:border-purple-400/60 group-hover:bg-white dark:group-hover:bg-gray-800">
                       <div className="flex items-start gap-4">
                         {/* Article Number & Status */}
                         <div className="flex-shrink-0">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-sm font-semibold text-slate-600">
+                            <div className="w-8 h-8 bg-slate-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-sm font-semibold text-slate-600 dark:text-gray-300">
                               {index + 1}
                             </div>
                             <div className={`p-2 rounded-lg ${statusInfo.bg} transition-all duration-300 group-hover:scale-110`}>
@@ -154,10 +154,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
-                              <h3 className="text-xl font-semibold text-slate-900 group-hover:text-slate-700 transition-colors mb-2">
+                              <h3 className="text-xl font-semibold text-slate-900 dark:text-white group-hover:text-slate-700 dark:group-hover:text-gray-200 transition-colors mb-2">
                                 {article.name}
                               </h3>
-                              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                              <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed mb-3">
                                 {article.description}
                               </p>
                             </div>
@@ -166,8 +166,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
                           {/* Proficiency Bar */}
                           <div className="mb-3">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-sm font-medium text-slate-700">Proficiency</span>
-                              <span className="text-sm text-slate-600">
+                              <span className="text-sm font-medium text-slate-700 dark:text-gray-300">Proficiency</span>
+                              <span className="text-sm text-slate-600 dark:text-gray-400">
                                 {article.learningStatus === 'Completed' ? '100%' :
                                  article.learningStatus === 'In progress' ? '75%' :
                                  article.learningStatus === 'Reviewing' ? '50%' : '25%'}

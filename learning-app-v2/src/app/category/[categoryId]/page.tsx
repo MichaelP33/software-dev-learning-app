@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { getCategoryById, calculateTopicProgress, getCompletionPercentage } from '@/lib/data'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { TopicCardClient } from '@/components/topic-card-client'
 
 // Gradient presets for server-side use
@@ -51,11 +50,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       {/* Header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/60 border-b border-gray-200/50 dark:border-gray-700/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          {/* Theme Toggle */}
-          <div className="absolute top-4 right-4 sm:right-6 lg:right-8">
-            <ThemeToggle />
-          </div>
-          
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Link 
