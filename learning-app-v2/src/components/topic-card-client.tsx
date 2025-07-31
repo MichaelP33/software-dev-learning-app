@@ -32,14 +32,14 @@ export function TopicCardClient({
     >
       <Link
         href={`/topic/${topic.id}`}
-        className="block p-6"
+        className="block p-6 pb-12 md:pb-6"
       >
         {/* Topic Header */}
         <div className="flex items-start justify-between mb-4">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-200 flex-1 pr-4 transition-colors duration-300">
             {topic.name}
           </h3>
-          <div className="text-right flex-shrink-0">
+          <div className="hidden md:block text-right flex-shrink-0">
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {topicProgress.completed}/{topicProgress.total}
             </div>
@@ -95,9 +95,9 @@ export function TopicCardClient({
           })()}
         </div>
 
-        {/* Enhanced Hover Indicator with Gradient */}
+        {/* Enhanced Hover Indicator with Gradient - Permanent on mobile, hover on desktop */}
         <motion.div 
-          className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+          className="absolute bottom-4 right-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-400"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >

@@ -64,8 +64,8 @@ export function CategoryCardClient({
           </div>
         </div>
 
-        {/* Progress Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        {/* Progress Stats - Hidden on mobile */}
+        <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 dark:text-white">{progress.total}</div>
             <div className="text-sm text-gray-600 dark:text-gray-400">Articles</div>
@@ -103,7 +103,7 @@ export function CategoryCardClient({
           {category.topics.slice(0, 3).map((topic) => (
             <div key={topic.id} className="flex items-center justify-between text-sm">
               <span className="text-gray-700 dark:text-gray-300">{topic.name}</span>
-              <span className="text-gray-500 dark:text-gray-400">{topic.articles.length} articles</span>
+              <span className="hidden md:inline text-gray-500 dark:text-gray-400">{topic.articles.length} articles</span>
             </div>
           ))}
           {category.topics.length > 3 && (
@@ -113,9 +113,9 @@ export function CategoryCardClient({
           )}
         </div>
 
-        {/* Enhanced Hover Indicator with Gradient */}
+        {/* Enhanced Hover Indicator with Gradient - Permanent on mobile, hover on desktop */}
         <motion.div 
-          className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+          className="absolute bottom-6 right-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-400"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
