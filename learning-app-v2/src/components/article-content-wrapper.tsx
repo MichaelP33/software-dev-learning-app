@@ -5,9 +5,11 @@ import Link from 'next/link'
 import { ArrowLeft, HelpCircle, Brain, TrendingUp, ChevronLeft, ChevronRight, X, Menu, Home, ArrowUp } from 'lucide-react'
 import { getCategoryPrimaryGradient, getCategoryBackground } from '@/lib/gradients'
 import { Article, Topic, Category } from '@/types'
+import { getQuizByArticleId } from '@/lib/data'
 import { ArticleTableOfContents } from '@/components/article-table-of-contents'
 import { ComparisonTable } from '@/components/comparison-table'
 import { MetricsCard } from '@/components/metrics-card'
+import QuizCTA from '@/components/quiz/quiz-cta'
 
 interface ArticleContentWrapperProps {
   article: Article
@@ -129,6 +131,18 @@ export function ArticleContentWrapper({
                   </div>
                 </div>
               </div>
+
+              {/* Quiz CTA - Show if quiz is available */}
+              {(() => {
+                const quiz = getQuizByArticleId(article.id)
+                return quiz ? (
+                  <QuizCTA 
+                    articleId={article.id} 
+                    quiz={quiz} 
+                    className="max-w-2xl mx-auto mb-8" 
+                  />
+                ) : null
+              })()}
             </div>
 
             {/* Article Content */}

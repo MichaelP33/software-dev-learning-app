@@ -20,7 +20,114 @@
               "learningStatus": "Not started",
               "priorityStatus": "Low",
               "description": "Languages that translate source code into machine code before execution",
-              "topics": ["Performance", "Deployment", "Enterprise Systems"]
+              "topics": ["Performance", "Deployment", "Enterprise Systems"],
+              "quiz": {
+                "title": "TAM Knowledge Quiz",
+                "totalQuestions": 8,
+                "totalPoints": 25,
+                "questions": [
+                  {
+                    "id": 1,
+                    "type": "multiple-choice",
+                    "difficulty": "easy",
+                    "points": 2,
+                    "question": "What is the primary difference between compiled and interpreted languages?",
+                    "options": [
+                      "Compiled languages are faster to write code in",
+                      "Compiled languages translate source code to machine code before execution",
+                      "Compiled languages can only run on one operating system",
+                      "Compiled languages don't require any optimization"
+                    ],
+                    "correctAnswer": 1,
+                    "additionalContext": "This upfront translation is what enables compiled languages to create standalone executables that can run without requiring the original compiler on the target machine. The compilation process includes sophisticated optimization stages (lexical analysis, parsing, optimization, code generation) that restructure code for maximum efficiency. This is why compiled languages eliminate translation overhead during execution - all the heavy lifting happens once during development rather than every time the program runs.",
+                    "keyConcepts": ["Basic compiled language definition", "translation timing", "deployment characteristics"]
+                  },
+                  {
+                    "id": 2,
+                    "type": "multiple-choice",
+                    "difficulty": "easy",
+                    "points": 2,
+                    "question": "Which of the following languages is primarily used for microservices and cloud infrastructure according to the article?",
+                    "options": [
+                      "C++",
+                      "Java",
+                      "Go",
+                      "Rust"
+                    ],
+                    "correctAnswer": 2,
+                    "additionalContext": "Go was specifically designed for modern cloud infrastructure and has become the foundation for major containerization technologies like Docker and Kubernetes. Its compiled nature provides fast startup times (milliseconds vs. seconds) and low memory usage (10-50MB vs. 200-500MB for interpreted alternatives) - critical factors when running hundreds of microservices. Companies like Docker migrated from Python to Go for significant performance improvements, while Uber uses Go for 600+ microservices with ~50MB vs. ~300MB per service compared to alternatives.",
+                    "keyConcepts": ["Go-specific advantages", "microservices requirements", "cloud infrastructure adoption"]
+                  },
+                  {
+                    "id": 3,
+                    "type": "multiple-choice",
+                    "difficulty": "easy-medium",
+                    "points": 3,
+                    "question": "Complete this statement: Compiled languages eliminate _______ overhead during execution because translation happens _______ rather than at runtime.",
+                    "options": [
+                      "runtime overhead, continuously",
+                      "translation overhead, upfront",
+                      "memory overhead, during compilation",
+                      "processing overhead, dynamically"
+                    ],
+                    "correctAnswer": 1,
+                    "additionalContext": "This elimination of translation overhead is why compiled languages can start services in milliseconds rather than seconds - crucial for microservices architectures where you might have hundreds of services starting and stopping. The compiler's multi-stage optimization process (lexical analysis, parsing, optimization, code generation) happens once during development, creating highly efficient machine code that can execute immediately without any interpretation layer.",
+                    "keyConcepts": ["Performance advantages", "compilation timing", "microservices impact"]
+                  },
+                  {
+                    "id": 4,
+                    "type": "multiple-choice",
+                    "difficulty": "medium",
+                    "points": 3,
+                    "question": "According to the article, what are the success rates and cost ranges for gradual migrations vs complete rewrites?",
+                    "options": [
+                      "50% vs 80% success rate, $10K-100K vs $500K-5M cost range",
+                      "70% vs 30% success rate, $50K-500K vs $1M-10M+ cost range",
+                      "80% vs 40% success rate, $25K-250K vs $2M-20M cost range",
+                      "90% vs 60% success rate, $100K-1M vs $5M-50M cost range"
+                    ],
+                    "correctAnswer": 1,
+                    "additionalContext": "These success rates reflect the risk and complexity differences between approaches. Gradual migrations allow teams to learn and adapt as they go, maintaining business continuity while gaining experience with the new technology. Complete rewrites are much riskier because they require perfect upfront planning and extended periods where the business runs on both old and new systems. The cost ranges reflect that individual microservice migrations can be scoped and managed, while full rewrites involve coordinating changes across entire technology stacks with unpredictable integration challenges.",
+                    "keyConcepts": ["Migration strategies", "business costs", "success patterns", "risk management"]
+                  },
+                  {
+                    "id": 5,
+                    "type": "short-answer",
+                    "difficulty": "medium",
+                    "points": 3,
+                    "question": "Explain why compiled languages provide a performance advantage in microservices architectures. Include at least one specific metric from the article.",
+                    "sampleStrongResponse": "Should explain that performance improvements multiply across hundreds of services in microservices architectures, and include specific metrics like services starting in milliseconds vs. seconds, memory usage of 10-50MB vs. 200-500MB for interpreted alternatives, or examples like Uber's ~50MB vs. ~300MB per service.",
+                    "keyConcepts": ["Microservices performance", "resource efficiency", "scalability impact"]
+                  },
+                  {
+                    "id": 6,
+                    "type": "short-answer",
+                    "difficulty": "medium-hard",
+                    "points": 3,
+                    "question": "What are the key customer scenarios that typically trigger migration from interpreted to compiled languages? Provide two specific examples with their quoted pain points.",
+                    "sampleStrongResponse": "Should identify performance crisis and scaling inefficiency as key triggers, with specific quotes like 'Our cloud bills doubled but traffic only increased 20%' or 'We need 10x the servers to handle 2x the traffic' or 'Microservices startup time is killing deployment velocity.'",
+                    "keyConcepts": ["Migration triggers", "customer pain points", "business drivers"]
+                  },
+                  {
+                    "id": 7,
+                    "type": "long-answer",
+                    "difficulty": "medium-hard",
+                    "points": 5,
+                    "question": "Describe the different compiled languages mentioned in the article and their primary enterprise use cases. Explain why teams might choose one over another, including at least two real company examples.",
+                    "sampleStrongResponse": "Should cover Go (microservices/cloud infrastructure), Rust (system-level/memory safety), C++ (high-performance computing), and Java (enterprise backends). Should explain selection criteria based on use case requirements and include examples like Docker's Python→Go migration, Discord's JavaScript→Rust transition with 40% cost reduction, or Shopify's adoption of Go for platform services while maintaining Rails.",
+                    "keyConcepts": ["Language selection criteria", "enterprise use cases", "real-world adoption patterns"]
+                  },
+                  {
+                    "id": 8,
+                    "type": "long-answer",
+                    "difficulty": "hard",
+                    "points": 4,
+                    "question": "Analyze the business considerations a TAM should discuss with a customer considering migration to compiled languages. Include customer profiles, cost factors, success patterns, and potential risks with specific data points from the article.",
+                    "sampleStrongResponse": "Should cover customer profiles (Series B/C startups spending 30%+ time on performance, enterprise teams with $1M+ modernization budgets, cloud-native companies with growing AWS bills), cost considerations ($50K-$500K per microservice, $1M-$10M+ for full rewrites), success patterns (70% success for gradual vs. 30% for complete rewrites), and strategic timing (migration represents competitive advantage inflection point). Should demonstrate understanding of when migration makes business sense vs. premature optimization.",
+                    "keyConcepts": ["Business case analysis", "customer profiling", "migration strategy", "cost-benefit analysis", "TAM advisory role"]
+                  }
+                ]
+              }
             },
             {
               "id": "interpreted-languages",

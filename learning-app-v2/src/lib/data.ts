@@ -1,4 +1,4 @@
-import { LearningContent, Category, Topic, Article, Progress } from '@/types'
+import { LearningContent, Category, Topic, Article, Progress, Quiz, QuizQuestion, QuizAnswer } from '@/types'
 import learningData from '../../data/learning-content.json'
 
 const data: LearningContent = learningData as LearningContent
@@ -173,5 +173,80 @@ export function getStatusIndicatorColor(status: string): string {
       return 'bg-gray-400'
     default:
       return 'bg-gray-400'
+  }
+}
+
+// Quiz utility functions
+export function getQuizByArticleId(articleId: string): Quiz | null {
+  const article = getArticleById(articleId)
+  return article?.quiz || null
+}
+
+export function validateMultipleChoiceAnswer(question: QuizQuestion, answer: number): boolean {
+  return question.correctAnswer === answer
+}
+
+// Removed validateFillInBlankAnswer - no longer needed
+
+export function calculateSelfAssessmentScore(points: number, assessment: 'nailed-it' | 'mostly-good' | 'not-quite'): number {
+  switch (assessment) {
+    case 'nailed-it':
+      return points
+    case 'mostly-good':
+      return Math.round(points * 0.7)
+    case 'not-quite':
+      return Math.round(points * 0.3)
+    default:
+      return 0
+  }
+}
+
+export function calculateQuizScore(answers: QuizAnswer[]): { score: number, percentage: number } {
+  const totalScore = answers.reduce((sum, answer) => sum + answer.pointsEarned, 0)
+  const totalPossible = answers.reduce((sum, answer) => {
+    // Get max possible points for this answer type
+    if (answer.type === 'multiple-choice') {
+      // Questions 1&2 = 2 points, Questions 3&4 = 3 points
+      return sum + (answer.questionId <= 2 ? 2 : 3)
+    }
+    if (answer.type === 'short-answer') return sum + 3
+    if (answer.type === 'long-answer') return sum + (answer.questionId === 8 ? 4 : 5) // Question 8 is 4 points
+    return sum
+  }, 0)
+  
+  const percentage = totalPossible > 0 ? Math.round((totalScore / totalPossible) * 100) : 0
+  
+  return { score: totalScore, percentage }
+}
+
+export function getQuizPerformanceLevel(percentage: number): {
+  level: 'excellent' | 'good' | 'needs-review' | 'retake-recommended'
+  message: string
+  color: string
+} {
+  if (percentage >= 92) {
+    return {
+      level: 'excellent',
+      message: 'Excellent! You have a strong understanding of this topic.',
+      color: 'text-green-600'
+    }
+  } else if (percentage >= 80) {
+    return {
+      level: 'good',
+      message: 'Good work! You understand most of the key concepts.',
+      color: 'text-blue-600'
+    }
+  } else if (percentage >= 60) {
+    return {
+      level: 'needs-review',
+      message: 'Consider reviewing the material to strengthen your understanding.',
+      color: 'text-yellow-600'
+    }
+  } else {
+    return {
+      level: 'retake-recommended',
+      message: 'We recommend reviewing the article and retaking the quiz.',
+      color: 'text-red-600'
+    }
   }
 }
