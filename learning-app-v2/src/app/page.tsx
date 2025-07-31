@@ -125,11 +125,11 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <div className="relative w-32 h-16 mb-3">
+              <div className="relative w-32 h-20 mb-3">
                 {/* Background arc */}
-                <svg className="w-full h-full" viewBox="0 0 128 64">
+                <svg className="w-full h-full" viewBox="0 0 128 72">
                   <path
-                    d="M 16 48 A 32 32 0 0 1 112 48"
+                    d="M 16 56 A 32 32 0 0 1 112 56"
                     fill="none"
                     stroke="rgba(255, 255, 255, 0.2)"
                     strokeWidth="4"
@@ -137,7 +137,7 @@ export default function HomePage() {
                   />
                   {/* Progress arc */}
                   <path
-                    d="M 16 48 A 32 32 0 0 1 112 48"
+                    d="M 16 56 A 32 32 0 0 1 112 56"
                     fill="none"
                     stroke="rgba(255, 255, 255, 0.9)"
                     strokeWidth="4"
