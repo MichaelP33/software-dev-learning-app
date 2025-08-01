@@ -1,0 +1,1349 @@
+{
+  "categories": [
+    {
+      "id": "programming-fundamentals",
+      "name": "Programming Fundamentals",
+      "description": "Core concepts and principles that form the foundation of software development",
+      "icon": "💻",
+      "iconType": "laptop",
+      "color": "from-blue-500 to-cyan-500",
+      "topics": [
+        {
+          "id": "programming-languages-paradigms",
+          "name": "Programming Languages & Paradigms",
+          "description": "Understanding different programming approaches and language types",
+          "category": "Programming Fundamentals",
+          "articles": [
+            {
+              "id": "compiled-languages",
+              "name": "Compiled Languages",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Languages that translate source code into machine code before execution",
+              "topics": ["Performance", "Deployment", "Enterprise Systems"],
+              "quiz": {
+                "title": "TAM Knowledge Quiz",
+                "totalQuestions": 8,
+                "totalPoints": 25,
+                "questions": [
+                  {
+                    "id": 1,
+                    "type": "multiple-choice",
+                    "difficulty": "easy",
+                    "points": 2,
+                    "question": "What is the primary difference between compiled and interpreted languages?",
+                    "options": [
+                      "Compiled languages are faster to write code in",
+                      "Compiled languages translate source code to machine code before execution",
+                      "Compiled languages can only run on one operating system",
+                      "Compiled languages don't require any optimization"
+                    ],
+                    "correctAnswer": 1,
+                    "additionalContext": "This upfront translation is what enables compiled languages to create standalone executables that can run without requiring the original compiler on the target machine. The compilation process includes sophisticated optimization stages (lexical analysis, parsing, optimization, code generation) that restructure code for maximum efficiency. This is why compiled languages eliminate translation overhead during execution - all the heavy lifting happens once during development rather than every time the program runs.",
+                    "keyConcepts": ["Basic compiled language definition", "translation timing", "deployment characteristics"]
+                  },
+                  {
+                    "id": 2,
+                    "type": "multiple-choice",
+                    "difficulty": "easy",
+                    "points": 2,
+                    "question": "Which of the following languages is primarily used for microservices and cloud infrastructure according to the article?",
+                    "options": [
+                      "C++",
+                      "Java",
+                      "Go",
+                      "Rust"
+                    ],
+                    "correctAnswer": 2,
+                    "additionalContext": "Go was specifically designed for modern cloud infrastructure and has become the foundation for major containerization technologies like Docker and Kubernetes. Its compiled nature provides fast startup times (milliseconds vs. seconds) and low memory usage (10-50MB vs. 200-500MB for interpreted alternatives) - critical factors when running hundreds of microservices. Companies like Docker migrated from Python to Go for significant performance improvements, while Uber uses Go for 600+ microservices with ~50MB vs. ~300MB per service compared to alternatives.",
+                    "keyConcepts": ["Go-specific advantages", "microservices requirements", "cloud infrastructure adoption"]
+                  },
+                  {
+                    "id": 3,
+                    "type": "multiple-choice",
+                    "difficulty": "easy-medium",
+                    "points": 3,
+                    "question": "Complete this statement: Compiled languages eliminate _______ overhead during execution because translation happens _______ rather than at runtime.",
+                    "options": [
+                      "runtime overhead, continuously",
+                      "translation overhead, upfront",
+                      "memory overhead, during compilation",
+                      "processing overhead, dynamically"
+                    ],
+                    "correctAnswer": 1,
+                    "additionalContext": "This elimination of translation overhead is why compiled languages can start services in milliseconds rather than seconds - crucial for microservices architectures where you might have hundreds of services starting and stopping. The compiler's multi-stage optimization process (lexical analysis, parsing, optimization, code generation) happens once during development, creating highly efficient machine code that can execute immediately without any interpretation layer.",
+                    "keyConcepts": ["Performance advantages", "compilation timing", "microservices impact"]
+                  },
+                  {
+                    "id": 4,
+                    "type": "multiple-choice",
+                    "difficulty": "medium",
+                    "points": 3,
+                    "question": "According to the article, what are the success rates and cost ranges for gradual migrations vs complete rewrites?",
+                    "options": [
+                      "50% vs 80% success rate, $10K-100K vs $500K-5M cost range",
+                      "70% vs 30% success rate, $50K-500K vs $1M-10M+ cost range",
+                      "80% vs 40% success rate, $25K-250K vs $2M-20M cost range",
+                      "90% vs 60% success rate, $100K-1M vs $5M-50M cost range"
+                    ],
+                    "correctAnswer": 1,
+                    "additionalContext": "These success rates reflect the risk and complexity differences between approaches. Gradual migrations allow teams to learn and adapt as they go, maintaining business continuity while gaining experience with the new technology. Complete rewrites are much riskier because they require perfect upfront planning and extended periods where the business runs on both old and new systems. The cost ranges reflect that individual microservice migrations can be scoped and managed, while full rewrites involve coordinating changes across entire technology stacks with unpredictable integration challenges.",
+                    "keyConcepts": ["Migration strategies", "business costs", "success patterns", "risk management"]
+                  },
+                  {
+                    "id": 5,
+                    "type": "short-answer",
+                    "difficulty": "medium",
+                    "points": 3,
+                    "question": "Explain why compiled languages provide a performance advantage in microservices architectures. Include at least one specific metric from the article.",
+                    "sampleStrongResponse": "Should explain that performance improvements multiply across hundreds of services in microservices architectures, and include specific metrics like services starting in milliseconds vs. seconds, memory usage of 10-50MB vs. 200-500MB for interpreted alternatives, or examples like Uber's ~50MB vs. ~300MB per service.",
+                    "keyConcepts": ["Microservices performance", "resource efficiency", "scalability impact"]
+                  },
+                  {
+                    "id": 6,
+                    "type": "short-answer",
+                    "difficulty": "medium-hard",
+                    "points": 3,
+                    "question": "What are the key customer scenarios that typically trigger migration from interpreted to compiled languages? Provide two specific examples with their quoted pain points.",
+                    "sampleStrongResponse": "Should identify performance crisis and scaling inefficiency as key triggers, with specific quotes like 'Our cloud bills doubled but traffic only increased 20%' or 'We need 10x the servers to handle 2x the traffic' or 'Microservices startup time is killing deployment velocity.'",
+                    "keyConcepts": ["Migration triggers", "customer pain points", "business drivers"]
+                  },
+                  {
+                    "id": 7,
+                    "type": "long-answer",
+                    "difficulty": "medium-hard",
+                    "points": 5,
+                    "question": "Describe the different compiled languages mentioned in the article and their primary enterprise use cases. Explain why teams might choose one over another, including at least two real company examples.",
+                    "sampleStrongResponse": "Should cover Go (microservices/cloud infrastructure), Rust (system-level/memory safety), C++ (high-performance computing), and Java (enterprise backends). Should explain selection criteria based on use case requirements and include examples like Docker's Python→Go migration, Discord's JavaScript→Rust transition with 40% cost reduction, or Shopify's adoption of Go for platform services while maintaining Rails.",
+                    "keyConcepts": ["Language selection criteria", "enterprise use cases", "real-world adoption patterns"]
+                  },
+                  {
+                    "id": 8,
+                    "type": "long-answer",
+                    "difficulty": "hard",
+                    "points": 4,
+                    "question": "Analyze the business considerations a TAM should discuss with a customer considering migration to compiled languages. Include customer profiles, cost factors, success patterns, and potential risks with specific data points from the article.",
+                    "sampleStrongResponse": "Should cover customer profiles (Series B/C startups spending 30%+ time on performance, enterprise teams with $1M+ modernization budgets, cloud-native companies with growing AWS bills), cost considerations ($50K-$500K per microservice, $1M-$10M+ for full rewrites), success patterns (70% success for gradual vs. 30% for complete rewrites), and strategic timing (migration represents competitive advantage inflection point). Should demonstrate understanding of when migration makes business sense vs. premature optimization.",
+                    "keyConcepts": ["Business case analysis", "customer profiling", "migration strategy", "cost-benefit analysis", "TAM advisory role"]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "interpreted-languages",
+              "name": "Interpreted Languages",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Languages executed line by line at runtime by an interpreter",
+              "topics": ["Rapid Development", "Scripting", "Prototyping"]
+            },
+            {
+              "id": "hybrid-languages",
+              "name": "Hybrid Languages",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Languages that combine compilation and interpretation approaches",
+              "topics": ["Virtual Machines", "Bytecode", "Platform Independence"]
+            },
+            {
+              "id": "procedural-programming",
+              "name": "Procedural Programming",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Programming paradigm that uses step-by-step functions to organize code",
+              "topics": ["Functions", "Modularity", "Sequential Logic", "Performance"]
+            },
+            {
+              "id": "object-oriented-programming",
+              "name": "Object-Oriented Programming",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Programming paradigm based on objects that combine data and behavior",
+              "topics": ["Encapsulation", "Inheritance", "Polymorphism", "Abstraction"]
+            },
+            {
+              "id": "functional-programming",
+              "name": "Functional Programming",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Programming paradigm treating computation as mathematical transformations",
+              "topics": ["Pure Functions", "Immutability", "Function Composition", "Concurrency"]
+            }
+          ]
+        },
+        {
+          "id": "core-programming-constructs",
+          "name": "Core Programming Constructs",
+          "description": "Fundamental building blocks used in all programming languages",
+          "category": "Programming Fundamentals",
+          "articles": [
+            {
+              "id": "variables-data-types",
+              "name": "Variables, data types, memory concepts",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Understanding how data is stored and manipulated in programs",
+              "topics": ["Memory Management", "Type Systems", "Variable Scope"]
+            },
+            {
+              "id": "control-flow",
+              "name": "Control flow (conditionals, loops, branching)",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "How programs make decisions and repeat operations",
+              "topics": ["If/Else", "Loops", "Switch Statements"]
+            },
+            {
+              "id": "functions-methods-scope",
+              "name": "Functions/methods and scope",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Organizing code into reusable blocks with proper scope management",
+              "topics": ["Function Parameters", "Return Values", "Scope Chain"]
+            },
+            {
+              "id": "error-handling",
+              "name": "Error handling and exceptions",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Managing and recovering from runtime errors",
+              "topics": ["Try/Catch", "Exception Types", "Error Propagation"]
+            }
+          ]
+        },
+        {
+          "id": "data-structures-algorithms",
+          "name": "Data Structures & Algorithms",
+          "description": "Efficient ways to organize data and solve computational problems",
+          "category": "Programming Fundamentals",
+          "articles": [
+            {
+              "id": "basic-structures",
+              "name": "Basic structures: arrays, lists, stacks, queues",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Fundamental data organization patterns",
+              "topics": ["Arrays", "Linked Lists", "LIFO/FIFO"]
+            },
+            {
+              "id": "complex-structures",
+              "name": "Complex structures: trees, graphs, hash tables",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Advanced data structures for complex relationships",
+              "topics": ["Binary Trees", "Graph Traversal", "Hash Functions"]
+            },
+            {
+              "id": "algorithm-design",
+              "name": "Algorithm design approaches and complexity",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for designing efficient algorithms",
+              "topics": ["Big O Notation", "Time/Space Complexity", "Optimization"]
+            },
+            {
+              "id": "common-patterns",
+              "name": "Common patterns: searching, sorting, recursion",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Frequently used algorithmic patterns",
+              "topics": ["Binary Search", "Quick Sort", "Recursive Thinking"]
+            }
+          ]
+        },
+        {
+          "id": "code-organization-modularity",
+          "name": "Code Organization & Modularity",
+          "description": "Best practices for structuring and organizing code",
+          "category": "Programming Fundamentals",
+          "articles": [
+            {
+              "id": "functions-classes-modules",
+              "name": "Functions, classes, and modules",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Building blocks for code organization",
+              "topics": ["Module Systems", "Class Design", "Function Libraries"]
+            },
+            {
+              "id": "separation-of-concerns",
+              "name": "Separation of concerns and single responsibility",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Principles for clean, maintainable code",
+              "topics": ["SRP", "Modularity", "Clean Code"]
+            },
+            {
+              "id": "code-reusability",
+              "name": "Code reusability and abstraction",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Creating flexible, reusable code components",
+              "topics": ["DRY Principle", "Abstraction Layers", "Component Design"]
+            },
+            {
+              "id": "documentation-naming",
+              "name": "Documentation and naming conventions",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Making code readable and maintainable",
+              "topics": ["Code Comments", "Naming Standards", "API Documentation"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-architecture-design",
+      "name": "Software Architecture & Design",
+      "description": "High-level design patterns and architectural approaches for building robust systems",
+      "icon": "🏗️",
+      "iconType": "building",
+      "color": "from-purple-500 to-pink-500",
+      "topics": [
+        {
+          "id": "system-design-patterns-principles",
+          "name": "System Design Patterns & Principles",
+          "description": "Proven architectural patterns for building maintainable systems",
+          "category": "Software Architecture & Design",
+          "articles": [
+            {
+              "id": "solid-principles",
+              "name": "SOLID principles",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Five design principles for writing maintainable object-oriented code",
+              "topics": ["Single Responsibility", "Open/Closed", "Liskov Substitution"]
+            },
+            {
+              "id": "design-patterns",
+              "name": "Design patterns: Observer, Factory, Singleton, MVC",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Common solutions to recurring design problems",
+              "topics": ["Creational", "Structural", "Behavioral"]
+            },
+            {
+              "id": "domain-driven-design",
+              "name": "Domain-driven design concepts",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Approach for developing software based on business domain",
+              "topics": ["Bounded Context", "Entities", "Value Objects"]
+            },
+            {
+              "id": "clean-architecture",
+              "name": "Clean architecture principles",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Architecture that separates concerns and dependencies",
+              "topics": ["Dependency Inversion", "Clean Boundaries", "Testing"]
+            }
+          ]
+        },
+        {
+          "id": "application-architecture-styles",
+          "name": "Application Architecture Styles",
+          "description": "Different architectural approaches for organizing applications",
+          "category": "Software Architecture & Design",
+          "articles": [
+            {
+              "id": "monolithic-architecture",
+              "name": "Monolithic Architecture",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Single deployable unit containing all application functionality",
+              "topics": ["Single Deployment", "Shared Database", "Internal Communication"]
+            },
+            {
+              "id": "microservices-architecture",
+              "name": "Microservices Architecture",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Distributed architecture with independently deployable services",
+              "topics": ["Service Boundaries", "Independent Deployment", "Distributed Systems"]
+            },
+            {
+              "id": "client-server-patterns",
+              "name": "Client-Server Patterns",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Architectural patterns for client-server communication",
+              "topics": ["Request-Response", "Thin/Thick Clients", "Load Distribution"]
+            }
+          ]
+        },
+        {
+          "id": "api-design-integration-patterns",
+          "name": "API Design & Integration Patterns",
+          "description": "Patterns for designing and integrating APIs",
+          "category": "Software Architecture & Design",
+          "articles": [
+            {
+              "id": "restful-apis",
+              "name": "RESTful APIs",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Architectural style for designing web services",
+              "topics": ["HTTP Methods", "Resource-Based", "Stateless"]
+            },
+            {
+              "id": "graphql",
+              "name": "GraphQL",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Query language and runtime for APIs",
+              "topics": ["Single Endpoint", "Type System", "Query Optimization"]
+            },
+            {
+              "id": "event-driven-architecture",
+              "name": "Event-Driven Architecture",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Architecture based on event production and consumption",
+              "topics": ["Event Sourcing", "Message Queues", "Asynchronous Processing"]
+            },
+            {
+              "id": "rpc-vs-rest",
+              "name": "RPC vs REST",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Comparison of Remote Procedure Call and REST architectures",
+              "topics": ["Performance", "Coupling", "Protocol Design"]
+            }
+          ]
+        },
+        {
+          "id": "database-architecture-decisions",
+          "name": "Database Architecture Decisions",
+          "description": "Architectural decisions around data storage and management",
+          "category": "Software Architecture & Design",
+          "articles": [
+            {
+              "id": "sql-vs-nosql",
+              "name": "SQL vs NoSQL trade-offs",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Choosing between relational and non-relational databases",
+              "topics": ["ACID vs BASE", "Schema Design", "Scalability"]
+            },
+            {
+              "id": "acid-vs-eventual-consistency",
+              "name": "ACID properties vs eventual consistency",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Trade-offs between consistency and availability",
+              "topics": ["CAP Theorem", "Consistency Models", "Distributed Systems"]
+            },
+            {
+              "id": "read-replicas-write-scaling",
+              "name": "Read replicas and write scaling",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for scaling database read and write operations",
+              "topics": ["Master-Slave", "Load Distribution", "Replication Lag"]
+            },
+            {
+              "id": "database-sharding-partitioning",
+              "name": "Database sharding and partitioning",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Techniques for distributing data across multiple databases",
+              "topics": ["Horizontal Partitioning", "Shard Keys", "Cross-Shard Queries"]
+            }
+          ]
+        },
+        {
+          "id": "scalability-patterns",
+          "name": "Scalability Patterns",
+          "description": "Patterns for building scalable systems",
+          "category": "Software Architecture & Design",
+          "articles": [
+            {
+              "id": "horizontal-vs-vertical-scaling",
+              "name": "Horizontal vs vertical scaling",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Different approaches to scaling system capacity",
+              "topics": ["Scale Out vs Up", "Cost Considerations", "Elastic Scaling"]
+            },
+            {
+              "id": "load-balancing-strategies",
+              "name": "Load balancing strategies",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Techniques for distributing load across multiple servers",
+              "topics": ["Round Robin", "Weighted Distribution", "Health Checks"]
+            },
+            {
+              "id": "caching-layers",
+              "name": "Caching layers",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Using caches to improve system performance",
+              "topics": ["Cache Strategies", "CDN", "In-Memory Caching"]
+            },
+            {
+              "id": "database-connection-pooling",
+              "name": "Database connection pooling",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Managing database connections efficiently",
+              "topics": ["Connection Management", "Pool Sizing", "Connection Lifecycle"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "development-process-methodologies",
+      "name": "Development Process & Methodologies",
+      "description": "Methodologies and processes for organizing software development work",
+      "icon": "⚡",
+      "iconType": "zap",
+      "color": "from-green-500 to-emerald-500",
+      "topics": [
+        {
+          "id": "software-development-lifecycle-models",
+          "name": "Software Development Lifecycle Models",
+          "description": "Different approaches to organizing the software development process",
+          "category": "Development Process & Methodologies",
+          "articles": [
+            {
+              "id": "waterfall",
+              "name": "Waterfall",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Sequential development approach with distinct phases",
+              "topics": ["Sequential Phases", "Documentation", "Planning"]
+            },
+            {
+              "id": "agile-scrum",
+              "name": "Agile/Scrum",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Iterative development with short sprints and regular feedback",
+              "topics": ["Sprints", "Stand-ups", "Retrospectives"]
+            },
+            {
+              "id": "devops-philosophy",
+              "name": "DevOps Philosophy",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Culture and practices that bridge development and operations",
+              "topics": ["Collaboration", "Automation", "Continuous Delivery"]
+            },
+            {
+              "id": "lean-startup",
+              "name": "Lean Startup",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Methodology for developing products through validated learning",
+              "topics": ["MVP", "Build-Measure-Learn", "Pivot"]
+            }
+          ]
+        },
+        {
+          "id": "team-collaboration-patterns",
+          "name": "Team Collaboration Patterns",
+          "description": "Practices for effective team collaboration in software development",
+          "category": "Development Process & Methodologies",
+          "articles": [
+            {
+              "id": "code-reviews",
+              "name": "Code Reviews",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Systematic examination of code by team members",
+              "topics": ["Review Process", "Quality Gates", "Knowledge Sharing"]
+            },
+            {
+              "id": "pair-programming",
+              "name": "Pair Programming",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Two developers working together on the same code",
+              "topics": ["Driver-Navigator", "Knowledge Transfer", "Code Quality"]
+            },
+            {
+              "id": "mob-programming",
+              "name": "Mob Programming",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Whole team working together on the same thing",
+              "topics": ["Collective Ownership", "Mob Roles", "Facilitation"]
+            },
+            {
+              "id": "documentation-standards",
+              "name": "Documentation Standards",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Standards and practices for maintaining project documentation",
+              "topics": ["Living Documentation", "API Docs", "Decision Records"]
+            }
+          ]
+        },
+        {
+          "id": "project-planning-estimation",
+          "name": "Project Planning & Estimation",
+          "description": "Techniques for planning and estimating software development work",
+          "category": "Development Process & Methodologies",
+          "articles": [
+            {
+              "id": "sprint-planning",
+              "name": "Sprint Planning",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Planning work for upcoming development iterations",
+              "topics": ["Story Estimation", "Capacity Planning", "Sprint Goals"]
+            },
+            {
+              "id": "technical-debt-management",
+              "name": "Technical Debt Management",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for managing and reducing technical debt",
+              "topics": ["Debt Assessment", "Refactoring", "Maintenance"]
+            },
+            {
+              "id": "risk-assessment",
+              "name": "Risk Assessment",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Identifying and mitigating project risks",
+              "topics": ["Risk Identification", "Mitigation Strategies", "Contingency Planning"]
+            },
+            {
+              "id": "capacity-planning",
+              "name": "Capacity Planning",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Planning team capacity and resource allocation",
+              "topics": ["Resource Allocation", "Team Velocity", "Workload Balancing"]
+            }
+          ]
+        },
+        {
+          "id": "release-management",
+          "name": "Release Management",
+          "description": "Processes for managing software releases and deployments",
+          "category": "Development Process & Methodologies",
+          "articles": [
+            {
+              "id": "version-control-strategies",
+              "name": "Version Control Strategies",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for managing code versions and releases",
+              "topics": ["Git Flow", "Feature Branches", "Release Branches"]
+            },
+            {
+              "id": "feature-flags",
+              "name": "Feature Flags",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Technique for deploying code with features toggled on/off",
+              "topics": ["Toggle Management", "Gradual Rollouts", "A/B Testing"]
+            },
+            {
+              "id": "rollback-procedures",
+              "name": "Rollback Procedures",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Procedures for reverting deployments when issues occur",
+              "topics": ["Rollback Strategies", "Blue-Green Deployment", "Canary Releases"]
+            },
+            {
+              "id": "change-management",
+              "name": "Change Management",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Processes for managing changes to production systems",
+              "topics": ["Change Approval", "Release Notes", "Communication"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tools-development-environment",
+      "name": "Tools & Development Environment",
+      "description": "Essential tools and environments for modern software development",
+      "icon": "🔧",
+      "iconType": "wrench",
+      "color": "from-orange-500 to-red-500",
+      "topics": [
+        {
+          "id": "version-control-systems",
+          "name": "Version Control Systems",
+          "description": "Tools and practices for managing code versions and collaboration",
+          "category": "Tools & Development Environment",
+          "articles": [
+            {
+              "id": "git-workflows",
+              "name": "Git Workflows",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Different approaches to organizing Git-based development",
+              "topics": ["Git Flow", "GitHub Flow", "Feature Branches"]
+            },
+            {
+              "id": "branching-strategies",
+              "name": "Branching Strategies",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for organizing code branches",
+              "topics": ["Master/Main", "Feature Branches", "Release Branches"]
+            },
+            {
+              "id": "pull-request-process",
+              "name": "Pull Request Process",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Process for reviewing and merging code changes",
+              "topics": ["PR Templates", "Review Process", "Merge Strategies"]
+            },
+            {
+              "id": "repository-organization",
+              "name": "Repository Organization",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Best practices for organizing code repositories",
+              "topics": ["Monorepo vs Multirepo", "Directory Structure", "Documentation"]
+            }
+          ]
+        },
+        {
+          "id": "ides-development-tools",
+          "name": "IDEs & Development Tools",
+          "description": "Development environments and productivity tools",
+          "category": "Tools & Development Environment",
+          "articles": [
+            {
+              "id": "integrated-development-environments",
+              "name": "Integrated Development Environments",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Full-featured development environments with integrated tools",
+              "topics": ["IntelliJ", "Eclipse", "Visual Studio"]
+            },
+            {
+              "id": "code-editors-vs-ides",
+              "name": "Code Editors vs IDEs",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Understanding the differences between editors and IDEs",
+              "topics": ["VS Code", "Sublime Text", "Feature Comparison"]
+            },
+            {
+              "id": "developer-productivity-tools",
+              "name": "Developer Productivity Tools",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Tools that enhance developer productivity and workflow",
+              "topics": ["Terminal", "Git GUI", "Task Runners"]
+            },
+            {
+              "id": "extension-ecosystems",
+              "name": "Extension Ecosystems",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Plugin and extension systems for development tools",
+              "topics": ["VS Code Extensions", "Plugin Management", "Customization"]
+            }
+          ]
+        },
+        {
+          "id": "build-systems-package-management",
+          "name": "Build Systems & Package Management",
+          "description": "Tools for building applications and managing dependencies",
+          "category": "Tools & Development Environment",
+          "articles": [
+            {
+              "id": "build-automation",
+              "name": "Build Automation",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Automating the process of building applications from source code",
+              "topics": ["Make", "Gradle", "Maven"]
+            },
+            {
+              "id": "package-managers",
+              "name": "Package Managers",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Tools for managing external dependencies and libraries",
+              "topics": ["npm", "pip", "Composer"]
+            },
+            {
+              "id": "dependency-management",
+              "name": "Dependency Management",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for managing project dependencies",
+              "topics": ["Version Locking", "Dependency Updates", "Security"]
+            },
+            {
+              "id": "artifact-management",
+              "name": "Artifact Management",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Managing build artifacts and distributable packages",
+              "topics": ["Package Registries", "Artifact Storage", "Distribution"]
+            }
+          ]
+        },
+        {
+          "id": "local-vs-cloud-development",
+          "name": "Local vs Cloud Development",
+          "description": "Development environment options and containerization",
+          "category": "Tools & Development Environment",
+          "articles": [
+            {
+              "id": "docker-containerization",
+              "name": "Docker & Containerization",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Using containers for consistent development environments",
+              "topics": ["Docker", "Images", "Container Orchestration"]
+            },
+            {
+              "id": "development-containers",
+              "name": "Development Containers",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Containerized development environments",
+              "topics": ["Dev Containers", "Remote Development", "Environment Consistency"]
+            },
+            {
+              "id": "cloud-ides",
+              "name": "Cloud IDEs",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Browser-based development environments",
+              "topics": ["GitHub Codespaces", "GitPod", "Cloud9"]
+            },
+            {
+              "id": "local-development-setup",
+              "name": "Local Development Setup",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Setting up and maintaining local development environments",
+              "topics": ["Environment Variables", "Local Services", "Development Tools"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data-management-apis",
+      "name": "Data Management & APIs",
+      "description": "Data storage, modeling, and API design principles",
+      "icon": "🗄️",
+      "iconType": "emoji",
+      "color": "from-indigo-500 to-purple-500",
+      "topics": [
+        {
+          "id": "database-fundamentals",
+          "name": "Database Fundamentals",
+          "description": "Core concepts and types of database systems",
+          "category": "Data Management & APIs",
+          "articles": [
+            {
+              "id": "relational-databases",
+              "name": "Relational Databases",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Traditional SQL databases with structured relationships",
+              "topics": ["SQL", "ACID Properties", "Normalization"]
+            },
+            {
+              "id": "document-databases",
+              "name": "Document Databases",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "NoSQL databases that store data in document format",
+              "topics": ["MongoDB", "JSON Documents", "Schema Flexibility"]
+            },
+            {
+              "id": "graph-databases",
+              "name": "Graph Databases",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Databases optimized for storing and querying relationships",
+              "topics": ["Nodes", "Edges", "Graph Queries"]
+            },
+            {
+              "id": "key-value-stores",
+              "name": "Key-Value Stores",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Simple databases that store data as key-value pairs",
+              "topics": ["Redis", "Caching", "Simple Operations"]
+            }
+          ]
+        },
+        {
+          "id": "data-modeling-concepts",
+          "name": "Data Modeling Concepts",
+          "description": "Principles and practices for designing data structures",
+          "category": "Data Management & APIs",
+          "articles": [
+            {
+              "id": "normalization",
+              "name": "Normalization",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Process of organizing data to reduce redundancy",
+              "topics": ["Normal Forms", "Data Redundancy", "Database Design"]
+            },
+            {
+              "id": "indexing-strategies",
+              "name": "Indexing Strategies",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Techniques for improving database query performance",
+              "topics": ["B-Tree Indexes", "Composite Indexes", "Query Optimization"]
+            },
+            {
+              "id": "query-optimization",
+              "name": "Query Optimization",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Techniques for improving database query performance",
+              "topics": ["Execution Plans", "Index Usage", "Query Rewriting"]
+            },
+            {
+              "id": "schema-design",
+              "name": "Schema Design",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Designing database schemas for performance and maintainability",
+              "topics": ["Entity Relationships", "Data Types", "Constraints"]
+            }
+          ]
+        },
+        {
+          "id": "api-design-principles",
+          "name": "API Design Principles",
+          "description": "Best practices for designing robust APIs",
+          "category": "Data Management & APIs",
+          "articles": [
+            {
+              "id": "rest-best-practices",
+              "name": "REST Best Practices",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Guidelines for designing RESTful APIs",
+              "topics": ["Resource Naming", "HTTP Methods", "Status Codes"]
+            },
+            {
+              "id": "api-versioning",
+              "name": "API Versioning",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Strategies for managing API changes over time",
+              "topics": ["Version Strategies", "Backward Compatibility", "Deprecation"]
+            },
+            {
+              "id": "authentication-authorization",
+              "name": "Authentication & Authorization",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Securing API access and controlling permissions",
+              "topics": ["JWT", "OAuth", "API Keys"]
+            },
+            {
+              "id": "rate-limiting",
+              "name": "Rate Limiting",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Controlling API usage to prevent abuse",
+              "topics": ["Throttling", "Quota Management", "Fair Usage"]
+            }
+          ]
+        },
+        {
+          "id": "data-integration-patterns",
+          "name": "Data Integration Patterns",
+          "description": "Patterns for integrating and processing data",
+          "category": "Data Management & APIs",
+          "articles": [
+            {
+              "id": "etl-vs-elt",
+              "name": "ETL vs ELT",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Different approaches to data transformation and loading",
+              "topics": ["Extract Transform Load", "Extract Load Transform", "Data Warehousing"]
+            },
+            {
+              "id": "real-time-vs-batch-processing",
+              "name": "Real-time vs Batch Processing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Different approaches to processing data",
+              "topics": ["Stream Processing", "Batch Jobs", "Latency Requirements"]
+            },
+            {
+              "id": "data-pipelines",
+              "name": "Data Pipelines",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Automated workflows for data processing",
+              "topics": ["Pipeline Orchestration", "Data Flow", "Error Handling"]
+            },
+            {
+              "id": "api-gateway-patterns",
+              "name": "API Gateway Patterns",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Centralized entry point for API management",
+              "topics": ["Request Routing", "Load Balancing", "Security"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "testing-quality-assurance",
+      "name": "Testing & Quality Assurance",
+      "description": "Strategies and practices for ensuring software quality",
+      "icon": "🧪",
+      "iconType": "emoji",
+      "color": "from-teal-500 to-cyan-500",
+      "topics": [
+        {
+          "id": "testing-pyramid",
+          "name": "Testing Pyramid",
+          "description": "Hierarchical approach to structuring automated tests",
+          "category": "Testing & Quality Assurance",
+          "articles": [
+            {
+              "id": "unit-testing",
+              "name": "Unit Testing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Testing individual components in isolation",
+              "topics": ["Test Isolation", "Mocking", "Test Coverage"]
+            },
+            {
+              "id": "integration-testing",
+              "name": "Integration Testing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Testing interactions between components",
+              "topics": ["Component Integration", "Database Testing", "API Testing"]
+            },
+            {
+              "id": "end-to-end-testing",
+              "name": "End-to-End Testing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Testing complete user workflows",
+              "topics": ["User Journeys", "Browser Automation", "System Testing"]
+            },
+            {
+              "id": "contract-testing",
+              "name": "Contract Testing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Testing interactions between services",
+              "topics": ["API Contracts", "Consumer-Driven", "Service Boundaries"]
+            }
+          ]
+        },
+        {
+          "id": "quality-metrics-standards",
+          "name": "Quality Metrics & Standards",
+          "description": "Measuring and maintaining code quality",
+          "category": "Testing & Quality Assurance",
+          "articles": [
+            {
+              "id": "code-coverage",
+              "name": "Code Coverage",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Measuring how much code is tested",
+              "topics": ["Line Coverage", "Branch Coverage", "Coverage Reports"]
+            },
+            {
+              "id": "static-analysis",
+              "name": "Static Analysis",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Analyzing code without executing it",
+              "topics": ["Linting", "Code Smells", "Security Analysis"]
+            },
+            {
+              "id": "performance-benchmarks",
+              "name": "Performance Benchmarks",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Measuring and tracking application performance",
+              "topics": ["Load Testing", "Performance Metrics", "Benchmarking"]
+            },
+            {
+              "id": "code-quality-gates",
+              "name": "Code Quality Gates",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Automated checks that enforce quality standards",
+              "topics": ["Quality Thresholds", "Build Failures", "Quality Metrics"]
+            }
+          ]
+        },
+        {
+          "id": "debugging-methodologies",
+          "name": "Debugging Methodologies",
+          "description": "Systematic approaches to finding and fixing bugs",
+          "category": "Testing & Quality Assurance",
+          "articles": [
+            {
+              "id": "logging-strategies",
+              "name": "Logging Strategies",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Effective approaches to application logging",
+              "topics": ["Log Levels", "Structured Logging", "Log Aggregation"]
+            },
+            {
+              "id": "debugging-tools",
+              "name": "Debugging Tools",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Tools and techniques for debugging applications",
+              "topics": ["Debuggers", "Profilers", "Memory Analysis"]
+            },
+            {
+              "id": "error-tracking",
+              "name": "Error Tracking",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Systems for monitoring and tracking application errors",
+              "topics": ["Error Monitoring", "Alert Systems", "Error Grouping"]
+            },
+            {
+              "id": "root-cause-analysis",
+              "name": "Root Cause Analysis",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Systematic approach to finding the underlying cause of issues",
+              "topics": ["5 Whys", "Fault Tree Analysis", "Problem Solving"]
+            }
+          ]
+        },
+        {
+          "id": "code-review-practices",
+          "name": "Code Review Practices",
+          "description": "Best practices for reviewing and improving code quality",
+          "category": "Testing & Quality Assurance",
+          "articles": [
+            {
+              "id": "review-criteria",
+              "name": "Review Criteria",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Standards and criteria for evaluating code changes",
+              "topics": ["Review Checklist", "Quality Standards", "Best Practices"]
+            },
+            {
+              "id": "review-process",
+              "name": "Review Process",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Structured process for conducting code reviews",
+              "topics": ["Pull Requests", "Review Workflow", "Approval Process"]
+            },
+            {
+              "id": "automated-checks",
+              "name": "Automated Checks",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Automated tools that assist in code review",
+              "topics": ["Lint Checks", "Security Scans", "Format Validation"]
+            },
+            {
+              "id": "knowledge-sharing",
+              "name": "Knowledge Sharing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Using code reviews to share knowledge across teams",
+              "topics": ["Learning Opportunities", "Best Practices", "Team Growth"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deployment-operations-devops",
+      "name": "Deployment & Operations (DevOps)",
+      "description": "Infrastructure, deployment, and operational practices for software systems",
+      "icon": "🚀",
+      "iconType": "rocket",
+      "color": "from-rose-500 to-pink-500",
+      "topics": [
+        {
+          "id": "infrastructure-concepts",
+          "name": "Infrastructure Concepts",
+          "description": "Fundamental infrastructure concepts for deploying applications",
+          "category": "Deployment & Operations (DevOps)",
+          "articles": [
+            {
+              "id": "servers-hosting",
+              "name": "Servers & Hosting",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Different approaches to hosting applications",
+              "topics": ["Physical Servers", "Virtual Machines", "Cloud Hosting"]
+            },
+            {
+              "id": "containers",
+              "name": "Containers",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Lightweight, portable application packaging",
+              "topics": ["Docker", "Container Images", "Container Runtime"]
+            },
+            {
+              "id": "kubernetes",
+              "name": "Kubernetes",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Container orchestration platform",
+              "topics": ["Pods", "Services", "Deployments"]
+            },
+            {
+              "id": "infrastructure-as-code",
+              "name": "Infrastructure as Code",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Managing infrastructure through code and automation",
+              "topics": ["Terraform", "CloudFormation", "Version Control"]
+            }
+          ]
+        },
+        {
+          "id": "ci-cd-pipelines",
+          "name": "CI/CD Pipelines",
+          "description": "Automated processes for building, testing, and deploying software",
+          "category": "Deployment & Operations (DevOps)",
+          "articles": [
+            {
+              "id": "continuous-integration",
+              "name": "Continuous Integration",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Practice of frequently integrating code changes",
+              "topics": ["Build Automation", "Automated Testing", "Integration"]
+            },
+            {
+              "id": "continuous-deployment",
+              "name": "Continuous Deployment",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Automated deployment of code to production",
+              "topics": ["Deployment Automation", "Release Pipeline", "Production Deployment"]
+            },
+            {
+              "id": "pipeline-stages",
+              "name": "Pipeline Stages",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Different stages in a CI/CD pipeline",
+              "topics": ["Build", "Test", "Deploy", "Stages"]
+            },
+            {
+              "id": "tool-ecosystem",
+              "name": "Tool Ecosystem",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Tools and platforms for implementing CI/CD",
+              "topics": ["Jenkins", "GitHub Actions", "GitLab CI"]
+            }
+          ]
+        },
+        {
+          "id": "monitoring-observability",
+          "name": "Monitoring & Observability",
+          "description": "Techniques for monitoring and understanding system behavior",
+          "category": "Deployment & Operations (DevOps)",
+          "articles": [
+            {
+              "id": "application-monitoring",
+              "name": "Application Monitoring",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Monitoring application performance and behavior",
+              "topics": ["APM", "Performance Metrics", "User Experience"]
+            },
+            {
+              "id": "infrastructure-monitoring",
+              "name": "Infrastructure Monitoring",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Monitoring servers, networks, and infrastructure",
+              "topics": ["System Metrics", "Resource Usage", "Network Monitoring"]
+            },
+            {
+              "id": "logging-systems",
+              "name": "Logging Systems",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Centralized logging and log analysis",
+              "topics": ["Log Aggregation", "Log Analysis", "Search"]
+            },
+            {
+              "id": "distributed-tracing",
+              "name": "Distributed Tracing",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Tracing requests across distributed systems",
+              "topics": ["Request Tracing", "Microservices", "Performance Analysis"]
+            }
+          ]
+        },
+        {
+          "id": "incident-response-reliability",
+          "name": "Incident Response & Reliability",
+          "description": "Practices for maintaining system reliability and responding to incidents",
+          "category": "Deployment & Operations (DevOps)",
+          "articles": [
+            {
+              "id": "on-call-practices",
+              "name": "On-Call Practices",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Practices for managing on-call responsibilities",
+              "topics": ["Rotation Schedules", "Escalation", "Alert Management"]
+            },
+            {
+              "id": "post-mortem-process",
+              "name": "Post-Mortem Process",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Learning from incidents through structured analysis",
+              "topics": ["Incident Analysis", "Root Cause", "Improvement Actions"]
+            },
+            {
+              "id": "site-reliability-engineering",
+              "name": "Site Reliability Engineering",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Engineering approach to reliability and operations",
+              "topics": ["SLI/SLO", "Error Budgets", "Reliability Engineering"]
+            },
+            {
+              "id": "disaster-recovery",
+              "name": "Disaster Recovery",
+              "learningStatus": "Not started",
+              "priorityStatus": "Low",
+              "description": "Planning and procedures for recovering from major incidents",
+              "topics": ["Backup Strategies", "Recovery Plans", "Business Continuity"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

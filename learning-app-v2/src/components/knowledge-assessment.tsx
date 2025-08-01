@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Brain, CheckCircle, Clock, RotateCcw, Trash2 } from 'lucide-react'
+import { Brain, CheckCircle, Clock } from 'lucide-react'
 import { Quiz } from '@/types'
 import { getCategoryPrimaryGradient } from '@/lib/gradients'
-import { getQuizHighScores, getQuestionMasteryCount, resetHighScores } from '@/lib/data'
+import { getQuizHighScores, getQuestionMasteryCount } from '@/lib/data'
 
 interface KnowledgeAssessmentProps {
   articleId: string
@@ -25,14 +25,7 @@ export default function KnowledgeAssessment({
   
   const bestPercentage = highScores?.bestOverallPercentage || 0
   const hasAttempted = highScores?.totalAttempts && highScores.totalAttempts > 0
-  
-  const handleResetProgress = () => {
-    if (confirm('Are you sure you want to reset all your progress on this quiz? This action cannot be undone.')) {
-      resetHighScores(articleId)
-      // Force a re-render by reloading the page or using state
-      window.location.reload()
-    }
-  }
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}

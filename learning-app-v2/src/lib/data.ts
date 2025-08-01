@@ -293,7 +293,7 @@ export function updateHighScores(
   currentScore: number, 
   currentPercentage: number
 ): QuizHighScores {
-  let highScores = getQuizHighScores(articleId) || initializeHighScores(articleId)
+  const highScores = getQuizHighScores(articleId) || initializeHighScores(articleId)
   
   // Update attempt counter
   highScores.totalAttempts += 1

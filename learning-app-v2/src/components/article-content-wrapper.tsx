@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, HelpCircle, Brain, TrendingUp, ChevronLeft, ChevronRight, X, ArrowUp } from 'lucide-react'
-import { getCategoryPrimaryGradient, getCategoryBackground } from '@/lib/gradients'
+import { ArrowLeft, TrendingUp, ChevronLeft, ChevronRight, X, ArrowUp } from 'lucide-react'
+import { getCategoryBackground } from '@/lib/gradients'
 import { Article, Topic, Category } from '@/types'
 import { getQuizByArticleId } from '@/lib/data'
 import { ArticleTableOfContents } from '@/components/article-table-of-contents'
@@ -28,13 +28,6 @@ export function ArticleContentWrapper({
   nextArticle, 
   topicLink 
 }: ArticleContentWrapperProps) {
-  // Mock question/proficiency data (this would come from your learning system)
-  const questionsAnswered = 3
-  const totalQuestions = 8
-  const proficiencyLevel = Math.round((questionsAnswered / totalQuestions) * 100)
-  const knowledgeLevel = proficiencyLevel < 30 ? 'Beginner' : 
-                        proficiencyLevel < 70 ? 'Intermediate' : 'Advanced'
-
   // Calculate article position in topic
   const currentArticleIndex = topic?.articles.findIndex(a => a.id === article.id) ?? -1
   const totalArticles = topic?.articles.length ?? 0
@@ -95,9 +88,6 @@ export function ArticleContentWrapper({
                   <KnowledgeAssessment 
                     articleId={article.id} 
                     quiz={quiz}
-                    questionsAnswered={questionsAnswered}
-                    totalQuestions={totalQuestions}
-                    proficiencyLevel={proficiencyLevel}
                     categoryId={category?.id}
                     className="max-w-2xl mx-auto mb-8" 
                   />
