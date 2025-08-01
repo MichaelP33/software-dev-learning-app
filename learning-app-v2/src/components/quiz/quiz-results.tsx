@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { QuizAnswer, QuizQuestion } from '@/types'
-import { CheckCircle, XCircle, Award, RotateCcw } from 'lucide-react'
+import { QuizHighScores } from '@/lib/data'
+import { CheckCircle, XCircle, Award, RotateCcw, Trash2, TrendingUp } from 'lucide-react'
 
 interface QuizResultsProps {
   score: number
@@ -17,7 +18,9 @@ interface QuizResultsProps {
   answers: QuizAnswer[]
   questions: QuizQuestion[]
   onRetake: () => void
+  onResetScores: () => void
   articleId: string
+  highScores?: QuizHighScores | null
 }
 
 export default function QuizResults({
@@ -28,7 +31,9 @@ export default function QuizResults({
   answers,
   questions,
   onRetake,
-  articleId
+  onResetScores,
+  articleId,
+  highScores
 }: QuizResultsProps) {
   const getQuestionTypeStats = () => {
     const stats = {
@@ -139,6 +144,64 @@ export default function QuizResults({
         </p>
       </motion.div>
 
+      {/* High Score Comparison */}
+      {highScores && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50"
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Performance Comparison
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                {percentage}%
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                This Attempt
+              </div>
+            </div>
+            
+            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+                {Math.round(highScores.bestOverallPercentage)}%
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                Personal Best
+              </div>
+            </div>
+            
+            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                {highScores.totalAttempts}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                Total Attempts
+              </div>
+            </div>
+          </div>
+          
+          {percentage > highScores.bestOverallPercentage && (
+            <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+              <div className="flex items-center gap-2 text-green-800 dark:text-green-200">
+                <Award className="w-4 h-4" />
+                <span className="font-medium">New Personal Best!</span>
+              </div>
+              <p className="text-sm text-green-700 dark:text-green-300 mt-1">
+                You improved by {Math.round(percentage - highScores.bestOverallPercentage)}%
+              </p>
+            </div>
+          )}
+        </motion.div>
+      )}
+
       {/* Breakdown by Question Type */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -223,11 +286,21 @@ export default function QuizResults({
       >
         <button
           onClick={onRetake}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2 justify-center"
         >
           <RotateCcw className="w-5 h-5" />
-          Retake Quiz
+          {highScores && highScores.bestOverallPercentage > 0 ? 'Improve Score' : 'Retake Quiz'}
         </button>
+
+        {highScores && highScores.totalAttempts > 0 && (
+          <button
+            onClick={onResetScores}
+            className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2 justify-center"
+          >
+            <Trash2 className="w-5 h-5" />
+            Reset All Progress
+          </button>
+        )}
 
         <Link
           href={`/article/${articleId}`}

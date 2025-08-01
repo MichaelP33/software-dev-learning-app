@@ -9,7 +9,7 @@ import { getQuizByArticleId } from '@/lib/data'
 import { ArticleTableOfContents } from '@/components/article-table-of-contents'
 import { ComparisonTable } from '@/components/comparison-table'
 import { MetricsCard } from '@/components/metrics-card'
-import QuizCTA from '@/components/quiz/quiz-cta'
+import KnowledgeAssessment from '@/components/knowledge-assessment'
 
 interface ArticleContentWrapperProps {
   article: Article
@@ -88,57 +88,17 @@ export function ArticleContentWrapper({
                 {article.description}
               </p>
 
-              {/* Knowledge Tracking Box */}
-              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-gray-700/50 shadow-lg max-w-2xl mx-auto mb-8">
-                <div className="text-center mb-6">
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <Brain className="w-5 h-5 text-slate-700 dark:text-gray-300" />
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Knowledge Check</h3>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <HelpCircle className="w-4 h-4 text-slate-600 dark:text-gray-400" />
-                      <span className="text-sm text-slate-600 dark:text-gray-400">Questions Answered</span>
-                    </div>
-                    <div className="text-2xl font-bold text-slate-900 dark:text-white">{questionsAnswered}/{totalQuestions}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm text-slate-600 dark:text-gray-400 mb-2">Knowledge Level</div>
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                      knowledgeLevel === 'Beginner' ? 'bg-orange-100 text-orange-700' :
-                      knowledgeLevel === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
-                      'bg-green-100 text-green-700'
-                    }`}>
-                      {knowledgeLevel}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Proficiency Bar */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-semibold text-slate-900 dark:text-white">Proficiency</span>
-                    <span className="text-sm text-slate-600 dark:text-gray-400">{proficiencyLevel}%</span>
-                  </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
-                    <div 
-                      className={`h-3 rounded-full transition-all duration-700 ease-out shadow-sm ${category ? `bg-gradient-to-r ${getCategoryPrimaryGradient(category.id)}` : 'bg-gradient-to-r from-blue-500 to-cyan-500'}`}
-                      style={{ width: `${proficiencyLevel}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Quiz CTA - Show if quiz is available */}
+              {/* Knowledge Assessment - Show if quiz is available */}
               {(() => {
                 const quiz = getQuizByArticleId(article.id)
                 return quiz ? (
-                  <QuizCTA 
+                  <KnowledgeAssessment 
                     articleId={article.id} 
-                    quiz={quiz} 
+                    quiz={quiz}
+                    questionsAnswered={questionsAnswered}
+                    totalQuestions={totalQuestions}
+                    proficiencyLevel={proficiencyLevel}
+                    categoryId={category?.id}
                     className="max-w-2xl mx-auto mb-8" 
                   />
                 ) : null

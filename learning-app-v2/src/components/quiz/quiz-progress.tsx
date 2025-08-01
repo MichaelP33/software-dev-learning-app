@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { X } from 'lucide-react'
 
 interface QuizProgressProps {
   currentQuestion: number
@@ -8,6 +9,7 @@ interface QuizProgressProps {
   score: number
   totalPossible: number
   title: string
+  onAbandon: () => void
 }
 
 export default function QuizProgress({ 
@@ -15,7 +17,8 @@ export default function QuizProgress({
   totalQuestions, 
   score, 
   totalPossible, 
-  title 
+  title,
+  onAbandon
 }: QuizProgressProps) {
   const progressPercentage = (currentQuestion / totalQuestions) * 100
   const scorePercentage = totalPossible > 0 ? (score / totalPossible) * 100 : 0
@@ -32,13 +35,24 @@ export default function QuizProgress({
           </p>
         </div>
         
-        <div className="text-right">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-            {score}/{totalPossible}
+        <div className="flex items-start gap-4">
+          <div className="text-right">
+            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              {score}/{totalPossible}
+            </div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              {Math.round(scorePercentage)}% Score
+            </div>
           </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            {Math.round(scorePercentage)}% Score
-          </div>
+          
+          {/* Abandon Quiz Button */}
+          <button
+            onClick={onAbandon}
+            className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            aria-label="Abandon quiz"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
       </div>
 

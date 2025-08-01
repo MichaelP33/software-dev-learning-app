@@ -3,6 +3,17 @@ import learningData from '../../data/learning-content.json'
 
 const data: LearningContent = learningData as LearningContent
 
+// High Score Tracking Types
+export interface QuizHighScores {
+  articleId: string
+  questionScores: { [questionId: number]: number } // Highest points ever earned per question
+  bestAttempts: { [questionId: number]: QuizAnswer } // Best answer ever given per question
+  totalAttempts: number
+  bestOverallScore: number
+  bestOverallPercentage: number
+  lastAttempted: string // timestamp
+}
+
 export function getAllCategories(): Category[] {
   return data.categories
 }
@@ -249,4 +260,86 @@ export function getQuizPerformanceLevel(percentage: number): {
       color: 'text-red-600'
     }
   }
+}
+
+// High Score Management Utilities
+export function getQuizHighScores(articleId: string): QuizHighScores | null {
+  if (typeof window === 'undefined') return null
+  
+  try {
+    const stored = localStorage.getItem(`quiz_highscores_${articleId}`)
+    return stored ? JSON.parse(stored) : null
+  } catch (error) {
+    console.warn('Failed to parse high scores:', error)
+    return null
+  }
+}
+
+export function initializeHighScores(articleId: string): QuizHighScores {
+  return {
+    articleId,
+    questionScores: {},
+    bestAttempts: {},
+    totalAttempts: 0,
+    bestOverallScore: 0,
+    bestOverallPercentage: 0,
+    lastAttempted: new Date().toISOString()
+  }
+}
+
+export function updateHighScores(
+  articleId: string, 
+  currentAnswers: QuizAnswer[], 
+  currentScore: number, 
+  currentPercentage: number
+): QuizHighScores {
+  let highScores = getQuizHighScores(articleId) || initializeHighScores(articleId)
+  
+  // Update attempt counter
+  highScores.totalAttempts += 1
+  highScores.lastAttempted = new Date().toISOString()
+  
+  // Update overall best if current is better
+  if (currentScore > highScores.bestOverallScore) {
+    highScores.bestOverallScore = currentScore
+    highScores.bestOverallPercentage = currentPercentage
+  }
+  
+  // Update individual question high scores
+  currentAnswers.forEach(answer => {
+    const currentQuestionScore = highScores.questionScores[answer.questionId] || 0
+    
+    if (answer.pointsEarned > currentQuestionScore) {
+      highScores.questionScores[answer.questionId] = answer.pointsEarned
+      highScores.bestAttempts[answer.questionId] = answer
+    }
+  })
+  
+  // Save to localStorage
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(`quiz_highscores_${articleId}`, JSON.stringify(highScores))
+  }
+  
+  return highScores
+}
+
+export function resetHighScores(articleId: string): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(`quiz_highscores_${articleId}`)
+  }
+}
+
+export function hasEverAnsweredQuestionCorrectly(articleId: string, questionId: number): boolean {
+  const highScores = getQuizHighScores(articleId)
+  if (!highScores) return false
+  
+  return (highScores.questionScores[questionId] || 0) > 0
+}
+
+export function getQuestionMasteryCount(articleId: string, totalQuestions: number): { mastered: number, total: number } {
+  const highScores = getQuizHighScores(articleId)
+  if (!highScores) return { mastered: 0, total: totalQuestions }
+  
+  const mastered = Object.values(highScores.questionScores).filter(score => score > 0).length
+  return { mastered, total: totalQuestions }
 }

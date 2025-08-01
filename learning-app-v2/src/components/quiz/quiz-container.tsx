@@ -1,9 +1,10 @@
 'use client'
 
-import { useReducer, useEffect } from 'react'
+import { useReducer, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Quiz, QuizAnswer, QuizState } from '@/types'
-import { calculateSelfAssessmentScore, validateMultipleChoiceAnswer, calculateQuizScore, getQuizPerformanceLevel } from '@/lib/data'
+import { calculateSelfAssessmentScore, validateMultipleChoiceAnswer, calculateQuizScore, getQuizPerformanceLevel, updateHighScores, resetHighScores, getQuizHighScores } from '@/lib/data'
 import MultipleChoiceQuestion from './multiple-choice-question'
 import ShortAnswerQuestion from './short-answer-question'
 import LongAnswerQuestion from './long-answer-question'
@@ -21,6 +22,7 @@ type QuizAction =
   | { type: 'PREVIOUS_QUESTION' }
   | { type: 'COMPLETE_QUIZ' }
   | { type: 'RESET_QUIZ' }
+  | { type: 'ABANDON_QUIZ' }
 
 function createQuizReducer(quiz: Quiz) {
   return function quizReducer(state: QuizState, action: QuizAction): QuizState {
@@ -87,6 +89,10 @@ function createQuizReducer(quiz: Quiz) {
         isCompleted: false
       }
     
+    case 'ABANDON_QUIZ':
+      // State remains the same, navigation is handled outside reducer
+      return state
+    
       default:
         return state
     }
@@ -94,6 +100,7 @@ function createQuizReducer(quiz: Quiz) {
 }
 
 export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
+  const router = useRouter()
   const quizReducer = createQuizReducer(quiz)
   const [state, dispatch] = useReducer(quizReducer, {
     currentQuestionIndex: 0,
@@ -101,6 +108,7 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
     totalScore: 0,
     isCompleted: false
   })
+  const [showAbandonConfirm, setShowAbandonConfirm] = useState(false)
 
   // Save quiz state to localStorage
   useEffect(() => {
@@ -167,9 +175,39 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
     localStorage.removeItem(`quiz_${articleId}`)
   }
 
+  const handleResetScores = () => {
+    if (confirm('Are you sure you want to reset all your progress on this quiz? This action cannot be undone.')) {
+      resetHighScores(articleId)
+      dispatch({ type: 'RESET_QUIZ' })
+      localStorage.removeItem(`quiz_${articleId}`)
+    }
+  }
+
+  const handleAbandonQuiz = () => {
+    setShowAbandonConfirm(true)
+  }
+
+  const confirmAbandon = () => {
+    dispatch({ type: 'ABANDON_QUIZ' })
+    router.push(`/article/${articleId}`)
+  }
+
+  const cancelAbandon = () => {
+    setShowAbandonConfirm(false)
+  }
+
+  // Update high scores when quiz is completed
+  useEffect(() => {
+    if (state.isCompleted && state.answers.length > 0) {
+      const { score, percentage } = calculateQuizScore(state.answers)
+      updateHighScores(articleId, state.answers, score, percentage)
+    }
+  }, [state.isCompleted, state.answers, articleId])
+
   if (state.isCompleted) {
     const { score, percentage } = calculateQuizScore(state.answers)
     const performance = getQuizPerformanceLevel(percentage)
+    const highScores = getQuizHighScores(articleId)
     
     return (
       <QuizResults
@@ -180,7 +218,9 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
         answers={state.answers}
         questions={quiz.questions}
         onRetake={handleRetake}
+        onResetScores={handleResetScores}
         articleId={articleId}
+        highScores={highScores}
       />
     )
   }
@@ -208,6 +248,7 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
         score={state.totalScore}
         totalPossible={quiz.totalPoints}
         title={quiz.title}
+        onAbandon={handleAbandonQuiz}
       />
 
       <AnimatePresence mode="wait">
@@ -272,6 +313,38 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
           {isLastQuestion ? 'Complete Quiz' : 'Next →'}
         </button>
       </div>
+
+      {/* Abandon Confirmation Modal */}
+      {showAbandonConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-md w-full shadow-xl"
+          >
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              Abandon Quiz?
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Are you sure you want to abandon this quiz? Your current progress will be lost.
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={cancelAbandon}
+                className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border border-gray-300 dark:border-gray-600 rounded-lg transition-colors"
+              >
+                Keep Going
+              </button>
+              <button
+                onClick={confirmAbandon}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+              >
+                Abandon Quiz
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   )
 }
