@@ -97,7 +97,13 @@
                     "points": 3,
                     "question": "Explain why compiled languages provide a performance advantage in microservices architectures. Include at least one specific metric from the article.",
                     "sampleStrongResponse": "Should explain that performance improvements multiply across hundreds of services in microservices architectures, and include specific metrics like services starting in milliseconds vs. seconds, memory usage of 10-50MB vs. 200-500MB for interpreted alternatives, or examples like Uber's ~50MB vs. ~300MB per service.",
-                    "keyConcepts": ["Microservices performance", "resource efficiency", "scalability impact"]
+                    "additionalContext": "This upfront translation is what enables compiled languages to create standalone executables that can run without requiring the original compiler on the target machine. The compilation process includes sophisticated optimization stages (lexical analysis, parsing, optimization, code generation) that restructure code for maximum efficiency. This is why compiled languages eliminate translation overhead during execution - all the heavy lifting happens once during development rather than every time the program runs.",
+                    "keyConcepts": ["Microservices performance", "resource efficiency", "scalability impact"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Clearly explains how performance benefits multiply across hundreds of services, includes specific metrics (startup time in milliseconds, memory usage 10-50MB vs 200-500MB, or Uber's ~50MB vs ~300MB per service), and demonstrates understanding of why these improvements matter at scale.",
+                      "partialPoints": "Explains performance advantages but misses the multiplication effect across many services OR includes metrics but doesn't explain why they matter in microservices context.",
+                      "noPoints": "Provides generic performance statements without specific metrics or fails to connect performance benefits to microservices architecture specifically."
+                    }
                   },
                   {
                     "id": 6,
@@ -106,7 +112,13 @@
                     "points": 3,
                     "question": "What are the key customer scenarios that typically trigger migration from interpreted to compiled languages? Provide two specific examples with their quoted pain points.",
                     "sampleStrongResponse": "Should identify performance crisis and scaling inefficiency as key triggers, with specific quotes like 'Our cloud bills doubled but traffic only increased 20%' or 'We need 10x the servers to handle 2x the traffic' or 'Microservices startup time is killing deployment velocity.'",
-                    "keyConcepts": ["Migration triggers", "customer pain points", "business drivers"]
+                    "additionalContext": "These scenarios represent the most common trigger points where companies realize their current technology choices are becoming a business impediment. Understanding these patterns helps TAMs identify when customers are ready for architectural discussions.",
+                    "keyConcepts": ["Migration triggers", "customer pain points", "business drivers"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies at least two specific trigger scenarios (performance crisis, scaling inefficiency, cost spiral) and includes exact quoted pain points from the article like 'Our cloud bills doubled but traffic only increased 20%' or 'Microservices startup time is killing deployment velocity.'",
+                      "partialPoints": "Identifies migration triggers but uses paraphrased rather than exact quoted pain points, OR provides quotes but misses connecting them to business trigger scenarios.",
+                      "noPoints": "Provides generic migration reasons without specific customer scenarios or fails to include any quoted pain points from the article."
+                    }
                   },
                   {
                     "id": 7,
@@ -124,7 +136,13 @@
                     "points": 4,
                     "question": "Analyze the business considerations a TAM should discuss with a customer considering migration to compiled languages. Include customer profiles, cost factors, success patterns, and potential risks with specific data points from the article.",
                     "sampleStrongResponse": "Should cover customer profiles (Series B/C startups spending 30%+ time on performance, enterprise teams with $1M+ modernization budgets, cloud-native companies with growing AWS bills), cost considerations ($50K-$500K per microservice, $1M-$10M+ for full rewrites), success patterns (70% success for gradual vs. 30% for complete rewrites), and strategic timing (migration represents competitive advantage inflection point). Should demonstrate understanding of when migration makes business sense vs. premature optimization.",
-                    "keyConcepts": ["Business case analysis", "customer profiling", "migration strategy", "cost-benefit analysis", "TAM advisory role"]
+                    "additionalContext": "This question tests the ability to synthesize multiple business factors and provide TAM-level advisory guidance. It requires demonstrating strategic thinking about when migrations make business sense versus premature optimization.",
+                    "keyConcepts": ["Business case analysis", "customer profiling", "migration strategy", "cost-benefit analysis", "TAM advisory role"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Demonstrates comprehensive TAM-level advisory thinking by covering all four areas: customer profiles (Series B/C startups spending 30%+ time on performance, enterprise teams with $1M+ budgets), specific cost ranges ($50K-$500K per microservice vs $1M-$10M+ for rewrites), success patterns with exact percentages (70% vs 30%), and strategic timing considerations. Shows understanding of when migration makes business sense vs premature optimization.",
+                      "partialPoints": "Covers most business considerations but lacks specific data points OR demonstrates good strategic thinking but misses key TAM advisory elements like customer profiling or risk assessment.",
+                      "noPoints": "Provides generic migration advice without specific business data points or fails to demonstrate TAM-level strategic thinking about customer business impact."
+                    }
                   }
                 ]
               }

@@ -254,34 +254,13 @@ export default function QuizResults({
         </div>
       </motion.div>
 
-      {/* Concept Review */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50"
-      >
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          Key Concepts Covered
-        </h3>
 
-        <div className="flex flex-wrap gap-2">
-          {questions.flatMap(q => q.keyConcepts).filter((concept, index, arr) => arr.indexOf(concept) === index).map((concept, index) => (
-            <span
-              key={index}
-              className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm"
-            >
-              {concept}
-            </span>
-          ))}
-        </div>
-      </motion.div>
 
       {/* Actions */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         className="flex flex-col sm:flex-row gap-4 justify-center"
       >
         <button

@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion'
 
 interface SelfAssessmentButtonsProps {
-  onAssess: (assessment: 'nailed-it' | 'mostly-good' | 'not-quite') => void
-  selectedAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite'
+  onAssess: (assessment: 'nailed-it' | 'mostly-good' | 'nope') => void
+  selectedAssessment?: 'nailed-it' | 'mostly-good' | 'nope'
   points: number
   disabled?: boolean
 }
@@ -33,11 +33,11 @@ export default function SelfAssessmentButtons({
       color: 'yellow'
     },
     {
-      key: 'not-quite' as const,
-      emoji: '🤨',
-      label: 'Not quite',
-      description: 'Basic understanding but needs improvement',
-      points: Math.round(points * 0.3),
+      key: 'nope' as const,
+      emoji: '😬',
+      label: 'Nope',
+      description: 'Answer misses key concepts or is off-topic',
+      points: 0,
       color: 'red'
     }
   ]

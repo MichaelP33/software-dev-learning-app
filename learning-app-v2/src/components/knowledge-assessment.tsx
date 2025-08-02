@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Brain, CheckCircle, Clock } from 'lucide-react'
@@ -20,11 +21,21 @@ export default function KnowledgeAssessment({
   categoryId,
   className = '' 
 }: KnowledgeAssessmentProps) {
-  const highScores = getQuizHighScores(articleId)
-  const masteryCount = getQuestionMasteryCount(articleId, quiz.totalQuestions)
+  const [isHydrated, setIsHydrated] = useState(false)
+  const [highScores, setHighScores] = useState<any>(null)
+  const [masteryCount, setMasteryCount] = useState({ mastered: 0, total: quiz.totalQuestions })
+  
+  useEffect(() => {
+    // This ensures consistent rendering between server and client
+    const scores = getQuizHighScores(articleId)
+    const mastery = getQuestionMasteryCount(articleId, quiz.totalQuestions)
+    setHighScores(scores)
+    setMasteryCount(mastery)
+    setIsHydrated(true)
+  }, [articleId, quiz.totalQuestions])
   
   const bestPercentage = highScores?.bestOverallPercentage || 0
-  const hasAttempted = highScores?.totalAttempts && highScores.totalAttempts > 0
+  const hasAttempted = isHydrated && highScores?.totalAttempts && highScores.totalAttempts > 0
 
   return (
     <motion.div 
@@ -46,9 +57,11 @@ export default function KnowledgeAssessment({
       {/* Progress Line */}
       <div className="mb-3">
         <span className="text-sm font-medium text-slate-900 dark:text-white">
-          {hasAttempted 
-            ? `Questions mastered: ${masteryCount.mastered}/${masteryCount.total}`
-            : `${quiz.totalQuestions} questions available`
+          {!isHydrated 
+            ? `${quiz.totalQuestions} questions available`
+            : hasAttempted 
+              ? `Questions mastered: ${masteryCount.mastered}/${masteryCount.total}`
+              : `${quiz.totalQuestions} questions available`
           }
         </span>
       </div>
@@ -62,11 +75,11 @@ export default function KnowledgeAssessment({
                 ? `bg-gradient-to-r ${getCategoryPrimaryGradient(categoryId)}` 
                 : 'bg-gradient-to-r from-blue-500 to-cyan-500'
             }`}
-            style={{ width: `${hasAttempted ? bestPercentage : 0}%` }}
+            style={{ width: `${isHydrated && hasAttempted ? bestPercentage : 0}%` }}
           />
         </div>
         <div className="text-right text-xs text-slate-500 dark:text-gray-400 mt-1">
-          {hasAttempted ? `Best: ${Math.round(bestPercentage)}%` : 'Not started'}
+          {!isHydrated || !hasAttempted ? 'Not started' : `Best: ${Math.round(bestPercentage)}%`}
         </div>
       </div>
 

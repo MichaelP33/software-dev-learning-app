@@ -17,7 +17,7 @@ interface QuizContainerProps {
 }
 
 type QuizAction = 
-  | { type: 'ANSWER_QUESTION'; payload: { questionId: number; answer: string | number | string[]; selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite' } }
+  | { type: 'ANSWER_QUESTION'; payload: { questionId: number; answer: string | number | string[]; selfAssessment?: 'nailed-it' | 'mostly-good' | 'nope' } }
   | { type: 'NEXT_QUESTION' }
   | { type: 'PREVIOUS_QUESTION' }
   | { type: 'COMPLETE_QUIZ' }
@@ -109,6 +109,7 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
     isCompleted: false
   })
   const [showAbandonConfirm, setShowAbandonConfirm] = useState(false)
+  const [isAutoAdvancing, setIsAutoAdvancing] = useState(false)
 
   // Save quiz state to localStorage
   useEffect(() => {
@@ -145,7 +146,7 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
   const isLastQuestion = state.currentQuestionIndex === quiz.questions.length - 1
   const canProceed = currentAnswer !== undefined
 
-  const handleAnswer = (answer: string | number | string[], selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite') => {
+  const handleAnswer = (answer: string | number | string[], selfAssessment?: 'nailed-it' | 'mostly-good' | 'nope') => {
     if (!currentQuestion) return
     
     dispatch({
@@ -156,6 +157,19 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
         selfAssessment
       }
     })
+
+    // Auto-advance for text-based questions when self-assessment is completed
+    if (selfAssessment && (currentQuestion.type === 'short-answer' || currentQuestion.type === 'long-answer')) {
+      setIsAutoAdvancing(true)
+      setTimeout(() => {
+        if (isLastQuestion) {
+          dispatch({ type: 'COMPLETE_QUIZ' })
+        } else {
+          dispatch({ type: 'NEXT_QUESTION' })
+        }
+        setIsAutoAdvancing(false)
+      }, 500) // Small delay for better UX
+    }
   }
 
   const handleNext = () => {
@@ -270,49 +284,77 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
           )}
 
           {currentQuestion.type === 'short-answer' && (
-            <ShortAnswerQuestion
-              question={currentQuestion}
-              answer={currentAnswer?.answer as string}
-              selfAssessment={currentAnswer?.selfAssessment}
-              onAnswer={(answer, assessment) => handleAnswer(answer, assessment)}
-              showResult={!!currentAnswer}
-            />
+            <>
+              <ShortAnswerQuestion
+                question={currentQuestion}
+                answer={currentAnswer?.answer as string}
+                selfAssessment={currentAnswer?.selfAssessment}
+                onAnswer={(answer, assessment) => handleAnswer(answer, assessment)}
+                showResult={!!currentAnswer && !isAutoAdvancing}
+              />
+              {isAutoAdvancing && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="text-lg font-medium text-gray-600 dark:text-gray-400">
+                    Moving to next question...
+                  </div>
+                </motion.div>
+              )}
+            </>
           )}
 
           {currentQuestion.type === 'long-answer' && (
-            <LongAnswerQuestion
-              question={currentQuestion}
-              answer={currentAnswer?.answer as string}
-              selfAssessment={currentAnswer?.selfAssessment}
-              onAnswer={(answer, assessment) => handleAnswer(answer, assessment)}
-              showResult={!!currentAnswer}
-            />
+            <>
+              <LongAnswerQuestion
+                question={currentQuestion}
+                answer={currentAnswer?.answer as string}
+                selfAssessment={currentAnswer?.selfAssessment}
+                onAnswer={(answer, assessment) => handleAnswer(answer, assessment)}
+                showResult={!!currentAnswer && !isAutoAdvancing}
+              />
+              {isAutoAdvancing && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="text-lg font-medium text-gray-600 dark:text-gray-400">
+                    {isLastQuestion ? 'Completing quiz...' : 'Moving to next question...'}
+                  </div>
+                </motion.div>
+              )}
+            </>
           )}
         </motion.div>
       </AnimatePresence>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-        <button
-          onClick={handlePrevious}
-          disabled={state.currentQuestionIndex === 0}
-          className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          ← Previous
-        </button>
+      {!isAutoAdvancing && (
+        <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <button
+            onClick={handlePrevious}
+            disabled={state.currentQuestionIndex === 0}
+            className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            ← Previous
+          </button>
 
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          Question {state.currentQuestionIndex + 1} of {quiz.questions.length}
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            Question {state.currentQuestionIndex + 1} of {quiz.questions.length}
+          </div>
+
+          <button
+            onClick={handleNext}
+            disabled={!canProceed}
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors disabled:cursor-not-allowed"
+          >
+            {isLastQuestion ? 'Complete Quiz' : 'Next →'}
+          </button>
         </div>
-
-        <button
-          onClick={handleNext}
-          disabled={!canProceed}
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors disabled:cursor-not-allowed"
-        >
-          {isLastQuestion ? 'Complete Quiz' : 'Next →'}
-        </button>
-      </div>
+      )}
 
       {/* Abandon Confirmation Modal */}
       {showAbandonConfirm && (

@@ -8,8 +8,8 @@ import SelfAssessmentButtons from './self-assessment-buttons'
 interface LongAnswerQuestionProps {
   question: QuizQuestion
   answer?: string
-  selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite'
-  onAnswer: (answer: string, assessment: 'nailed-it' | 'mostly-good' | 'not-quite') => void
+  selfAssessment?: 'nailed-it' | 'mostly-good' | 'nope'
+  onAnswer: (answer: string, assessment: 'nailed-it' | 'mostly-good' | 'nope') => void
   showResult: boolean
 }
 
@@ -36,24 +36,14 @@ export default function LongAnswerQuestion({
     }
   }
 
-  const handleAssessment = (assessment: 'nailed-it' | 'mostly-good' | 'not-quite') => {
+  const handleAssessment = (assessment: 'nailed-it' | 'mostly-good' | 'nope') => {
     onAnswer(textAnswer, assessment)
   }
 
   const canSubmitText = textAnswer.trim().length > 0 && !hasSubmittedText
-  const showAssessment = hasSubmittedText && !showResult
+  const showSampleResponse = hasSubmittedText && !selfAssessment && !showResult
+  const showAssessment = hasSubmittedText && !showResult && showSampleResponse
   const isComplete = hasSubmittedText && selfAssessment
-
-  // Generate medium-level response examples for long answers
-  const generateMediumResponse = (strongResponse: string) => {
-    if (strongResponse.includes('Go (microservices')) {
-      return "Go is for microservices, Rust is for system programming, Java is for enterprise. Companies choose based on what they're building. Some companies like Docker switched to Go."
-    }
-    if (strongResponse.includes('TAM should discuss')) {
-      return "TAMs should talk about costs, which can be expensive, and success rates. Some companies spend a lot on performance issues. Gradual migration is usually better than rewriting everything."
-    }
-    return "A response that shows basic understanding but lacks depth and specific examples."
-  }
 
   return (
     <div className="space-y-6">
@@ -103,6 +93,75 @@ export default function LongAnswerQuestion({
         </div>
       </div>
 
+      {/* Sample Strong Response (shown immediately after submission) */}
+      {showSampleResponse && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="bg-gray-50/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50"
+        >
+          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            💡 Sample Strong Response
+          </h4>
+          
+          <div className="border-l-4 border-blue-400 pl-4">
+            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+              {question.sampleStrongResponse}
+            </p>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Thoughtful Scoring Guide (shown after sample response) */}
+      {showSampleResponse && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          className="bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur-sm rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
+        >
+          <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-4">
+            🎯 Scoring Guide
+          </h4>
+          
+          <div className="space-y-4">
+            <div className="border-l-4 border-green-400 pl-4">
+              <h5 className="font-medium text-green-800 dark:text-green-200 mb-2">
+                Full Points ({question.points}/{question.points}):
+              </h5>
+              <p className="text-green-700 dark:text-green-300 text-sm leading-relaxed">
+                {question.customScoringCriteria?.fullPoints || 
+                  "Demonstrates comprehensive understanding by explaining strategic decision-making, real-world implementation challenges, and business impact. Includes specific examples that show expertise."
+                }
+              </p>
+            </div>
+
+            <div className="border-l-4 border-yellow-400 pl-4">
+              <h5 className="font-medium text-yellow-800 dark:text-yellow-200 mb-2">
+                Partial Points ({Math.round(question.points * 0.7)}/{question.points}):
+              </h5>
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm leading-relaxed">
+                {question.customScoringCriteria?.partialPoints || 
+                  "Shows solid understanding but lacks depth in strategic thinking or misses important practical considerations."
+                }
+              </p>
+            </div>
+
+            <div className="border-l-4 border-red-400 pl-4">
+              <h5 className="font-medium text-red-800 dark:text-red-200 mb-2">
+                No Points (0/{question.points}):
+              </h5>
+              <p className="text-red-700 dark:text-red-300 text-sm leading-relaxed">
+                {question.customScoringCriteria?.noPoints || 
+                  "Provides surface-level information without demonstrating understanding of underlying principles or business context."
+                }
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Self Assessment */}
       {showAssessment && (
         <motion.div
@@ -120,55 +179,7 @@ export default function LongAnswerQuestion({
         </motion.div>
       )}
 
-      {/* Sample Response (shown after self-assessment) */}
-      {showResult && isComplete && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur-sm rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
-        >
-          <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-4">
-            Sample Responses
-          </h4>
-          
-          <div className="space-y-4">
-            <div className="border-l-4 border-green-400 pl-4">
-              <h5 className="font-medium text-green-800 dark:text-green-200 mb-2">
-                🔨 Strong Response Example:
-              </h5>
-              <p className="text-green-700 dark:text-green-300 text-sm leading-relaxed">
-                {question.sampleStrongResponse}
-              </p>
-            </div>
 
-            <div className="border-l-4 border-yellow-400 pl-4">
-              <h5 className="font-medium text-yellow-800 dark:text-yellow-200 mb-2">
-                😐 Medium Response Example:
-              </h5>
-              <p className="text-yellow-700 dark:text-yellow-300 text-sm leading-relaxed">
-                {generateMediumResponse(question.sampleStrongResponse || '')}
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-blue-200 dark:border-blue-700 pt-4 mt-6">
-            <h5 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
-              Key Concepts:
-            </h5>
-            <div className="flex flex-wrap gap-2">
-              {question.keyConcepts.map((concept, index) => (
-                <span
-                  key={index}
-                  className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-sm"
-                >
-                  {concept}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      )}
     </div>
   )
 }

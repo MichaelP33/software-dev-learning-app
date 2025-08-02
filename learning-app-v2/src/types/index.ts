@@ -39,6 +39,12 @@ export interface Progress {
 }
 
 // Quiz Types
+export interface ScoringCriteria {
+  fullPoints: string
+  partialPoints: string
+  noPoints: string
+}
+
 export interface QuizQuestion {
   id: number
   type: 'multiple-choice' | 'short-answer' | 'long-answer'
@@ -50,6 +56,7 @@ export interface QuizQuestion {
   sampleStrongResponse?: string
   additionalContext: string
   keyConcepts: string[]
+  customScoringCriteria?: ScoringCriteria
 }
 
 export interface Quiz {
