@@ -8,8 +8,8 @@ import SelfAssessmentButtons from './self-assessment-buttons'
 interface LongAnswerQuestionProps {
   question: QuizQuestion
   answer?: string
-  selfAssessment?: 'nailed-it' | 'mostly-good' | 'nope'
-  onAnswer: (answer: string, assessment: 'nailed-it' | 'mostly-good' | 'nope') => void
+  selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite'
+  onAnswer: (answer: string, assessment: 'nailed-it' | 'mostly-good' | 'not-quite') => void
   showResult: boolean
 }
 
@@ -36,14 +36,13 @@ export default function LongAnswerQuestion({
     }
   }
 
-  const handleAssessment = (assessment: 'nailed-it' | 'mostly-good' | 'nope') => {
+  const handleAssessment = (assessment: 'nailed-it' | 'mostly-good' | 'not-quite') => {
     onAnswer(textAnswer, assessment)
   }
 
   const canSubmitText = textAnswer.trim().length > 0 && !hasSubmittedText
   const showSampleResponse = hasSubmittedText && !selfAssessment && !showResult
   const showAssessment = hasSubmittedText && !showResult && showSampleResponse
-  const isComplete = hasSubmittedText && selfAssessment
 
   return (
     <div className="space-y-6">

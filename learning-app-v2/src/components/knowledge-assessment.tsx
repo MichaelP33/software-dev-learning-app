@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Brain, CheckCircle, Clock } from 'lucide-react'
 import { Quiz } from '@/types'
 import { getCategoryPrimaryGradient } from '@/lib/gradients'
-import { getQuizHighScores, getQuestionMasteryCount } from '@/lib/data'
+import { getQuizHighScores, getQuestionMasteryCount, QuizHighScores } from '@/lib/data'
 
 interface KnowledgeAssessmentProps {
   articleId: string
@@ -22,7 +22,7 @@ export default function KnowledgeAssessment({
   className = '' 
 }: KnowledgeAssessmentProps) {
   const [isHydrated, setIsHydrated] = useState(false)
-  const [highScores, setHighScores] = useState<any>(null)
+  const [highScores, setHighScores] = useState<QuizHighScores | null>(null)
   const [masteryCount, setMasteryCount] = useState({ mastered: 0, total: quiz.totalQuestions })
   
   useEffect(() => {

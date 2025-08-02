@@ -17,7 +17,7 @@ interface QuizContainerProps {
 }
 
 type QuizAction = 
-  | { type: 'ANSWER_QUESTION'; payload: { questionId: number; answer: string | number | string[]; selfAssessment?: 'nailed-it' | 'mostly-good' | 'nope' } }
+  | { type: 'ANSWER_QUESTION'; payload: { questionId: number; answer: string | number | string[]; selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite' } }
   | { type: 'NEXT_QUESTION' }
   | { type: 'PREVIOUS_QUESTION' }
   | { type: 'COMPLETE_QUIZ' }
@@ -146,7 +146,7 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
   const isLastQuestion = state.currentQuestionIndex === quiz.questions.length - 1
   const canProceed = currentAnswer !== undefined
 
-  const handleAnswer = (answer: string | number | string[], selfAssessment?: 'nailed-it' | 'mostly-good' | 'nope') => {
+  const handleAnswer = (answer: string | number | string[], selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite') => {
     if (!currentQuestion) return
     
     dispatch({
