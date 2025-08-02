@@ -127,7 +127,13 @@
                     "points": 5,
                     "question": "Describe the different compiled languages mentioned in the article and their primary enterprise use cases. Explain why teams might choose one over another, including at least two real company examples.",
                     "sampleStrongResponse": "Should cover Go (microservices/cloud infrastructure), Rust (system-level/memory safety), C++ (high-performance computing), and Java (enterprise backends). Should explain selection criteria based on use case requirements and include examples like Docker's Python→Go migration, Discord's JavaScript→Rust transition with 40% cost reduction, or Shopify's adoption of Go for platform services while maintaining Rails.",
-                    "keyConcepts": ["Language selection criteria", "enterprise use cases", "real-world adoption patterns"]
+                    "additionalContext": "This question tests understanding of language-specific strengths and the ability to match technology choices to business requirements. It requires demonstrating knowledge of real-world adoption patterns and the strategic thinking behind language selection decisions.",
+                    "keyConcepts": ["Language selection criteria", "enterprise use cases", "real-world adoption patterns"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Covers all four compiled languages (Go for microservices/cloud, Rust for system-level/memory safety, C++ for high-performance computing, Java for enterprise backends) with clear use case explanations, demonstrates understanding of selection criteria based on technical requirements, and includes at least two specific company examples with context (like Docker's Python→Go migration, Discord's JavaScript→Rust with 40% cost reduction).",
+                      "partialPoints": "Covers most languages and use cases but lacks depth in explaining selection criteria OR includes company examples but doesn't connect them clearly to business reasoning OR misses some key language specializations.",
+                      "noPoints": "Provides superficial language descriptions without connecting to enterprise use cases or fails to include real company examples that demonstrate practical adoption patterns."
+                    }
                   },
                   {
                     "id": 8,
@@ -231,7 +237,12 @@
                     "question": "Explain what REPLs are and why they provide a development advantage for interpreted languages.",
                     "sampleStrongResponse": "REPLs (Read-Eval-Print Loops) are interactive development environments like Python console or Node.js shell that allow developers to execute code immediately and get instant feedback. This enables rapid experimentation and iteration, creating feedback loops measured in seconds rather than minutes, which accelerates the development process and makes interpreted languages particularly powerful for prototyping and learning.",
                     "additionalContext": "REPLs represent one of the key advantages of interpreted languages - the ability to experiment and test code incrementally without compilation overhead.",
-                    "keyConcepts": ["Interactive development", "REPLs", "development velocity", "instant feedback"]
+                    "keyConcepts": ["Interactive development", "REPLs", "development velocity", "instant feedback"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Correctly defines REPLs as Read-Eval-Print Loops and interactive development environments, explains how they enable immediate code execution and instant feedback, and demonstrates understanding of why this creates development advantages (rapid experimentation, faster feedback loops, prototyping benefits) specific to interpreted languages.",
+                      "partialPoints": "Defines REPLs correctly but lacks depth in explaining the development advantages OR explains the benefits but doesn't clearly connect them to interpreted language characteristics OR misses the rapid iteration/feedback loop concept.",
+                      "noPoints": "Provides incorrect definition of REPLs or fails to explain why they provide advantages for interpreted language development workflows."
+                    }
                   },
                   {
                     "id": 6,
@@ -241,7 +252,12 @@
                     "question": "Describe the main operational trade-offs that come with using interpreted languages in production environments.",
                     "sampleStrongResponse": "The main operational trade-offs include 20-50% higher compute costs due to runtime interpretation overhead, the need to manage runtime environment dependencies across all deployment targets (ensuring consistent Python/Node.js versions), and later error discovery since some errors only surface during execution rather than before deployment. These infrastructure implications must be balanced against development speed benefits.",
                     "additionalContext": "Understanding these trade-offs is crucial for making informed architectural decisions and properly planning infrastructure investments.",
-                    "keyConcepts": ["Operational trade-offs", "infrastructure implications", "production considerations"]
+                    "keyConcepts": ["Operational trade-offs", "infrastructure implications", "production considerations"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies key operational challenges including higher compute costs (20-50% overhead), runtime environment dependency management across deployment targets, and later error discovery during execution rather than before deployment. Demonstrates understanding that these infrastructure costs must be balanced against development velocity benefits.",
+                      "partialPoints": "Identifies most operational trade-offs but lacks specific details (like cost percentages) OR explains challenges but doesn't connect them to business decision-making OR misses the balancing aspect with development benefits.",
+                      "noPoints": "Provides generic responses about performance without specific operational considerations or fails to demonstrate understanding of production deployment challenges unique to interpreted languages."
+                    }
                   },
                   {
                     "id": 7,
@@ -251,7 +267,12 @@
                     "question": "Using the examples provided (Instagram, Netflix, or Airbnb), explain how companies can successfully scale with interpreted languages and when they might need to consider hybrid approaches. What does this tell us about the strategic use of interpreted languages?",
                     "sampleStrongResponse": "Instagram successfully scaled to 100M+ users on Python/Django before selectively migrating only performance-critical components, while Netflix uses Python extensively for recommendations and data processing while using compiled languages for streaming infrastructure. These examples demonstrate that interpreted languages can handle massive scale for most business logic and feature development, but companies adopt hybrid approaches where they identify specific bottlenecks. This shows that interpreted languages are strategically viable for core business development while allowing targeted optimization of performance-critical paths when needed.",
                     "additionalContext": "These real-world examples demonstrate that scale challenges are often more about architecture and specific use cases rather than fundamental language limitations.",
-                    "keyConcepts": ["Scaling patterns", "hybrid architecture", "strategic language selection", "performance optimization"]
+                    "keyConcepts": ["Scaling patterns", "hybrid architecture", "strategic language selection", "performance optimization"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Uses specific company examples (Instagram scaling to 100M+ users on Python/Django, Netflix using Python for recommendations while using compiled languages for streaming) to demonstrate successful scaling patterns, explains the hybrid approach strategy of selective migration for performance-critical components, and articulates the strategic insight that interpreted languages are viable for core business logic while allowing targeted optimization where needed.",
+                      "partialPoints": "Includes company examples but lacks depth in explaining their scaling strategies OR explains hybrid approaches but doesn't clearly connect to the strategic implications OR misses the key insight about selective optimization vs. wholesale migration.",
+                      "noPoints": "Fails to use specific company examples provided or doesn't demonstrate understanding of how hybrid approaches enable strategic use of interpreted languages at scale."
+                    }
                   },
                   {
                     "id": 8,
@@ -261,7 +282,12 @@
                     "question": "Analyze how Cursor's AI-assisted development capabilities specifically benefit interpreted language workflows compared to compiled language workflows. Include the relationship between immediate execution, feedback loops, and AI code generation in your explanation.",
                     "sampleStrongResponse": "Cursor's capabilities particularly benefit interpreted languages because immediate execution allows instant validation of AI-generated code suggestions, creating faster feedback loops than compiled workflows that require compilation before testing. Cursor's context awareness helps manage environment consistency issues like dependency management and version compatibility that are common pain points for interpreted languages. The AI assistance accelerates legacy modernization and technical debt reduction while maintaining rapid development advantages. The key insight is that AI assistance combined with immediate execution creates a compounding effect on development velocity that's particularly powerful for interpreted language workflows.",
                     "additionalContext": "The synergy between AI code generation and interpreted language execution models creates unique advantages for development velocity and code quality.",
-                    "keyConcepts": ["AI-assisted development", "feedback loops", "environment management", "legacy modernization", "development acceleration"]
+                    "keyConcepts": ["AI-assisted development", "feedback loops", "environment management", "legacy modernization", "development acceleration"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Clearly explains how immediate execution in interpreted languages enables instant validation of AI-generated code (faster than compiled workflows requiring compilation), demonstrates understanding of how this creates compounding effects on development velocity, addresses Cursor's context awareness for environment management challenges, and articulates the strategic advantage of AI assistance for interpreted language workflows.",
+                      "partialPoints": "Explains AI benefits for interpreted languages but lacks depth in the comparison to compiled workflows OR understands immediate execution advantages but doesn't connect to the compounding velocity effects OR misses the environment management aspect.",
+                      "noPoints": "Fails to demonstrate understanding of why AI assistance specifically benefits interpreted languages more than compiled languages or doesn't explain the relationship between immediate execution and feedback loops."
+                    }
                   }
                 ]
               }
@@ -350,7 +376,12 @@
                     "question": "Explain the key operational advantages that hybrid languages provide over pure compilation or interpretation approaches in enterprise environments.",
                     "sampleStrongResponse": "Hybrid languages eliminate platform-specific builds while maintaining better performance than interpreted languages, provide single runtime installation that supports hundreds of applications without dependency conflicts, and offer advanced virtual machine features like automatic memory management, security sandboxing, and adaptive optimization that are crucial for enterprise operations. This combination reduces operational complexity while providing enterprise-grade capabilities.",
                     "additionalContext": "These operational advantages make hybrid languages particularly attractive for enterprise environments where deployment complexity and operational overhead are key concerns.",
-                    "keyConcepts": ["Operational advantages", "enterprise deployment", "virtual machine benefits", "dependency management"]
+                    "keyConcepts": ["Operational advantages", "enterprise deployment", "virtual machine benefits", "dependency management"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Explains how hybrid languages eliminate platform-specific builds while maintaining better performance than interpreted languages, describes the single runtime installation supporting hundreds of applications without dependency conflicts, and identifies key virtual machine features (automatic memory management, security sandboxing, adaptive optimization) that reduce operational complexity in enterprise environments.",
+                      "partialPoints": "Identifies some operational advantages but lacks depth in explaining how they specifically benefit enterprise environments OR misses key virtual machine features OR doesn't clearly contrast with pure compilation/interpretation approaches.",
+                      "noPoints": "Provides generic advantages without demonstrating understanding of enterprise operational requirements or fails to explain how hybrid approaches improve upon pure compilation/interpretation methods."
+                    }
                   },
                   {
                     "id": 6,
@@ -360,7 +391,12 @@
                     "question": "Describe the three main customer profiles who typically evaluate hybrid languages and what drives their adoption decisions.",
                     "sampleStrongResponse": "The three main profiles are: Series B+ startups building enterprise products requiring long-term maintainability and cross-platform capabilities; Fortune 500 companies modernizing legacy systems while maintaining integration capabilities with existing enterprise infrastructure; and financial services firms needing robust, auditable systems with regulatory compliance features. Each profile is driven by specific scalability, integration, or compliance requirements that hybrid languages address effectively.",
                     "additionalContext": "Understanding these customer profiles helps explain why hybrid languages have achieved such strong enterprise adoption despite being more complex than pure approaches.",
-                    "keyConcepts": ["Customer segmentation", "adoption drivers", "enterprise requirements", "regulatory compliance"]
+                    "keyConcepts": ["Customer segmentation", "adoption drivers", "enterprise requirements", "regulatory compliance"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies all three customer profiles (Series B+ startups building enterprise products, Fortune 500 companies modernizing legacy systems, financial services firms with regulatory needs) and clearly explains what drives each profile's adoption decisions (long-term maintainability/cross-platform needs, integration with existing infrastructure, regulatory compliance and auditability requirements).",
+                      "partialPoints": "Identifies most customer profiles but lacks depth in explaining their specific adoption drivers OR explains drivers but doesn't clearly connect them to business requirements OR misses key characteristics of one customer segment.",
+                      "noPoints": "Fails to identify the three distinct customer profiles or doesn't demonstrate understanding of what specifically drives hybrid language adoption decisions for enterprise customers."
+                    }
                   },
                   {
                     "id": 7,
@@ -370,7 +406,12 @@
                     "question": "Using the enterprise examples provided (Netflix, LinkedIn, Stack Overflow, or Goldman Sachs), analyze how hybrid languages enable massive scale operations and what this demonstrates about their strategic value for enterprise applications.",
                     "sampleStrongResponse": "Netflix's entire streaming platform runs on the JVM handling billions of requests daily, LinkedIn scaled to 800+ million users with real-time features on Java, Stack Overflow serves millions of developers with minimal infrastructure on C#/.NET, and Goldman Sachs processes $2+ trillion daily on Java trading systems. These examples demonstrate that hybrid languages can handle extreme scale while providing enterprise features like cross-platform deployment, shared runtime efficiency, and advanced optimization. The strategic value lies in combining performance approaching compiled languages with operational simplicity and enterprise features that pure compiled languages often lack.",
                     "additionalContext": "These real-world examples prove that hybrid languages can successfully power some of the world's largest and most demanding applications.",
-                    "keyConcepts": ["Enterprise scaling examples", "strategic platform value", "performance at scale", "operational efficiency"]
+                    "keyConcepts": ["Enterprise scaling examples", "strategic platform value", "performance at scale", "operational efficiency"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Uses specific enterprise examples with scale metrics (Netflix handling billions of requests on JVM, LinkedIn scaling to 800+ million users, Stack Overflow serving millions with minimal infrastructure, Goldman Sachs processing $2+ trillion daily) to demonstrate massive scale capabilities, explains how hybrid languages provide enterprise features like cross-platform deployment and shared runtime efficiency, and articulates the strategic value of combining near-compiled performance with operational simplicity.",
+                      "partialPoints": "Includes enterprise examples but lacks specific scale metrics OR explains hybrid language capabilities but doesn't clearly connect to strategic value OR misses the key insight about combining performance with operational simplicity.",
+                      "noPoints": "Fails to use specific enterprise examples with scale context or doesn't demonstrate understanding of how hybrid languages enable strategic enterprise platform value."
+                    }
                   },
                   {
                     "id": 8,
@@ -380,7 +421,12 @@
                     "question": "Analyze how Cursor's AI-assisted development capabilities specifically accelerate hybrid language development, particularly in the context of enterprise modernization scenarios. Include the relationship between boilerplate code generation, framework knowledge, and legacy system transformation in your explanation.",
                     "sampleStrongResponse": "Cursor excels with hybrid languages due to extensive training on Java/C# codebases, enabling high-quality generation of boilerplate-heavy enterprise patterns common in these ecosystems. AI assistance is particularly valuable for legacy system modernization projects, helping translate old patterns to modern frameworks while preserving business logic. Cross-platform migration efforts benefit from AI maintaining consistency across different deployment targets. The key insight is that hybrid languages' structured, pattern-heavy nature aligns well with AI code generation capabilities, creating a multiplier effect for enterprise development teams tackling complex modernization challenges.",
                     "additionalContext": "The alignment between hybrid languages' structured patterns and AI capabilities creates unique opportunities for accelerating enterprise development and modernization efforts.",
-                    "keyConcepts": ["AI-assisted development", "enterprise patterns", "legacy modernization", "cross-platform migration", "boilerplate generation", "framework expertise"]
+                    "keyConcepts": ["AI-assisted development", "enterprise patterns", "legacy modernization", "cross-platform migration", "boilerplate generation", "framework expertise"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Explains how Cursor's extensive training on Java/C# codebases enables high-quality generation of boilerplate-heavy enterprise patterns, demonstrates understanding of AI assistance for legacy system modernization (translating old patterns to modern frameworks while preserving business logic), addresses cross-platform migration consistency benefits, and articulates the key insight that hybrid languages' structured nature creates a multiplier effect for enterprise modernization challenges.",
+                      "partialPoints": "Explains AI benefits for hybrid language development but lacks depth in enterprise modernization context OR understands boilerplate generation but doesn't connect to legacy transformation OR misses the strategic insight about structured patterns aligning with AI capabilities.",
+                      "noPoints": "Fails to demonstrate understanding of how AI assistance specifically accelerates hybrid language development in enterprise contexts or doesn't explain the relationship between boilerplate generation and legacy modernization."
+                    }
                   }
                 ]
               }
@@ -469,7 +515,12 @@
                     "question": "Explain what \"mixed-paradigm development\" means in the context of daily software development and provide the morning scenario example from the article.",
                     "sampleStrongResponse": "Mixed-paradigm development refers to using both procedural and object-oriented approaches within the same codebase based on what's most appropriate for each task. The morning scenario example shows a developer creating User objects (OOP) for representing business entities while simultaneously writing validateEmail() utility functions (procedural) for data processing, demonstrating how developers naturally combine paradigms based on the task at hand rather than strictly adhering to one approach.",
                     "additionalContext": "This mixed approach reflects the practical reality of modern software development where different paradigms excel at different types of problems.",
-                    "keyConcepts": ["Mixed-paradigm development", "practical development patterns", "OOP and procedural integration"]
+                    "keyConcepts": ["Mixed-paradigm development", "practical development patterns", "OOP and procedural integration"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Correctly defines mixed-paradigm development as using both procedural and object-oriented approaches within the same codebase based on task appropriateness, accurately provides the morning scenario example (creating User objects for business entities while writing validateEmail() utility functions for data processing), and demonstrates understanding of how developers naturally choose paradigms based on the task rather than strict adherence to one approach.",
+                      "partialPoints": "Defines mixed-paradigm development correctly but lacks the specific morning scenario example OR provides the example but doesn't clearly explain the concept OR misses the key insight about natural paradigm selection based on task appropriateness.",
+                      "noPoints": "Fails to correctly define mixed-paradigm development or doesn't provide the morning scenario example from the article."
+                    }
                   },
                   {
                     "id": 6,
@@ -479,7 +530,12 @@
                     "question": "Describe the three main customer profiles that actively use procedural approaches and what drives their adoption.",
                     "sampleStrongResponse": "The three customer profiles are: Series B+ startups with significant data processing needs and performance requirements driven by scaling challenges; Enterprise teams managing large-scale system integrations and legacy modernization projects where performance and maintainability are critical; and Financial services organizations requiring maximum performance for trading systems and calculations where millisecond improvements translate to business value. Each profile is driven by specific performance, cost, or efficiency requirements that procedural approaches address effectively.",
                     "additionalContext": "These profiles represent organizations where the performance and efficiency benefits of procedural programming provide clear business value.",
-                    "keyConcepts": ["Customer segmentation", "adoption drivers", "enterprise use cases"]
+                    "keyConcepts": ["Customer segmentation", "adoption drivers", "enterprise use cases"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies all three customer profiles (Series B+ startups with data processing needs, Enterprise teams managing large-scale integrations and legacy modernization, Financial services organizations with trading systems) and clearly explains what drives each profile's adoption (scaling challenges and performance requirements, performance and maintainability for integrations, millisecond performance improvements for business value).",
+                      "partialPoints": "Identifies most customer profiles but lacks depth in explaining their specific adoption drivers OR explains drivers but doesn't clearly connect them to business requirements OR misses key characteristics of one customer segment.",
+                      "noPoints": "Fails to identify the three distinct customer profiles or doesn't demonstrate understanding of what specifically drives procedural programming adoption for each profile."
+                    }
                   },
                   {
                     "id": 7,
@@ -489,7 +545,12 @@
                     "question": "Using Netflix as an example, explain how enterprises successfully implement strategic application patterns that combine procedural and object-oriented approaches. What business outcomes does this hybrid approach achieve?",
                     "sampleStrongResponse": "Netflix demonstrates strategic application patterns by using procedural approaches for data processing pipelines and ETL operations where performance is critical, while maintaining object-oriented programming for business logic where maintainability and structure are important. This hybrid approach allows them to achieve both high performance for data-intensive operations and code maintainability for complex business rules. The business outcome is optimized performance where it matters most (data processing) while preserving development velocity and code organization for business logic, resulting in better resource utilization and faster feature development.",
                     "additionalContext": "This strategic combination allows organizations to optimize for both performance and maintainability across different parts of their systems.",
-                    "keyConcepts": ["Strategic application patterns", "hybrid architecture", "performance optimization", "business logic separation"]
+                    "keyConcepts": ["Strategic application patterns", "hybrid architecture", "performance optimization", "business logic separation"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Uses Netflix as the specific example to demonstrate strategic application patterns (procedural for data processing pipelines and ETL where performance is critical, object-oriented for business logic where maintainability matters), explains how this achieves both high performance for data operations and code maintainability for business rules, and articulates the business outcomes (optimized performance where it matters, preserved development velocity, better resource utilization, faster feature development).",
+                      "partialPoints": "Uses Netflix example but lacks depth in explaining the strategic pattern implementation OR explains the hybrid approach but doesn't clearly connect to specific business outcomes OR misses the key insight about optimizing different parts of the system differently.",
+                      "noPoints": "Fails to use Netflix as the example or doesn't demonstrate understanding of how strategic application patterns enable business outcomes through hybrid approaches."
+                    }
                   },
                   {
                     "id": 8,
@@ -499,7 +560,12 @@
                     "question": "Analyze how Cursor's AI assistance specifically supports mixed-paradigm development workflows, including both the benefits for seamless paradigm switching and the important considerations for performance-critical code generation. What should TAMs emphasize when discussing this with enterprise customers?",
                     "sampleStrongResponse": "Cursor's context awareness enables developers to seamlessly transition between procedural functions and OOP objects within the same file, which is crucial since most enterprise development involves mixed paradigms. The AI excels at generating procedural boilerplate code and standard algorithms that teams use constantly, significantly accelerating development velocity. However, TAMs should emphasize that while Cursor is excellent for generating utility functions and data transformation code, performance-critical procedural functions require careful human review for optimization opportunities to ensure they meet enterprise performance requirements. This is especially important for customers like financial services or high-scale startups where performance directly impacts business outcomes.",
                     "additionalContext": "The balance between AI acceleration and human oversight is particularly important for performance-sensitive procedural code in enterprise environments.",
-                    "keyConcepts": ["AI-assisted mixed-paradigm development", "context awareness", "performance-critical code oversight", "enterprise considerations", "development acceleration"]
+                    "keyConcepts": ["AI-assisted mixed-paradigm development", "context awareness", "performance-critical code oversight", "enterprise considerations", "development acceleration"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Explains how Cursor's context awareness enables seamless transitions between procedural functions and OOP objects within the same file, demonstrates understanding of AI excellence in generating procedural boilerplate and algorithms for development acceleration, addresses the important TAM consideration that performance-critical procedural functions require human review for optimization, and connects this to specific customer types (financial services, high-scale startups) where performance impacts business outcomes.",
+                      "partialPoints": "Explains AI support for mixed-paradigm development but lacks depth in TAM advisory considerations OR understands seamless paradigm switching but doesn't address performance-critical code oversight OR misses the connection to specific customer scenarios where this matters most.",
+                      "noPoints": "Fails to demonstrate understanding of how AI assistance specifically supports mixed-paradigm workflows or doesn't explain what TAMs should emphasize with enterprise customers regarding performance considerations."
+                    }
                   }
                 ]
               }
@@ -588,7 +654,12 @@
                     "question": "Explain what encapsulation means in object-oriented programming and provide the analogy used in the article.",
                     "sampleStrongResponse": "Encapsulation means hiding internal complexity from users of an object, exposing only the necessary interface for interaction. The article uses the car analogy where users interact with simple interfaces like the steering wheel, gas pedal, and brake, while the complex engine internals are hidden from view. This principle allows objects to manage their own internal state while providing clean, simple interfaces to other parts of the system.",
                     "additionalContext": "Encapsulation is crucial for building maintainable systems because it allows internal implementations to change without affecting code that uses the object.",
-                    "keyConcepts": ["Encapsulation principle", "interface design", "complexity hiding"]
+                    "keyConcepts": ["Encapsulation principle", "interface design", "complexity hiding"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Correctly defines encapsulation as hiding internal complexity while exposing only necessary interfaces, accurately provides the car analogy (steering wheel, gas pedal, brake as simple interfaces while engine internals are hidden), and demonstrates understanding of how this principle enables objects to manage internal state while providing clean interfaces to other system components.",
+                      "partialPoints": "Defines encapsulation correctly but lacks the specific car analogy from the article OR provides the analogy but doesn't clearly explain the encapsulation concept OR misses the key benefit of enabling internal state management with clean interfaces.",
+                      "noPoints": "Fails to correctly define encapsulation or doesn't provide the car analogy from the article."
+                    }
                   },
                   {
                     "id": 6,
@@ -598,7 +669,12 @@
                     "question": "Describe the three common customer triggers that drive architectural discussions about object-oriented programming.",
                     "sampleStrongResponse": "The three triggers are: over-architecture paralysis where teams spend months designing perfect object hierarchies instead of shipping features; legacy complexity crisis where OOP systems become so layered that nobody fully understands them; and performance vs maintainability trade-offs where object overhead impacts high-throughput scenarios. These represent the key pain points that lead customers to reconsider their architectural approaches and seek guidance on when and how to apply OOP effectively.",
                     "additionalContext": "These triggers represent common challenges that arise when object-oriented principles are applied inappropriately or taken to extremes.",
-                    "keyConcepts": ["Customer pain points", "architectural challenges", "business impact"]
+                    "keyConcepts": ["Customer pain points", "architectural challenges", "business impact"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies all three customer triggers (over-architecture paralysis with teams spending months on perfect hierarchies instead of shipping, legacy complexity crisis with overly layered systems nobody understands, performance vs maintainability trade-offs where object overhead impacts high-throughput scenarios) and demonstrates understanding that these represent key pain points driving customers to reconsider architectural approaches and seek OOP guidance.",
+                      "partialPoints": "Identifies most triggers but lacks depth in explaining their specific manifestations OR explains triggers but doesn't connect them to business impact OR misses the insight about driving customers to reconsider architectural approaches.",
+                      "noPoints": "Fails to identify the three distinct customer triggers or doesn't demonstrate understanding of how these pain points drive architectural discussions."
+                    }
                   },
                   {
                     "id": 7,
@@ -608,7 +684,12 @@
                     "question": "Analyze the customer profiles most likely to engage on OOP topics and explain why each profile has specific needs related to object-oriented programming approaches.",
                     "sampleStrongResponse": "The key customer profiles are: Fortune 500 companies needing OOP for traditional business applications with complex workflows and long-term maintainability requirements; financial services requiring heavily regulated systems with audit trails and compliance features that OOP's structure supports; Series B+ startups growing from simple scripts to complex multi-team codebases requiring better organization and collaboration; and healthcare systems needing complex business domain modeling with strict compliance requirements. Each profile represents organizations dealing with increasing complexity that object-oriented approaches can help manage, but they face different specific challenges around scale, regulation, growth, and compliance.",
                     "additionalContext": "Understanding these different customer needs helps explain why object-oriented programming remains relevant despite performance trade-offs in certain scenarios.",
-                    "keyConcepts": ["Customer segmentation", "business domain complexity", "regulatory requirements", "scaling challenges"]
+                    "keyConcepts": ["Customer segmentation", "business domain complexity", "regulatory requirements", "scaling challenges"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies all four customer profiles (Fortune 500 companies with complex business applications and maintainability needs, financial services with regulatory systems requiring audit trails, Series B+ startups growing from scripts to multi-team codebases needing organization, healthcare systems with complex domain modeling and compliance requirements) and clearly explains why each profile has specific OOP needs related to their unique challenges around scale, regulation, growth, and compliance.",
+                      "partialPoints": "Identifies most customer profiles but lacks depth in explaining their specific OOP needs OR explains needs but doesn't clearly connect them to business challenges OR misses key characteristics that drive OOP adoption for each profile.",
+                      "noPoints": "Fails to identify the distinct customer profiles or doesn't demonstrate understanding of why each profile specifically needs object-oriented programming approaches."
+                    }
                   },
                   {
                     "id": 8,
@@ -618,7 +699,12 @@
                     "question": "Explain how Cursor's AI assistance specifically addresses the three implementation considerations mentioned for object-oriented programming: architectural decision support, mixed-paradigm workflow optimization, and legacy system navigation. How do these capabilities create value for enterprise development teams?",
                     "sampleStrongResponse": "Cursor provides architectural decision support by offering AI assistance for the critical \"object vs function\" choices that teams debate daily, with intelligent suggestions based on team patterns and codebase context. For mixed-paradigm workflow optimization, it provides context-aware code completion that recognizes when to suggest OOP patterns vs functional approaches, enabling seamless transitions between paradigms. For legacy system navigation, it offers visual relationship mapping and intelligent code exploration for understanding complex object dependencies, plus refactoring assistance for safely evolving object models. The value creation comes from reducing decision paralysis, accelerating development across different paradigms, and making large codebases more manageable - directly addressing the customer pain points of over-architecture, complexity crisis, and performance trade-offs.",
                     "additionalContext": "These AI capabilities help teams apply object-oriented programming more effectively while avoiding common pitfalls that lead to over-engineering or performance issues.",
-                    "keyConcepts": ["AI-assisted development", "architectural decision-making", "mixed-paradigm support", "legacy code management", "enterprise value creation"]
+                    "keyConcepts": ["AI-assisted development", "architectural decision-making", "mixed-paradigm support", "legacy code management", "enterprise value creation"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Explains how Cursor addresses all three implementation considerations: architectural decision support through AI assistance for 'object vs function' choices with intelligent suggestions, mixed-paradigm workflow optimization via context-aware code completion that recognizes when to suggest OOP vs functional approaches, and legacy system navigation through visual relationship mapping and refactoring assistance for object dependencies. Demonstrates understanding that value creation comes from reducing decision paralysis, accelerating development, and making large codebases manageable while directly addressing customer pain points.",
+                      "partialPoints": "Addresses most implementation considerations but lacks depth in explaining specific AI capabilities OR explains capabilities but doesn't clearly connect to enterprise value creation OR misses the connection to addressing customer pain points like over-architecture and complexity crisis.",
+                      "noPoints": "Fails to address the three specific implementation considerations or doesn't demonstrate understanding of how Cursor's AI capabilities create value for enterprise OOP development."
+                    }
                   }
                 ]
               }
@@ -707,7 +793,12 @@
                     "question": "Explain what \"pure functions\" are and why they provide advantages for development teams.",
                     "sampleStrongResponse": "Pure functions always produce the same output for the same input and have no side effects - they don't modify external state or depend on mutable global variables. This makes them easier to test since you don't need complex setup or mocking, easier to debug because their behavior is predictable and isolated, and enables safer parallel development since multiple developers can work on pure functions without conflicts or race conditions.",
                     "additionalContext": "Pure functions are fundamental to functional programming because they enable many of the paradigm's benefits including testability, predictability, and parallelization.",
-                    "keyConcepts": ["Pure functions", "predictability", "testing benefits", "parallel development"]
+                    "keyConcepts": ["Pure functions", "predictability", "testing benefits", "parallel development"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Correctly defines pure functions as always producing the same output for the same input with no side effects (no modification of external state or dependence on mutable global variables), and explains the three key advantages: easier testing without complex setup or mocking, easier debugging due to predictable and isolated behavior, and safer parallel development without conflicts or race conditions.",
+                      "partialPoints": "Defines pure functions correctly but lacks depth in explaining the development advantages OR explains some advantages but doesn't clearly connect them to the no-side-effects characteristic OR misses one of the key benefits (testing, debugging, or parallel development).",
+                      "noPoints": "Fails to correctly define pure functions or doesn't demonstrate understanding of why they provide advantages for development teams."
+                    }
                   },
                   {
                     "id": 6,
@@ -717,7 +808,12 @@
                     "question": "Describe the \"mixed reality\" approach that most enterprise teams use when adopting functional programming concepts.",
                     "sampleStrongResponse": "Most enterprise teams use functional patterns selectively for data operations like collections processing with .map(), .filter(), and .reduce() methods, while continuing to use object-oriented programming for business modeling and entity management. Teams intuitively choose functional approaches for data transformation tasks where immutability and pure functions provide clear benefits, but retain traditional step-by-step processing for single entity operations where object-oriented approaches are more natural.",
                     "additionalContext": "This hybrid approach allows teams to gain functional programming benefits without completely abandoning familiar object-oriented patterns for business logic.",
-                    "keyConcepts": ["Hybrid adoption patterns", "practical implementation", "team decision patterns"]
+                    "keyConcepts": ["Hybrid adoption patterns", "practical implementation", "team decision patterns"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Describes the mixed reality approach as using functional patterns selectively for data operations (collections processing with .map(), .filter(), .reduce() methods) while continuing object-oriented programming for business modeling and entity management, and explains how teams intuitively choose functional approaches for data transformation tasks where benefits are clear while retaining traditional processing for single entity operations where OOP is more natural.",
+                      "partialPoints": "Describes the selective use of functional patterns but lacks specific examples (.map(), .filter(), .reduce()) OR explains the hybrid approach but doesn't clearly explain the decision-making rationale OR misses the distinction between data transformation vs. single entity operations.",
+                      "noPoints": "Fails to describe the mixed reality approach or doesn't demonstrate understanding of how enterprise teams practically adopt functional programming concepts."
+                    }
                   },
                   {
                     "id": 7,
@@ -727,7 +823,12 @@
                     "question": "Using the customer pain points mentioned in the article, explain how functional programming addresses common enterprise challenges and identify which types of companies are most likely to benefit from adoption.",
                     "sampleStrongResponse": "Functional programming addresses four key enterprise pain points: data pipeline crashes under load (solved by eliminating race conditions and shared mutable state), inability to reproduce calculation errors (solved by pure functions that are deterministic), slow code reviews on complex transformations (solved by readable functional chains that are easier to understand), and random ETL failures (solved by eliminating shared mutable state that causes unpredictable behavior). Companies most likely to benefit include Series B+ startups with growing data volumes that need reliable processing, financial services requiring audit trails and reproducible calculations, e-commerce platforms with high-volume transactions where consistency matters, and healthcare/biotech companies needing compliance-ready data transformations with clear lineage.",
                     "additionalContext": "The connection between functional programming's core principles and these enterprise challenges makes it particularly valuable for data-intensive and high-reliability applications.",
-                    "keyConcepts": ["Customer pain points", "business impact", "target customer profiles", "problem-solution fit"]
+                    "keyConcepts": ["Customer pain points", "business impact", "target customer profiles", "problem-solution fit"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Identifies all four enterprise pain points (data pipeline crashes under load, inability to reproduce calculation errors, slow code reviews on complex transformations, random ETL failures) with clear explanations of how functional programming solves each (eliminating race conditions/shared mutable state, pure functions for deterministic results, readable functional chains, eliminating unpredictable behavior), and identifies appropriate customer types (Series B+ startups with data volumes, financial services needing audit trails, e-commerce with high-volume transactions, healthcare/biotech with compliance needs).",
+                      "partialPoints": "Identifies most pain points and solutions but lacks depth in connecting functional programming principles to specific problems OR identifies customer types but doesn't clearly explain why they benefit OR misses key pain points or customer segments.",
+                      "noPoints": "Fails to identify the specific enterprise pain points mentioned in the article or doesn't demonstrate understanding of how functional programming addresses these challenges for particular customer types."
+                    }
                   },
                   {
                     "id": 8,
@@ -737,7 +838,12 @@
                     "question": "Analyze how Cursor's AI-assisted development capabilities can accelerate functional programming adoption, particularly for teams transitioning from imperative to functional approaches. Include specific examples of how this impacts data pipeline development.",
                     "sampleStrongResponse": "Cursor accelerates functional programming adoption by suggesting idiomatic transformations through natural language prompts like \"convert this loop to functional style,\" helping teams modernize legacy code without requiring deep functional programming expertise. For data pipeline development specifically, Cursor can generate functional transformation chains that reduce the learning curve for teams transitioning from imperative to functional data processing patterns. The context-aware suggestions help developers choose appropriately between functional and imperative approaches based on the specific use case. This is particularly valuable for ETL systems where Cursor can maintain consistency across team members with varying functional programming experience, essentially democratizing functional programming expertise across the entire development team.",
                     "additionalContext": "AI assistance can significantly reduce the learning curve and adoption barriers that often prevent teams from realizing functional programming's benefits.",
-                    "keyConcepts": ["AI-assisted learning", "legacy modernization", "ETL development", "team consistency", "context-aware suggestions"]
+                    "keyConcepts": ["AI-assisted learning", "legacy modernization", "ETL development", "team consistency", "context-aware suggestions"],
+                    "customScoringCriteria": {
+                      "fullPoints": "Explains how Cursor accelerates functional programming adoption through natural language prompts for idiomatic transformations (like 'convert this loop to functional style'), demonstrates understanding of how this helps teams modernize legacy code without deep expertise, provides specific examples of data pipeline development impact (generating functional transformation chains, reducing learning curve for imperative-to-functional transitions), and explains the value for ETL systems in maintaining team consistency and democratizing functional programming expertise across varying skill levels.",
+                      "partialPoints": "Explains AI acceleration for functional programming but lacks specific examples of data pipeline impact OR demonstrates understanding of legacy modernization but doesn't clearly connect to team consistency benefits OR misses the key insight about democratizing expertise across skill levels.",
+                      "noPoints": "Fails to demonstrate understanding of how AI assistance specifically accelerates functional programming adoption or doesn't explain the impact on data pipeline development and team transitions."
+                    }
                   }
                 ]
               }
