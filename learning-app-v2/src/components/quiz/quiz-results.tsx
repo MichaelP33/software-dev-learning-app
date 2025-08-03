@@ -4,17 +4,13 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { QuizAnswer, QuizQuestion } from '@/types'
 import { QuizHighScores } from '@/lib/data'
-import { CheckCircle, XCircle, Award, RotateCcw, Trash2, TrendingUp } from 'lucide-react'
+import { TrendingUp } from 'lucide-react'
+import { AnimatedCard, FloatingCard } from '@/components/animated-card'
 
 interface QuizResultsProps {
   score: number
   totalPossible: number
   percentage: number
-  performance: {
-    level: 'excellent' | 'good' | 'needs-review' | 'retake-recommended'
-    message: string
-    color: string
-  }
   answers: QuizAnswer[]
   questions: QuizQuestion[]
   onRetake: () => void
@@ -27,7 +23,6 @@ export default function QuizResults({
   score,
   totalPossible,
   percentage,
-  performance,
   answers,
   questions,
   onRetake,
@@ -62,66 +57,79 @@ export default function QuizResults({
 
   const stats = getQuestionTypeStats()
 
-  const getPerformanceIcon = () => {
-    switch (performance.level) {
-      case 'excellent':
-        return <Award className="w-16 h-16 text-yellow-500" />
-      case 'good':
-        return <CheckCircle className="w-16 h-16 text-green-500" />
-      case 'needs-review':
-        return <XCircle className="w-16 h-16 text-yellow-500" />
-      case 'retake-recommended':
-        return <RotateCcw className="w-16 h-16 text-red-500" />
+  // Millennial dad energy performance messages
+  const getPerformanceMessage = () => {
+    if (percentage >= 90) {
+      return {
+        emoji: '🔥',
+        title: 'Absolutely crushing it!',
+        subtitle: 'That\'s what I\'m talking about!'
+      }
+    } else if (percentage >= 80) {
+      return {
+        emoji: '💪',
+        title: 'Nice work, champ!',
+        subtitle: 'Looking solid out there!'
+      }
+    } else if (percentage >= 70) {
+      return {
+        emoji: '🌊',
+        title: 'You\'re finding your groove',
+        subtitle: 'Solid effort, let\'s build on this'
+      }
+    } else if (percentage >= 60) {
+      return {
+        emoji: '🤔',
+        title: 'Let\'s take another swing at this',
+        subtitle: 'Time to regroup and try again'
+      }
+    } else {
+      return {
+        emoji: '🤝',
+        title: 'Hey, we all start somewhere!',
+        subtitle: 'Every pro was once a beginner'
+      }
     }
   }
 
   const getPerformanceColor = () => {
-    switch (performance.level) {
-      case 'excellent':
-        return 'bg-gradient-to-r from-yellow-500 to-orange-500'
-      case 'good':
-        return 'bg-gradient-to-r from-green-500 to-emerald-500'
-      case 'needs-review':
-        return 'bg-gradient-to-r from-yellow-500 to-amber-500'
-      case 'retake-recommended':
-        return 'bg-gradient-to-r from-red-500 to-rose-500'
-    }
+    if (percentage >= 90) return 'from-yellow-500 to-orange-500'
+    if (percentage >= 80) return 'from-green-500 to-emerald-500'
+    if (percentage >= 70) return 'from-blue-500 to-cyan-500'
+    if (percentage >= 60) return 'from-yellow-500 to-amber-500'
+    return 'from-red-500 to-rose-500'
   }
+
+  const performanceMessage = getPerformanceMessage()
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Quiz Complete!
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            Here&apos;s how you performed
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-4xl">{performanceMessage.emoji}</span>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              {performanceMessage.title}
+            </h1>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400">
+            {performanceMessage.subtitle}
           </p>
         </div>
         
         <Link
           href={`/article/${articleId}`}
-          className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
         >
           ✕
         </Link>
       </div>
 
       {/* Main Score Card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200/50 dark:border-gray-700/50 text-center"
-      >
-        <div className="flex justify-center mb-6">
-          {getPerformanceIcon()}
-        </div>
-
-        <div className="mb-4">
-          <div className="text-6xl font-bold text-gray-900 dark:text-white mb-2">
+      <AnimatedCard className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl p-8 border border-white/20 dark:border-gray-700/30 shadow-xl text-center">
+        <div className="mb-6">
+          <div className="text-7xl font-bold text-gray-900 dark:text-white mb-3">
             {percentage}%
           </div>
           <div className="text-xl text-gray-600 dark:text-gray-400">
@@ -132,25 +140,26 @@ export default function QuizResults({
         {/* Progress Bar */}
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mb-6 overflow-hidden">
           <motion.div
-            className={`h-4 rounded-full ${getPerformanceColor()}`}
+            className={`h-4 rounded-full bg-gradient-to-r ${getPerformanceColor()}`}
             initial={{ width: 0 }}
             animate={{ width: `${percentage}%` }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           />
         </div>
 
-        <p className={`text-lg font-medium ${performance.color}`}>
-          {performance.message}
-        </p>
-      </motion.div>
+        <div className="text-lg text-gray-600 dark:text-gray-400">
+          Great work on this quiz! 
+          {percentage >= 80 && " You're really getting the hang of this."}
+          {percentage < 80 && percentage >= 60 && " Keep pushing forward!"}
+          {percentage < 60 && " Let's review and try again."}
+        </div>
+      </AnimatedCard>
 
       {/* High Score Comparison */}
       {highScores && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50"
+        <FloatingCard 
+          delay={1}
+          className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl p-6 border border-white/20 dark:border-gray-700/30 shadow-xl"
         >
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -160,7 +169,7 @@ export default function QuizResults({
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div className="text-center p-4 bg-gray-50/80 dark:bg-gray-700/50 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-600/50">
               <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                 {percentage}%
               </div>
@@ -169,7 +178,7 @@ export default function QuizResults({
               </div>
             </div>
             
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div className="text-center p-4 bg-blue-50/80 dark:bg-blue-900/20 backdrop-blur-sm rounded-xl border border-blue-200/50 dark:border-blue-700/50">
               <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
                 {Math.round(highScores.bestOverallPercentage)}%
               </div>
@@ -178,7 +187,7 @@ export default function QuizResults({
               </div>
             </div>
             
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <div className="text-center p-4 bg-gray-50/80 dark:bg-gray-700/50 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-600/50">
               <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                 {highScores.totalAttempts}
               </div>
@@ -189,70 +198,72 @@ export default function QuizResults({
           </div>
           
           {percentage > highScores.bestOverallPercentage && (
-            <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-4 p-3 bg-green-50/80 dark:bg-green-900/20 border border-green-200/50 dark:border-green-700/50 rounded-xl backdrop-blur-sm"
+            >
               <div className="flex items-center gap-2 text-green-800 dark:text-green-200">
-                <Award className="w-4 h-4" />
+                <span className="text-lg">🎉</span>
                 <span className="font-medium">New Personal Best!</span>
               </div>
               <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                You improved by {Math.round(percentage - highScores.bestOverallPercentage)}%
+                You improved by {Math.round(percentage - highScores.bestOverallPercentage)}% - that&apos;s the spirit!
               </p>
-            </div>
+            </motion.div>
           )}
-        </motion.div>
+        </FloatingCard>
       )}
 
       {/* Breakdown by Question Type */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50"
+      <FloatingCard 
+        delay={2}
+        className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl p-6 border border-white/20 dark:border-gray-700/30 shadow-xl"
       >
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-          Performance Breakdown
+          How You Did by Question Type
         </h3>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Object.entries(stats).map(([type, data]) => {
+          {Object.entries(stats).map(([type, data], index) => {
             if (data.total === 0) return null
             
-            const typeLabels = {
-              'multiple-choice': 'Multiple Choice',
-              'fill-in-blank': 'Fill in Blank',
-              'short-answer': 'Short Answer',
-              'long-answer': 'Long Answer'
+            const typeInfo = {
+              'multiple-choice': { emoji: '📋', label: 'Multiple Choice', color: 'blue' },
+              'fill-in-blank': { emoji: '🔤', label: 'Fill in Blank', color: 'orange' },
+              'short-answer': { emoji: '✏️', label: 'Short Answer', color: 'green' },
+              'long-answer': { emoji: '📝', label: 'Long Answer', color: 'purple' }
             }
 
-            const typeColors = {
-              'multiple-choice': 'blue',
-              'fill-in-blank': 'orange',
-              'short-answer': 'green',
-              'long-answer': 'purple'
-            }
-
-            const color = typeColors[type as keyof typeof typeColors]
-            const percentage = data.possible > 0 ? Math.round((data.points / data.possible) * 100) : 0
+            const info = typeInfo[type as keyof typeof typeInfo]
+            const typePercentage = data.possible > 0 ? Math.round((data.points / data.possible) * 100) : 0
 
             return (
-              <div
+              <motion.div
                 key={type}
-                className={`p-4 rounded-lg border bg-${color}-50/80 dark:bg-${color}-900/20 border-${color}-200 dark:border-${color}-700`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+                className={`p-4 rounded-xl border bg-${info.color}-50/80 dark:bg-${info.color}-900/20 border-${info.color}-200/50 dark:border-${info.color}-700/50 backdrop-blur-sm hover:scale-105 transition-transform`}
               >
-                <div className={`text-2xl font-bold text-${color}-600 dark:text-${color}-400 mb-1`}>
-                  {percentage}%
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xl">{info.emoji}</span>
+                  <div className={`text-2xl font-bold text-${info.color}-600 dark:text-${info.color}-400`}>
+                    {typePercentage}%
+                  </div>
                 </div>
-                <div className={`text-sm font-medium text-${color}-700 dark:text-${color}-300 mb-1`}>
-                  {typeLabels[type as keyof typeof typeLabels]}
+                <div className={`text-sm font-medium text-${info.color}-700 dark:text-${info.color}-300 mb-1`}>
+                  {info.label}
                 </div>
-                <div className={`text-xs text-${color}-600 dark:text-${color}-400`}>
+                <div className={`text-xs text-${info.color}-600 dark:text-${info.color}-400`}>
                   {data.points}/{data.possible} pts
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>
-      </motion.div>
+      </FloatingCard>
 
 
 
@@ -260,33 +271,40 @@ export default function QuizResults({
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
         className="flex flex-col sm:flex-row gap-4 justify-center"
       >
-        <button
+        <motion.button
           onClick={onRetake}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2 justify-center"
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+          className="px-8 py-3 bg-gradient-to-b from-white/95 to-white/85 dark:from-gray-800/95 dark:to-gray-800/85 backdrop-blur-md rounded-xl font-medium transition-all duration-200 shadow-lg border border-blue-300/50 dark:border-blue-600/50 text-blue-700 dark:text-blue-300 hover:shadow-xl hover:from-blue-50/95 dark:hover:from-blue-900/20 hover:border-blue-400/70 dark:hover:border-blue-500/70 shadow-inner"
         >
-          <RotateCcw className="w-5 h-5" />
-          {highScores && highScores.bestOverallPercentage > 0 ? 'Improve Score' : 'Retake Quiz'}
-        </button>
+          Retake Quiz
+        </motion.button>
 
         {highScores && highScores.totalAttempts > 0 && (
-          <button
+          <motion.button
             onClick={onResetScores}
-            className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2 justify-center"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-3 bg-gradient-to-b from-white/95 to-white/85 dark:from-gray-800/95 dark:to-gray-800/85 backdrop-blur-md rounded-xl font-medium transition-all duration-200 shadow-lg border border-gray-300/50 dark:border-gray-600/50 text-gray-700 dark:text-gray-300 hover:shadow-xl hover:from-gray-50/95 dark:hover:from-gray-700/20 hover:border-gray-400/70 dark:hover:border-gray-500/70 shadow-inner"
           >
-            <Trash2 className="w-5 h-5" />
-            Reset All Progress
-          </button>
+            Reset Progress
+          </motion.button>
         )}
 
-        <Link
-          href={`/article/${articleId}`}
-          className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors inline-block text-center"
+        <motion.div
+          whileHover={{ scale: 1.02, y: -2 }}
+          whileTap={{ scale: 0.98 }}
         >
-          Back to Article
-        </Link>
+          <Link
+            href={`/article/${articleId}`}
+            className="px-8 py-3 bg-gradient-to-b from-white/95 to-white/85 dark:from-gray-800/95 dark:to-gray-800/85 backdrop-blur-md rounded-xl font-medium transition-all duration-200 shadow-lg border border-gray-300/50 dark:border-gray-600/50 text-gray-700 dark:text-gray-300 hover:shadow-xl hover:from-gray-50/95 dark:hover:from-gray-700/20 hover:border-gray-400/70 dark:hover:border-gray-500/70 shadow-inner inline-block text-center"
+          >
+            Back to Article
+          </Link>
+        </motion.div>
       </motion.div>
     </div>
   )
