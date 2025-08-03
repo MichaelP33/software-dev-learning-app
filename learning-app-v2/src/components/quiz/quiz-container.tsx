@@ -4,7 +4,7 @@ import { useReducer, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Quiz, QuizAnswer, QuizState } from '@/types'
-import { calculateSelfAssessmentScore, validateMultipleChoiceAnswer, calculateQuizScore, getQuizPerformanceLevel, updateHighScores, resetHighScores, getQuizHighScores } from '@/lib/data'
+import { calculateSelfAssessmentScore, validateMultipleChoiceAnswer, calculateQuizScore, updateHighScores, resetHighScores, getQuizHighScores } from '@/lib/data'
 import MultipleChoiceQuestion from './multiple-choice-question'
 import ShortAnswerQuestion from './short-answer-question'
 import LongAnswerQuestion from './long-answer-question'
@@ -220,7 +220,6 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
 
   if (state.isCompleted) {
     const { score, percentage } = calculateQuizScore(state.answers)
-    const performance = getQuizPerformanceLevel(percentage)
     const highScores = getQuizHighScores(articleId)
     
     return (
@@ -228,7 +227,6 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
         score={score}
         totalPossible={quiz.totalPoints}
         percentage={percentage}
-        performance={performance}
         answers={state.answers}
         questions={quiz.questions}
         onRetake={handleRetake}
