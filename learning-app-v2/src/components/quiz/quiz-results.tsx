@@ -295,12 +295,13 @@ export default function QuizResults({
         )}
 
         <motion.div
+          className="w-full sm:w-auto"
           whileHover={{ scale: 1.02, y: -2 }}
           whileTap={{ scale: 0.98 }}
         >
           <Link
             href={`/article/${articleId}`}
-            className="px-8 py-3 bg-gradient-to-b from-white/95 to-white/85 dark:from-gray-800/95 dark:to-gray-800/85 backdrop-blur-md rounded-xl font-medium transition-all duration-200 shadow-lg border border-gray-300/50 dark:border-gray-600/50 text-gray-700 dark:text-gray-300 hover:shadow-xl hover:from-gray-50/95 dark:hover:from-gray-700/20 hover:border-gray-400/70 dark:hover:border-gray-500/70 shadow-inner inline-block text-center"
+            className="w-full sm:w-auto px-8 py-3 bg-gradient-to-b from-white/95 to-white/85 dark:from-gray-800/95 dark:to-gray-800/85 backdrop-blur-md rounded-xl font-medium transition-all duration-200 shadow-lg border border-gray-300/50 dark:border-gray-600/50 text-gray-700 dark:text-gray-300 hover:shadow-xl hover:from-gray-50/95 dark:hover:from-gray-700/20 hover:border-gray-400/70 dark:hover:border-gray-500/70 shadow-inner inline-block text-center"
           >
             Back to Article
           </Link>
