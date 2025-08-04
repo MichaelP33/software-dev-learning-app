@@ -1,0 +1,96 @@
+# Quiz Generation Framework for Learning App V2
+
+## 🎯 **Quiz Structure Requirements**
+- **8 Multiple Choice questions** (2 points each = 16 points)
+- **2 Freeform questions** (Q9: 4 points, Q10: 5 points = 9 points)
+- **Total: 25 points per quiz**
+
+## ✅ **Multiple Choice Question Excellence**
+
+### DO:
+- Focus on **foundational concepts** with lasting business value
+- Test understanding of **technical implications** and **decision frameworks**
+- Explain challenges and provide **solution options** (not just recall)
+- Include **specific language applications** and **business scenarios**
+- Test knowledge useful for **strategic technology conversations**
+
+### DON'T:
+- Ask trivia about **company names** or case study details
+- Test random facts without foundational value
+- Create questions where you can guess without understanding the concept
+- Focus on memorizing specific metrics or dates
+
+### Proven Patterns:
+```
+✅ "Which factor makes compiled languages particularly suited for microservices architectures?"
+✅ "A company experiencing 'Our cloud bills doubled but traffic only increased 20%' would benefit most from:"
+✅ "What distinguishes object-oriented programming's approach to code organization?"
+```
+
+## 🎯 **Freeform Question Excellence**
+
+### DO:
+- Make questions **specific and prescriptive** (not open-ended)
+- Include **clear success criteria** with measurable components
+- Test **different foundational concepts** (avoid redundancy between Q9 and Q10)
+- Focus on **essential information retention**
+- Require **2-3 sentence minimum** responses
+- Test knowledge useful for **understanding development team contexts**
+- **Use listing format** - "Describe the three..." or "List the main..."
+
+### DON'T:
+- Create hypothetical TAM scenarios or business projections
+- Ask about specific company examples or case studies
+- Make questions too broad or philosophical
+- Test knowledge that overlaps significantly with MC questions
+
+### Proven Patterns:
+```
+✅ Q9 (4 pts): "Describe the three main customer scenarios that trigger migration discussions about [topic]. For each scenario, include one specific quoted pain point from the article."
+
+✅ Q10 (5 pts): "List the core specialties of [languages/concepts] and explain what types of projects would benefit most from each one's strengths."
+```
+
+## 🔧 **Content Focus Priorities**
+1. **Language specializations** and technical strengths
+2. **Technical requirements** that drive technology decisions  
+3. **Development environment** considerations
+4. **Architectural implications** of language choices
+5. **Performance characteristics** and trade-offs
+
+## 💻 **Technical Implementation**
+
+### JSON Structure:
+```json
+{
+  "id": "question-id",
+  "type": "multiple-choice" | "freeform",
+  "question": "Clear, specific question text",
+  "points": 2 | 4 | 5,
+  "options": [...], // MC only
+  "correctAnswer": "...", // MC only  
+  "explanation": "...", // MC only
+  "sampleStrongResponse": "..." // Freeform only
+}
+```
+
+### Scoring Logic:
+- MC: `points: 2` for all questions
+- Freeform Q9: `points: 4` (self-assessment: 4 excellent, 2 partial, 0 poor)
+- Freeform Q10: `points: 5` (self-assessment: 5 excellent, 3 partial, 0 poor)
+
+## ✅ **Validation Checklist**
+- [ ] 8 MC questions focusing on foundational concepts
+- [ ] 2 Freeform questions with listing/specific format
+- [ ] No redundancy between questions
+- [ ] All questions test lasting knowledge value
+- [ ] Clear success criteria for freeform responses
+- [ ] Focus on languages/tech requirements (not company examples)
+- [ ] Total points = 25
+
+## 📚 **Key Learnings from Compiled Languages Quiz**
+- Questions about language specializations work better than company examples
+- "List the core specialties of X, Y, Z languages" format is effective
+- Avoid redundancy between MC performance questions and freeform architecture questions
+- Pain point quotes from articles make good freeform question material
+- Technical requirements should drive language selection discussions
