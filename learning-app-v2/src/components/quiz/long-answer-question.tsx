@@ -48,18 +48,6 @@ export default function LongAnswerQuestion({
     <div className="space-y-6">
       {/* Question */}
       <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50">
-        <div className="flex items-start gap-3 mb-4">
-          <div className="bg-purple-100 dark:bg-purple-900/30 px-3 py-1 rounded-full text-sm font-medium text-purple-700 dark:text-purple-300">
-            Long Answer
-          </div>
-          <div className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">
-            {question.difficulty}
-          </div>
-          <div className="bg-purple-100 dark:bg-purple-900/30 px-3 py-1 rounded-full text-sm font-medium text-purple-700 dark:text-purple-300">
-            {question.points} points
-          </div>
-        </div>
-
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
           {question.question}
         </h3>

@@ -35,7 +35,8 @@ export default function QuizResults({
       'multiple-choice': { correct: 0, total: 0, points: 0, possible: 0 },
       'fill-in-blank': { correct: 0, total: 0, points: 0, possible: 0 },
       'short-answer': { correct: 0, total: 0, points: 0, possible: 0 },
-      'long-answer': { correct: 0, total: 0, points: 0, possible: 0 }
+      'long-answer': { correct: 0, total: 0, points: 0, possible: 0 },
+      'freeform': { correct: 0, total: 0, points: 0, possible: 0 }
     }
 
     answers.forEach(answer => {
@@ -230,10 +231,11 @@ export default function QuizResults({
             if (data.total === 0) return null
             
             const typeInfo = {
-              'multiple-choice': { emoji: '📋', label: 'Multiple Choice', color: 'blue' },
-              'fill-in-blank': { emoji: '🔤', label: 'Fill in Blank', color: 'orange' },
-              'short-answer': { emoji: '✏️', label: 'Short Answer', color: 'green' },
-              'long-answer': { emoji: '📝', label: 'Long Answer', color: 'purple' }
+              'multiple-choice': { emoji: '📋', label: 'Questions', color: 'blue' },
+              'fill-in-blank': { emoji: '🔤', label: 'Questions', color: 'orange' },
+              'short-answer': { emoji: '✏️', label: 'Questions', color: 'green' },
+              'long-answer': { emoji: '📝', label: 'Questions', color: 'purple' },
+              'freeform': { emoji: '📝', label: 'Questions', color: 'purple' }
             }
 
             const info = typeInfo[type as keyof typeof typeInfo]

@@ -47,8 +47,8 @@ export interface ScoringCriteria {
 
 export interface QuizQuestion {
   id: number
-  type: 'multiple-choice' | 'short-answer' | 'long-answer'
-  difficulty: 'easy' | 'easy-medium' | 'medium' | 'medium-hard' | 'hard'
+  type: 'multiple-choice' | 'short-answer' | 'long-answer' | 'freeform'
+  difficulty?: 'easy' | 'easy-medium' | 'medium' | 'medium-hard' | 'hard'
   points: number
   question: string
   options?: string[]
@@ -68,7 +68,7 @@ export interface Quiz {
 
 export interface QuizAnswer {
   questionId: number
-  type: 'multiple-choice' | 'short-answer' | 'long-answer'
+  type: 'multiple-choice' | 'short-answer' | 'long-answer' | 'freeform'
   answer: string | number
   isCorrect?: boolean
   selfAssessment?: 'nailed-it' | 'mostly-good' | 'not-quite'

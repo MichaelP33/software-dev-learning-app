@@ -212,17 +212,12 @@ export function calculateSelfAssessmentScore(points: number, assessment: 'nailed
   }
 }
 
-export function calculateQuizScore(answers: QuizAnswer[]): { score: number, percentage: number } {
+export function calculateQuizScore(answers: QuizAnswer[], questions: QuizQuestion[]): { score: number, percentage: number } {
   const totalScore = answers.reduce((sum, answer) => sum + answer.pointsEarned, 0)
   const totalPossible = answers.reduce((sum, answer) => {
-    // Get max possible points for this answer type
-    if (answer.type === 'multiple-choice') {
-      // Questions 1&2 = 2 points, Questions 3&4 = 3 points
-      return sum + (answer.questionId <= 2 ? 2 : 3)
-    }
-    if (answer.type === 'short-answer') return sum + 3
-    if (answer.type === 'long-answer') return sum + (answer.questionId === 8 ? 4 : 5) // Question 8 is 4 points
-    return sum
+    // Find the actual question to get its real point value
+    const question = questions.find(q => q.id === answer.questionId)
+    return sum + (question?.points || 0)
   }, 0)
   
   const percentage = totalPossible > 0 ? Math.round((totalScore / totalPossible) * 100) : 0

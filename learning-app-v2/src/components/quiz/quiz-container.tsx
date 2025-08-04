@@ -8,6 +8,7 @@ import { calculateSelfAssessmentScore, validateMultipleChoiceAnswer, calculateQu
 import MultipleChoiceQuestion from './multiple-choice-question'
 import ShortAnswerQuestion from './short-answer-question'
 import LongAnswerQuestion from './long-answer-question'
+import FreeformQuestion from './freeform-question'
 import QuizProgress from './quiz-progress'
 import QuizResults from './quiz-results'
 
@@ -40,7 +41,7 @@ function createQuizReducer(quiz: Quiz) {
       if (question.type === 'multiple-choice') {
         isCorrect = validateMultipleChoiceAnswer(question, answer as number)
         pointsEarned = isCorrect ? question.points : 0
-      } else if ((question.type === 'short-answer' || question.type === 'long-answer') && selfAssessment) {
+      } else if ((question.type === 'short-answer' || question.type === 'long-answer' || question.type === 'freeform') && selfAssessment) {
         pointsEarned = calculateSelfAssessmentScore(question.points, selfAssessment)
       }
 
@@ -159,7 +160,7 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
     })
 
     // Auto-advance for text-based questions when self-assessment is completed
-    if (selfAssessment && (currentQuestion.type === 'short-answer' || currentQuestion.type === 'long-answer')) {
+    if (selfAssessment && (currentQuestion.type === 'short-answer' || currentQuestion.type === 'long-answer' || currentQuestion.type === 'freeform')) {
       setIsAutoAdvancing(true)
       setTimeout(() => {
         if (isLastQuestion) {
@@ -213,13 +214,13 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
   // Update high scores when quiz is completed
   useEffect(() => {
     if (state.isCompleted && state.answers.length > 0) {
-      const { score, percentage } = calculateQuizScore(state.answers)
+      const { score, percentage } = calculateQuizScore(state.answers, quiz.questions)
       updateHighScores(articleId, state.answers, score, percentage)
     }
-  }, [state.isCompleted, state.answers, articleId])
+  }, [state.isCompleted, state.answers, articleId, quiz.questions])
 
   if (state.isCompleted) {
-    const { score, percentage } = calculateQuizScore(state.answers)
+    const { score, percentage } = calculateQuizScore(state.answers, quiz.questions)
     const highScores = getQuizHighScores(articleId)
     
     return (
@@ -307,6 +308,29 @@ export default function QuizContainer({ quiz, articleId }: QuizContainerProps) {
           {currentQuestion.type === 'long-answer' && (
             <>
               <LongAnswerQuestion
+                question={currentQuestion}
+                answer={currentAnswer?.answer as string}
+                selfAssessment={currentAnswer?.selfAssessment}
+                onAnswer={(answer, assessment) => handleAnswer(answer, assessment)}
+                showResult={!!currentAnswer && !isAutoAdvancing}
+              />
+              {isAutoAdvancing && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="text-lg font-medium text-gray-600 dark:text-gray-400">
+                    {isLastQuestion ? 'Completing quiz...' : 'Moving to next question...'}
+                  </div>
+                </motion.div>
+              )}
+            </>
+          )}
+
+          {currentQuestion.type === 'freeform' && (
+            <>
+              <FreeformQuestion
                 question={currentQuestion}
                 answer={currentAnswer?.answer as string}
                 selfAssessment={currentAnswer?.selfAssessment}
